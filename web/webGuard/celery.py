@@ -8,7 +8,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webGuard.settings')
 django.setup()
 
 # Celery app
-app = Celery('reNgine')
+app = Celery('webGuard')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 

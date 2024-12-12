@@ -25,7 +25,7 @@ class RengineRequest(Request):
 
 
 class RengineTask(Task):
-	"""A Celery task that is tracked by reNgine. Save task output files and
+	"""A Celery task that is tracked by webGuard. Save task output files and
 	tracebacks to RENGINE_RESULTS.
 
 	The custom task meta-options are toggleable through environment variables:
@@ -33,7 +33,7 @@ class RengineTask(Task):
 	RENGINE_RECORD_ENABLED:
 	- Create / update ScanActivity object to track statuses.
 	- Send notifications before and after each task (start / end).
-	- Send traceback file to reNgine's Discord channel if an exception happened.
+	- Send traceback file to webGuard's Discord channel if an exception happened.
 
 	RENGINE_CACHE_ENABLED:
 	- Get result from cache if it exists.
@@ -60,7 +60,7 @@ class RengineTask(Task):
 		self.description = kwargs.get('description') or ' '.join(self.task_name.split('_')).capitalize()
 		logger = get_task_logger(self.task_name)
 
-		# Get reNgine context
+		# Get webGuard context
 		ctx = kwargs.get('ctx', {})
 		self.track = ctx.pop('track', True)
 		self.scan_id = ctx.get('scan_history_id')

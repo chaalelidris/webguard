@@ -284,7 +284,7 @@ def initiate_subscan(
 	# Run task
 	method = globals().get(scan_type)
 	if not method:
-		logger.warning(f'Task {scan_type} is not supported by reNgine. Skipping')
+		logger.warning(f'Task {scan_type} is not supported by webGuard. Skipping')
 		return
 	scan.tasks.append(scan_type)
 	scan.save()
@@ -392,7 +392,7 @@ def report(ctx={}, description=None):
 
 
 #------------------------- #
-# Tracked reNgine tasks    #
+# Tracked webGuard tasks    #
 #--------------------------#
 
 @app.task(name='subdomain_discovery', queue='main_scan_queue', base=RengineTask, bind=True)
@@ -527,7 +527,7 @@ def subdomain_discovery(
 			cmd = cmd.replace('{PATH}', custom_tool.github_clone_path) if '{PATH}' in cmd else cmd
 		else:
 			logger.warning(
-				f'Subdomain discovery tool "{tool}" is not supported by reNgine. Skipping.')
+				f'Subdomain discovery tool "{tool}" is not supported by webGuard. Skipping.')
 			continue
 
 		# Run tool
@@ -3282,7 +3282,7 @@ def send_file_to_discord(file_path, title=None):
 	webhook = DiscordWebhook(
 		url=notif.discord_hook_url,
 		rate_limit_retry=True,
-		username=title or "reNgine Discord Plugin"
+		username=title or "webGuard Discord Plugin"
 	)
 	with open(file_path, "rb") as f:
 		head, tail = os.path.split(file_path)

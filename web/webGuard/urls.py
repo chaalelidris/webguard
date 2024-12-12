@@ -12,9 +12,9 @@ from webGuard.views import serve_protected_media
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="reNgine API",
+      title="webGuard API",
       default_version='v1',
-      description="reNgine: An Automated reconnaissance framework.",
+      description="webGuard: An Automated reconnaissance framework.",
       contact=openapi.Contact(email="yogesh.ojha11@gmail.com"),
    ),
    public=True,
