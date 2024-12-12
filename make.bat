@@ -27,11 +27,13 @@ if "%1" == "up" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% up -d --build %SERVICES%
 :: Build and start all services in development mode.
 if "%1" == "devup" %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% up -d --build %DEV_SERVICES%
 :: print command to run in development mode.
-if "%1" == "cmd" @echo %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% stop & %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% rm -f %DEV_SERVICES% & docker volume prune -f
+if "%1" == "cmd" @echo %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% up -d --build %DEV_SERVICES%
 :: Build all services.
 if "%1" == "build" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% build %SERVICES%
 :: Generate Username (Use only after make up).
 if "%1" == "username" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% exec web python3 manage.py createsuperuser
+:: Generate Username (Use only after make devup).
+if "%1" == "devusername" %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% exec web python3 manage.py createsuperuser
 :: Apply migrations
 if "%1" == "migrate" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% exec web python3 manage.py migrate
 :: Pull Docker images.

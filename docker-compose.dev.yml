@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: webguard_db
     restart: always
     image: "postgres:12.3-alpine"
     environment:
@@ -8,19 +9,21 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_PORT=${POSTGRES_PORT}
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - wg_postgres_data:/var/lib/postgresql/data/
     networks:
-      - rengine_network
+      - webguard_network
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   redis:
+    container_name: webguard_redis
     image: "redis:alpine"
     hostname: redis
     networks:
-      - rengine_network
+      - webguard_network
 
   celery:
+    container_name: webguard_celery
     build:
       context: ./web
     restart: always
@@ -28,12 +31,12 @@ services:
     # command: watchmedo auto-restart --recursive --pattern="*.py" --directory="/usr/src/app/reNgine/" -- celery -A reNgine.tasks worker --autoscale=10,0 -l INFO
     volumes:
       - ./web:/usr/src/app
-      - github_repos:/usr/src/github
-      - wordlist:/usr/src/wordlist
-      - scan_results:/usr/src/scan_results
-      - gf_patterns:/root/.gf
-      - nuclei_templates:/root/nuclei-templates
-      - tool_config:/root/.config
+      - wg_github_repos:/usr/src/github
+      - wg_wordlist:/usr/src/wg_wordlist
+      - wg_scan_results:/usr/src/wg_scan_results
+      - wg_gf_patterns:/root/.gf
+      - wg_nuclei_templates:/root/nuclei-templates
+      - wg_tool_config:/root/.config
     environment:
       - DEBUG=1
       - CELERY_BROKER=redis://redis:6379/0
@@ -50,9 +53,10 @@ services:
       - db
       - redis
     networks:
-      - rengine_network
+      - webguard_network
 
   celery-beat:
+    container_name: webguard_celery_beat
     build: ./web
     entrypoint: /usr/src/app/beat-entrypoint.sh
     command: celery -A reNgine beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
@@ -70,21 +74,22 @@ services:
       - POSTGRES_HOST=${POSTGRES_HOST}
     volumes:
       - ./web:/usr/src/app
-      - github_repos:/usr/src/github
-      - wordlist:/usr/src/wordlist
-      - scan_results:/usr/src/scan_results
-      - gf_patterns:/root/.gf
-      - nuclei_templates:/root/nuclei-templates
-      - tool_config:/root/.config
+      - wg_github_repos:/usr/src/github
+      - wg_wordlist:/usr/src/wg_wordlist
+      - wg_scan_results:/usr/src/wg_scan_results
+      - wg_gf_patterns:/root/.gf
+      - wg_nuclei_templates:/root/nuclei-templates
+      - wg_tool_config:/root/.config
     networks:
-      - rengine_network
+      - webguard_network
 
   web:
+    container_name: webguard_web
     build:
       context: ./web
     entrypoint: /usr/src/app/entrypoint.sh
     restart: always
-    image: docker.pkg.github.com/yogeshojha/rengine/rengine:latest
+    image: docker.pkg.github.com/yogeshojha/webguard/webguard:latest
     environment:
       - DEBUG=1
       - CELERY_BROKER=redis://redis:6379/0
@@ -97,36 +102,37 @@ services:
       - POSTGRES_HOST=${POSTGRES_HOST}
     volumes:
       - ./web:/usr/src/app
-      - github_repos:/usr/src/github
-      - wordlist:/usr/src/wordlist
-      - scan_results:/usr/src/scan_results
-      - gf_patterns:/root/.gf
-      - nuclei_templates:/root/nuclei-templates
-      - tool_config:/root/.config
+      - wg_github_repos:/usr/src/github
+      - wg_wordlist:/usr/src/wg_wordlist
+      - wg_scan_results:/usr/src/wg_scan_results
+      - wg_gf_patterns:/root/.gf
+      - wg_nuclei_templates:/root/nuclei-templates
+      - wg_tool_config:/root/.config
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       - db
       - celery
       - celery-beat
     networks:
-      - rengine_network
+      - webguard_network
   ollama:
+    container_name: webguard_ollama
     image: ollama/ollama
     volumes:
-      - ollama_data:/root/.ollama
+      - wg_ollama_data:/root/.ollama
     networks:
-      - rengine_network
+      - webguard_network
     restart: always
 
 networks:
-  rengine_network:
+  webguard_network:
 volumes:
-  tool_config:
-  postgres_data:
-  gf_patterns:
-  nuclei_templates:
-  github_repos:
-  wordlist:
-  scan_results:
-  ollama_data:
+  wg_tool_config:
+  wg_postgres_data:
+  wg_gf_patterns:
+  wg_nuclei_templates:
+  wg_github_repos:
+  wg_wordlist:
+  wg_scan_results:
+  wg_ollama_data:
