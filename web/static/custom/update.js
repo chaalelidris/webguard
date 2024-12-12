@@ -1,4 +1,4 @@
-// all the functions related to reNgine update, including showing up modal, notification etc will be here
+// all the functions related to webGuard update, including showing up modal, notification etc will be here
 
 // Source : https://stackoverflow.com/a/32428268
 function checkDailyUpdate() {
@@ -27,7 +27,7 @@ function check_rengine_update() {
     window.open("https://github.com/yogeshojha/rengine/releases", "_blank");
   } else {
     Swal.fire({
-      title: "Checking reNgine latest version...",
+      title: "Checking webGuard latest version...",
       allowOutsideClick: false,
     });
     swal.showLoading();
@@ -53,7 +53,7 @@ function check_rengine_update() {
           $(".rengine_update_available").hide();
           Swal.fire({
             title: "Update not available",
-            text: "You are running the latest version of reNgine!",
+            text: "You are running the latest version of webGuard!",
             icon: "info",
           });
         }
@@ -114,7 +114,7 @@ function update_available(latest_version_number, changelog) {
       title: "Update Available!",
       html: `
           ${changelogStyle}
-          <h5>reNgine's new update ${latest_version_number} is available, please follow the update instructions.</h5>
+          <h5>webGuard's new update ${latest_version_number} is available, please follow the update instructions.</h5>
           <div class="changelog-content" style="max-height: 500px;" data-simplebar>
             ${parsedChangelog}
           </div>
@@ -151,13 +151,11 @@ function showAfterUpdatePopup() {
   // this function will show a popup after the update is done to tell user about the new features
   const currentVersion = document.body.getAttribute("data-rengine-version");
   const lastShownVersion = localStorage.getItem("lastShownUpdateVersion");
-
-  
 }
 
 $(document).ready(function () {
-    // show popup after update
-    showAfterUpdatePopup();
+  // show popup after update
+  showAfterUpdatePopup();
   // hide badge if update does not exists
   if (
     window.localStorage.getItem("update_available") &&
