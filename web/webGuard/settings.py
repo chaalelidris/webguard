@@ -6,13 +6,13 @@ import mimetypes
 import os
 
 from webGuard.init import first_run
-from webGuard.utilities import RengineTaskFormatter
+from webGuard.utilities import WebguardTaskFormatter
 
 mimetypes.add_type("text/javascript", ".js", True)
 mimetypes.add_type("text/css", ".css", True)
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#       RENGINE CONFIGURATIONS
+#       WEBGUARD CONFIGURATIONS
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,17 +21,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, os.pardir, '.env'))
 
 # Root env vars
-RENGINE_HOME = env('RENGINE_HOME', default='/usr/src/app')
-RENGINE_RESULTS = env('RENGINE_RESULTS', default=f'{RENGINE_HOME}/scan_results')
-RENGINE_CACHE_ENABLED = env.bool('RENGINE_CACHE_ENABLED', default=False)
-RENGINE_RECORD_ENABLED = env.bool('RENGINE_RECORD_ENABLED', default=True)
-RENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)
+WEBGUARD_HOME = env('WEBGUARD_HOME', default='/usr/src/app')
+WEBGUARD_RESULTS = env('WEBGUARD_RESULTS', default=f'{WEBGUARD_HOME}/scan_results')
+WEBGUARD_CACHE_ENABLED = env.bool('WEBGUARD_CACHE_ENABLED', default=False)
+WEBGUARD_RECORD_ENABLED = env.bool('WEBGUARD_RECORD_ENABLED', default=True)
+WEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)
 
 # Common env vars
 DEBUG = env.bool('DEBUG', default=False)
 DOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')
 TEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)
-SECRET_FILE = os.path.join(RENGINE_HOME, 'secret')
+SECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')
 DEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)
 DEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second
 DEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds
@@ -43,7 +43,7 @@ DEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)
 ALLOWED_HOSTS = ['*']
 SECRET_KEY = first_run(SECRET_FILE, BASE_DIR)
 
-# Rengine version
+# Webguard version
 # reads current version from a file called .version
 VERSION_FILE = os.path.join(BASE_DIR, '.version')
 if os.path.exists(VERSION_FILE):
@@ -56,7 +56,7 @@ else:
 if _version.startswith('v'):
     _version = _version[1:]
 
-RENGINE_CURRENT_VERSION = _version
+WEBGUARD_CURRENT_VERSION = _version
 
 # Databases
 DATABASES = {
@@ -215,7 +215,7 @@ ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
 '''
 Cache settings
 '''
-RENGINE_TASK_IGNORE_CACHE_KWARGS = ['ctx']
+WEBGUARD_TASK_IGNORE_CACHE_KWARGS = ['ctx']
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -273,7 +273,7 @@ LOGGING = {
             'format': '%(name)-10s | %(message)s'
         },
         'task': {
-            '()': lambda : RengineTaskFormatter('%(task_name)-34s | %(levelname)s | %(message)s')
+            '()': lambda : WebguardTaskFormatter('%(task_name)-34s | %(levelname)s | %(message)s')
         },
         'simple': {
             'format': '%(levelname)s %(message)s',

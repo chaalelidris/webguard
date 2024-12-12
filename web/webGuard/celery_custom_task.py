@@ -19,30 +19,30 @@ if 'CELERY_BROKER' in os.environ:
 	cache = Redis.from_url(os.environ['CELERY_BROKER'])
 
 
-class RengineRequest(Request):
+class WebguardRequest(Request):
 	success_msg = ''
 	retry_msg = ''
 
 
-class RengineTask(Task):
+class WebguardTask(Task):
 	"""A Celery task that is tracked by webGuard. Save task output files and
-	tracebacks to RENGINE_RESULTS.
+	tracebacks to WEBGUARD_RESULTS.
 
 	The custom task meta-options are toggleable through environment variables:
 
-	RENGINE_RECORD_ENABLED:
+	WEBGUARD_RECORD_ENABLED:
 	- Create / update ScanActivity object to track statuses.
 	- Send notifications before and after each task (start / end).
 	- Send traceback file to webGuard's Discord channel if an exception happened.
 
-	RENGINE_CACHE_ENABLED:
+	WEBGUARD_CACHE_ENABLED:
 	- Get result from cache if it exists.
 	- Set result to cache after a task if no exceptions occured.
 
-	RENGINE_RAISE_ON_ERROR:
+	WEBGUARD_RAISE_ON_ERROR:
 	- Raise the actual exception when task fails instead of just logging it.
 	"""
-	Request = RengineRequest
+	Request = WebguardRequest
 
 	@property
 	def status_str(self):
@@ -69,7 +69,7 @@ class RengineTask(Task):
 		self.filename = ctx.get('filename')
 		self.starting_point_path = ctx.get('starting_point_path', '')
 		self.excluded_paths = ctx.get('excluded_paths', [])
-		self.results_dir = ctx.get('results_dir', RENGINE_RESULTS)
+		self.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)
 		self.yaml_configuration = ctx.get('yaml_configuration', {})
 		self.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])
 		self.history_file = f'{self.results_dir}/commands.txt'
@@ -92,7 +92,7 @@ class RengineTask(Task):
 				self.filename = 'Requests.csv'
 		self.output_path = f'{self.results_dir}/{self.filename}'
 
-		if RENGINE_RECORD_ENABLED:
+		if WEBGUARD_RECORD_ENABLED:
 			if self.engine: # task not in engine.tasks, skip it.
 				# create a rule for tasks that has to run parallel like dalfox
 				# xss scan but not necessarily part of main task rather part like
@@ -113,13 +113,13 @@ class RengineTask(Task):
 				logger.warning(f'Task {self.task_name} is RUNNING')
 				self.create_scan_activity()
 
-		if RENGINE_CACHE_ENABLED:
+		if WEBGUARD_CACHE_ENABLED:
 			# Check for result in cache and return it if it's a hit
 			record_key = get_task_cache_key(self.name, *args, **kwargs)
 			result = cache.get(record_key)
 			if result and result != b'null':
 				self.status = SUCCESS_TASK
-				if RENGINE_RECORD_ENABLED and self.track:
+				if WEBGUARD_RECORD_ENABLED and self.track:
 					logger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')
 					self.update_scan_activity()
 				return json.loads(result)
@@ -142,7 +142,7 @@ class RengineTask(Task):
 				self.subscan_id)
 			os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
 
-			if RENGINE_RAISE_ON_ERROR:
+			if WEBGUARD_RAISE_ON_ERROR:
 				raise exc
 
 			logger.exception(exc)
@@ -150,14 +150,14 @@ class RengineTask(Task):
 		finally:
 			self.write_results()
 
-			if RENGINE_RECORD_ENABLED and self.track:
+			if WEBGUARD_RECORD_ENABLED and self.track:
 				msg = f'Task {self.task_name} status is {self.status_str}'
 				msg += f' | Error: {self.error}' if self.error else ''
 				logger.warning(msg)
 				self.update_scan_activity()
 
 		# Set task result in cache if task was successful
-		if RENGINE_CACHE_ENABLED and self.status == SUCCESS_TASK and result:
+		if WEBGUARD_CACHE_ENABLED and self.status == SUCCESS_TASK and result:
 			cache.set(record_key, json.dumps(result))
 			cache.expire(record_key, 600) # 10mn cache
 

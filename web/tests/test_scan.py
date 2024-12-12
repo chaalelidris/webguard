@@ -3,7 +3,7 @@ import logging
 import os
 import unittest
 
-os.environ['RENGINE_SECRET_KEY'] = 'secret'
+os.environ['WEBGUARD_SECRET_KEY'] = 'secret'
 os.environ['CELERY_ALWAYS_EAGER'] = 'True'
 
 import yaml

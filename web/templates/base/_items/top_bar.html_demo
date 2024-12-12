@@ -197,10 +197,10 @@
     <div class="logo-box">
       <a href="{% url 'dashboardIndex' current_project.slug %}" class="logo logo-dark text-center">
         <span class="logo-sm">
-          <h3 class="text-logo vertical-center">webGuard&nbsp;<small>{{RENGINE_CURRENT_VERSION}}</small></h3>
+          <h3 class="text-logo vertical-center">webGuard&nbsp;<small>{{WEBGUARD_CURRENT_VERSION}}</small></h3>
         </span>
         <span class="logo-lg">
-          <h3 class="text-logo vertical-center">webGuard&nbsp;<small>{{RENGINE_CURRENT_VERSION}}</small></h3>
+          <h3 class="text-logo vertical-center">webGuard&nbsp;<small>{{WEBGUARD_CURRENT_VERSION}}</small></h3>
         </span>
       </a>
       <a href="{% url 'dashboardIndex' current_project.slug %}" class="logo logo-light text-center">

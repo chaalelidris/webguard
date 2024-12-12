@@ -1662,7 +1662,7 @@
         "documentation": {}
     },
     {
-        "label": "RengineTaskFormatter",
+        "label": "WebguardTaskFormatter",
         "importPath": "webGuard.utilities",
         "description": "webGuard.utilities",
         "isExtraImport": true,
@@ -3222,7 +3222,7 @@
         "documentation": {}
     },
     {
-        "label": "RengineTask",
+        "label": "WebguardTask",
         "importPath": "webGuard.celery_custom_task",
         "description": "webGuard.celery_custom_task",
         "isExtraImport": true,
@@ -6250,16 +6250,16 @@
         "kind": 6,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "class ListInterestingKeywords(APIView):\n\tdef get(self, request, format=None):\n\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'",
+        "peekOfCode": "class ListInterestingKeywords(APIView):\n\tdef get(self, request, format=None):\n\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass WebguardUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'",
         "detail": "web.api.views",
         "documentation": {}
     },
     {
-        "label": "RengineUpdateCheck",
+        "label": "WebguardUpdateCheck",
         "kind": 6,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "class RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number",
+        "peekOfCode": "class WebguardUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9625,7 +9625,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\treq = self.request\n\t\tfor id in req.data['vulnerability_ids']:\n\t\t\tVulnerability.objects.get(id=id).delete()\n\t\treturn Response({'status': True})\nclass ListInterestingKeywords(APIView):\n\tdef get(self, request, format=None):\n\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):",
+        "peekOfCode": "\t\treq = self.request\n\t\tfor id in req.data['vulnerability_ids']:\n\t\t\tVulnerability.objects.get(id=id).delete()\n\t\treturn Response({'status': True})\nclass ListInterestingKeywords(APIView):\n\tdef get(self, request, format=None):\n\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass WebguardUpdateCheck(APIView):",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9634,7 +9634,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:",
+        "peekOfCode": "\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass WebguardUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9643,7 +9643,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})",
+        "peekOfCode": "\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass WebguardUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9652,7 +9652,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION",
+        "peekOfCode": "\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = WEBGUARD_CURRENT_VERSION",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9661,7 +9661,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists",
+        "peekOfCode": "\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = WEBGUARD_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9670,7 +9670,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists\n\t\tlatest_version = re.search(r'v(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t   ((response[0]['name'",
+        "peekOfCode": "\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = WEBGUARD_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists\n\t\tlatest_version = re.search(r'v(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t   ((response[0]['name'",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9679,7 +9679,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists\n\t\tlatest_version = re.search(r'v(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t   ((response[0]['name'\n\t\t\t\t\t\t\t\t   ])[1:] if response[0]['name'][0] == 'v'\n\t\t\t\t\t\t\t\t\telse response[0]['name']))\n\t\tlatest_version = latest_version.group(0) if latest_version else None",
+        "peekOfCode": "\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = WEBGUARD_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists\n\t\tlatest_version = re.search(r'v(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t   ((response[0]['name'\n\t\t\t\t\t\t\t\t   ])[1:] if response[0]['name'][0] == 'v'\n\t\t\t\t\t\t\t\t\telse response[0]['name']))\n\t\tlatest_version = latest_version.group(0) if latest_version else None",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9688,7 +9688,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\tcurrent_version = RENGINE_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists\n\t\tlatest_version = re.search(r'v(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t   ((response[0]['name'\n\t\t\t\t\t\t\t\t   ])[1:] if response[0]['name'][0] == 'v'\n\t\t\t\t\t\t\t\t\telse response[0]['name']))\n\t\tlatest_version = latest_version.group(0) if latest_version else None\n\t\tif not latest_version:\n\t\t\tlatest_version = re.search(r'(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t\t\t((response[0]['name'",
+        "peekOfCode": "\t\tcurrent_version = WEBGUARD_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists\n\t\tlatest_version = re.search(r'v(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t   ((response[0]['name'\n\t\t\t\t\t\t\t\t   ])[1:] if response[0]['name'][0] == 'v'\n\t\t\t\t\t\t\t\t\telse response[0]['name']))\n\t\tlatest_version = latest_version.group(0) if latest_version else None\n\t\tif not latest_version:\n\t\t\tlatest_version = re.search(r'(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)',\n\t\t\t\t\t\t\t\t\t\t((response[0]['name'",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -19953,11 +19953,11 @@
         "documentation": {}
     },
     {
-        "label": "os.environ['RENGINE_SECRET_KEY']",
+        "label": "os.environ['WEBGUARD_SECRET_KEY']",
         "kind": 5,
         "importPath": "web.tests.test_nmap",
         "description": "web.tests.test_nmap",
-        "peekOfCode": "os.environ['RENGINE_SECRET_KEY'] = 'secret'\nos.environ['CELERY_ALWAYS_EAGER'] = 'True'\nfrom celery.utils.log import get_task_logger\nfrom webGuard.settings import DEBUG\nfrom webGuard.tasks import parse_nmap_results, parse_nmap_vuln_output, parse_nmap_vulscan_output\nimport pathlib\nlogger = get_task_logger(__name__)\nDOMAIN_NAME = os.environ['DOMAIN_NAME']\nFIXTURES_DIR = pathlib.Path().absolute() / 'fixtures' / 'nmap_xml'\nif not DEBUG:",
+        "peekOfCode": "os.environ['WEBGUARD_SECRET_KEY'] = 'secret'\nos.environ['CELERY_ALWAYS_EAGER'] = 'True'\nfrom celery.utils.log import get_task_logger\nfrom webGuard.settings import DEBUG\nfrom webGuard.tasks import parse_nmap_results, parse_nmap_vuln_output, parse_nmap_vulscan_output\nimport pathlib\nlogger = get_task_logger(__name__)\nDOMAIN_NAME = os.environ['DOMAIN_NAME']\nFIXTURES_DIR = pathlib.Path().absolute() / 'fixtures' / 'nmap_xml'\nif not DEBUG:",
         "detail": "web.tests.test_nmap",
         "documentation": {}
     },
@@ -20007,11 +20007,11 @@
         "documentation": {}
     },
     {
-        "label": "os.environ['RENGINE_SECRET_KEY']",
+        "label": "os.environ['WEBGUARD_SECRET_KEY']",
         "kind": 5,
         "importPath": "web.tests.test_scan",
         "description": "web.tests.test_scan",
-        "peekOfCode": "os.environ['RENGINE_SECRET_KEY'] = 'secret'\nos.environ['CELERY_ALWAYS_EAGER'] = 'True'\nimport yaml\nfrom celery.utils.log import get_task_logger\nfrom webGuard.settings import DEBUG\nfrom webGuard.tasks import (dir_file_fuzz, fetch_url, http_crawl, initiate_scan,\n                           osint, port_scan, subdomain_discovery,\n                           vulnerability_scan)\nfrom startScan.models import *\nlogger = get_task_logger(__name__)",
+        "peekOfCode": "os.environ['WEBGUARD_SECRET_KEY'] = 'secret'\nos.environ['CELERY_ALWAYS_EAGER'] = 'True'\nimport yaml\nfrom celery.utils.log import get_task_logger\nfrom webGuard.settings import DEBUG\nfrom webGuard.tasks import (dir_file_fuzz, fetch_url, http_crawl, initiate_scan,\n                           osint, port_scan, subdomain_discovery,\n                           vulnerability_scan)\nfrom startScan.models import *\nlogger = get_task_logger(__name__)",
         "detail": "web.tests.test_scan",
         "documentation": {}
     },
@@ -20061,20 +20061,20 @@
         "documentation": {}
     },
     {
-        "label": "RengineRequest",
+        "label": "WebguardRequest",
         "kind": 6,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "class RengineRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tRENGINE_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).",
+        "peekOfCode": "class WebguardRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tWEBGUARD_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
     {
-        "label": "RengineTask",
+        "label": "WebguardTask",
         "kind": 6,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "class RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tRENGINE_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).\n\t- Send traceback file to webGuard's Discord channel if an exception happened.\n\tRENGINE_CACHE_ENABLED:\n\t- Get result from cache if it exists.",
+        "peekOfCode": "class WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tWEBGUARD_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).\n\t- Send traceback file to webGuard's Discord channel if an exception happened.\n\tWEBGUARD_CACHE_ENABLED:\n\t- Get result from cache if it exists.",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20083,7 +20083,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "logger = get_task_logger(__name__)\ncache = None\nif 'CELERY_BROKER' in os.environ:\n\tcache = Redis.from_url(os.environ['CELERY_BROKER'])\nclass RengineRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.",
+        "peekOfCode": "logger = get_task_logger(__name__)\ncache = None\nif 'CELERY_BROKER' in os.environ:\n\tcache = Redis.from_url(os.environ['CELERY_BROKER'])\nclass WebguardRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20092,7 +20092,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "cache = None\nif 'CELERY_BROKER' in os.environ:\n\tcache = Redis.from_url(os.environ['CELERY_BROKER'])\nclass RengineRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:",
+        "peekOfCode": "cache = None\nif 'CELERY_BROKER' in os.environ:\n\tcache = Redis.from_url(os.environ['CELERY_BROKER'])\nclass WebguardRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20101,7 +20101,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\tcache = Redis.from_url(os.environ['CELERY_BROKER'])\nclass RengineRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tRENGINE_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.",
+        "peekOfCode": "\tcache = Redis.from_url(os.environ['CELERY_BROKER'])\nclass WebguardRequest(Request):\n\tsuccess_msg = ''\n\tretry_msg = ''\nclass WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tWEBGUARD_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20110,7 +20110,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\tsuccess_msg = ''\n\tretry_msg = ''\nclass RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tRENGINE_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).\n\t- Send traceback file to webGuard's Discord channel if an exception happened.",
+        "peekOfCode": "\tsuccess_msg = ''\n\tretry_msg = ''\nclass WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tWEBGUARD_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).\n\t- Send traceback file to webGuard's Discord channel if an exception happened.",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20119,7 +20119,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\tretry_msg = ''\nclass RengineTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to RENGINE_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tRENGINE_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).\n\t- Send traceback file to webGuard's Discord channel if an exception happened.\n\tRENGINE_CACHE_ENABLED:",
+        "peekOfCode": "\tretry_msg = ''\nclass WebguardTask(Task):\n\t\"\"\"A Celery task that is tracked by webGuard. Save task output files and\n\ttracebacks to WEBGUARD_RESULTS.\n\tThe custom task meta-options are toggleable through environment variables:\n\tWEBGUARD_RECORD_ENABLED:\n\t- Create / update ScanActivity object to track statuses.\n\t- Send notifications before and after each task (start / end).\n\t- Send traceback file to webGuard's Discord channel if an exception happened.\n\tWEBGUARD_CACHE_ENABLED:",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20128,7 +20128,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\tRequest = RengineRequest\n\t@property\n\tdef status_str(self):\n\t\treturn CELERY_TASK_STATUS_MAP.get(self.status)\n\tdef __call__(self, *args, **kwargs):\n\t\tself.result = None\n\t\tself.error = None\n\t\tself.traceback = None\n\t\tself.output_path = None\n\t\tself.status = RUNNING_TASK",
+        "peekOfCode": "\tRequest = WebguardRequest\n\t@property\n\tdef status_str(self):\n\t\treturn CELERY_TASK_STATUS_MAP.get(self.status)\n\tdef __call__(self, *args, **kwargs):\n\t\tself.result = None\n\t\tself.error = None\n\t\tself.traceback = None\n\t\tself.output_path = None\n\t\tself.status = RUNNING_TASK",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20209,7 +20209,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tctx = kwargs.get('ctx', {})\n\t\tself.track = ctx.pop('track', True)\n\t\tself.scan_id = ctx.get('scan_history_id')\n\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})",
+        "peekOfCode": "\t\tctx = kwargs.get('ctx', {})\n\t\tself.track = ctx.pop('track', True)\n\t\tself.scan_id = ctx.get('scan_history_id')\n\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20218,7 +20218,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.track = ctx.pop('track', True)\n\t\tself.scan_id = ctx.get('scan_history_id')\n\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])",
+        "peekOfCode": "\t\tself.track = ctx.pop('track', True)\n\t\tself.scan_id = ctx.get('scan_history_id')\n\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20227,7 +20227,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.scan_id = ctx.get('scan_history_id')\n\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'",
+        "peekOfCode": "\t\tself.scan_id = ctx.get('scan_history_id')\n\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20236,7 +20236,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()",
+        "peekOfCode": "\t\tself.subscan_id = ctx.get('subscan_id')\n\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20245,7 +20245,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()",
+        "peekOfCode": "\t\tself.engine_id = ctx.get('engine_id')\n\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20254,7 +20254,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()",
+        "peekOfCode": "\t\tself.filename = ctx.get('filename')\n\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20263,7 +20263,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()\n\t\tself.domain = self.scan.domain if self.scan else None",
+        "peekOfCode": "\t\tself.starting_point_path = ctx.get('starting_point_path', '')\n\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()\n\t\tself.domain = self.scan.domain if self.scan else None",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20272,7 +20272,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()\n\t\tself.domain = self.scan.domain if self.scan else None\n\t\tself.domain_id = self.domain.id if self.domain else None",
+        "peekOfCode": "\t\tself.excluded_paths = ctx.get('excluded_paths', [])\n\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()\n\t\tself.domain = self.scan.domain if self.scan else None\n\t\tself.domain_id = self.domain.id if self.domain else None",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20281,7 +20281,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.results_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()\n\t\tself.domain = self.scan.domain if self.scan else None\n\t\tself.domain_id = self.domain.id if self.domain else None\n\t\tself.subdomain = self.subscan.subdomain if self.subscan else None",
+        "peekOfCode": "\t\tself.results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t\tself.yaml_configuration = ctx.get('yaml_configuration', {})\n\t\tself.out_of_scope_subdomains = ctx.get('out_of_scope_subdomains', [])\n\t\tself.history_file = f'{self.results_dir}/commands.txt'\n\t\tself.scan = ScanHistory.objects.filter(pk=self.scan_id).first()\n\t\tself.subscan = SubScan.objects.filter(pk=self.subscan_id).first()\n\t\tself.engine = EngineType.objects.filter(pk=self.engine_id).first()\n\t\tself.domain = self.scan.domain if self.scan else None\n\t\tself.domain_id = self.domain.id if self.domain else None\n\t\tself.subdomain = self.subscan.subdomain if self.subscan else None",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20389,7 +20389,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\tself.filename = get_output_file_name(\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id,\n\t\t\t\tf'{self.task_name}.txt')\n\t\t\tif self.task_name == 'screenshot':\n\t\t\t\tself.filename = 'Requests.csv'\n\t\tself.output_path = f'{self.results_dir}/{self.filename}'\n\t\tif RENGINE_RECORD_ENABLED:\n\t\t\tif self.engine: # task not in engine.tasks, skip it.\n\t\t\t\t# create a rule for tasks that has to run parallel like dalfox",
+        "peekOfCode": "\t\t\tself.filename = get_output_file_name(\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id,\n\t\t\t\tf'{self.task_name}.txt')\n\t\t\tif self.task_name == 'screenshot':\n\t\t\t\tself.filename = 'Requests.csv'\n\t\tself.output_path = f'{self.results_dir}/{self.filename}'\n\t\tif WEBGUARD_RECORD_ENABLED:\n\t\t\tif self.engine: # task not in engine.tasks, skip it.\n\t\t\t\t# create a rule for tasks that has to run parallel like dalfox",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20398,7 +20398,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\t\tself.filename = 'Requests.csv'\n\t\tself.output_path = f'{self.results_dir}/{self.filename}'\n\t\tif RENGINE_RECORD_ENABLED:\n\t\t\tif self.engine: # task not in engine.tasks, skip it.\n\t\t\t\t# create a rule for tasks that has to run parallel like dalfox\n\t\t\t\t# xss scan but not necessarily part of main task rather part like\n\t\t\t\t# dalfox scan being part of vulnerability task\n\t\t\t\tdependent_tasks = {\n\t\t\t\t\t'dalfox_xss_scan': 'vulnerability_scan',\n\t\t\t\t\t'crlfuzz': 'vulnerability_scan',",
+        "peekOfCode": "\t\t\t\tself.filename = 'Requests.csv'\n\t\tself.output_path = f'{self.results_dir}/{self.filename}'\n\t\tif WEBGUARD_RECORD_ENABLED:\n\t\t\tif self.engine: # task not in engine.tasks, skip it.\n\t\t\t\t# create a rule for tasks that has to run parallel like dalfox\n\t\t\t\t# xss scan but not necessarily part of main task rather part like\n\t\t\t\t# dalfox scan being part of vulnerability task\n\t\t\t\tdependent_tasks = {\n\t\t\t\t\t'dalfox_xss_scan': 'vulnerability_scan',\n\t\t\t\t\t'crlfuzz': 'vulnerability_scan',",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20407,7 +20407,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\tself.output_path = f'{self.results_dir}/{self.filename}'\n\t\tif RENGINE_RECORD_ENABLED:\n\t\t\tif self.engine: # task not in engine.tasks, skip it.\n\t\t\t\t# create a rule for tasks that has to run parallel like dalfox\n\t\t\t\t# xss scan but not necessarily part of main task rather part like\n\t\t\t\t# dalfox scan being part of vulnerability task\n\t\t\t\tdependent_tasks = {\n\t\t\t\t\t'dalfox_xss_scan': 'vulnerability_scan',\n\t\t\t\t\t'crlfuzz': 'vulnerability_scan',\n\t\t\t\t\t'nuclei_scan': 'vulnerability_scan',",
+        "peekOfCode": "\t\tself.output_path = f'{self.results_dir}/{self.filename}'\n\t\tif WEBGUARD_RECORD_ENABLED:\n\t\t\tif self.engine: # task not in engine.tasks, skip it.\n\t\t\t\t# create a rule for tasks that has to run parallel like dalfox\n\t\t\t\t# xss scan but not necessarily part of main task rather part like\n\t\t\t\t# dalfox scan being part of vulnerability task\n\t\t\t\tdependent_tasks = {\n\t\t\t\t\t'dalfox_xss_scan': 'vulnerability_scan',\n\t\t\t\t\t'crlfuzz': 'vulnerability_scan',\n\t\t\t\t\t'nuclei_scan': 'vulnerability_scan',",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20425,7 +20425,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\trecord_key = get_task_cache_key(self.name, *args, **kwargs)\n\t\t\tresult = cache.get(record_key)\n\t\t\tif result and result != b'null':\n\t\t\t\tself.status = SUCCESS_TASK\n\t\t\t\tif RENGINE_RECORD_ENABLED and self.track:\n\t\t\t\t\tlogger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')\n\t\t\t\t\tself.update_scan_activity()\n\t\t\t\treturn json.loads(result)\n\t\t# Execute task, catch exceptions and update ScanActivity object after\n\t\t# task has finished running.",
+        "peekOfCode": "\t\t\trecord_key = get_task_cache_key(self.name, *args, **kwargs)\n\t\t\tresult = cache.get(record_key)\n\t\t\tif result and result != b'null':\n\t\t\t\tself.status = SUCCESS_TASK\n\t\t\t\tif WEBGUARD_RECORD_ENABLED and self.track:\n\t\t\t\t\tlogger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')\n\t\t\t\t\tself.update_scan_activity()\n\t\t\t\treturn json.loads(result)\n\t\t# Execute task, catch exceptions and update ScanActivity object after\n\t\t# task has finished running.",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20434,7 +20434,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\tresult = cache.get(record_key)\n\t\t\tif result and result != b'null':\n\t\t\t\tself.status = SUCCESS_TASK\n\t\t\t\tif RENGINE_RECORD_ENABLED and self.track:\n\t\t\t\t\tlogger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')\n\t\t\t\t\tself.update_scan_activity()\n\t\t\t\treturn json.loads(result)\n\t\t# Execute task, catch exceptions and update ScanActivity object after\n\t\t# task has finished running.\n\t\ttry:",
+        "peekOfCode": "\t\t\tresult = cache.get(record_key)\n\t\t\tif result and result != b'null':\n\t\t\t\tself.status = SUCCESS_TASK\n\t\t\t\tif WEBGUARD_RECORD_ENABLED and self.track:\n\t\t\t\t\tlogger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')\n\t\t\t\t\tself.update_scan_activity()\n\t\t\t\treturn json.loads(result)\n\t\t# Execute task, catch exceptions and update ScanActivity object after\n\t\t# task has finished running.\n\t\ttry:",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20443,7 +20443,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\t\tself.status = SUCCESS_TASK\n\t\t\t\tif RENGINE_RECORD_ENABLED and self.track:\n\t\t\t\t\tlogger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')\n\t\t\t\t\tself.update_scan_activity()\n\t\t\t\treturn json.loads(result)\n\t\t# Execute task, catch exceptions and update ScanActivity object after\n\t\t# task has finished running.\n\t\ttry:\n\t\t\tself.result = self.run(*args, **kwargs)\n\t\t\tself.status = SUCCESS_TASK",
+        "peekOfCode": "\t\t\t\tself.status = SUCCESS_TASK\n\t\t\t\tif WEBGUARD_RECORD_ENABLED and self.track:\n\t\t\t\t\tlogger.warning(f'Task {self.task_name} status is SUCCESS (CACHED)')\n\t\t\t\t\tself.update_scan_activity()\n\t\t\t\treturn json.loads(result)\n\t\t# Execute task, catch exceptions and update ScanActivity object after\n\t\t# task has finished running.\n\t\ttry:\n\t\t\tself.result = self.run(*args, **kwargs)\n\t\t\tself.status = SUCCESS_TASK",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20479,7 +20479,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\tself.error = repr(exc)\n\t\t\tself.traceback = fmt_traceback(exc)\n\t\t\tself.result = self.traceback\n\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif RENGINE_RAISE_ON_ERROR:",
+        "peekOfCode": "\t\t\tself.error = repr(exc)\n\t\t\tself.traceback = fmt_traceback(exc)\n\t\t\tself.result = self.traceback\n\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif WEBGUARD_RAISE_ON_ERROR:",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20488,7 +20488,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\tself.traceback = fmt_traceback(exc)\n\t\t\tself.result = self.traceback\n\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif RENGINE_RAISE_ON_ERROR:\n\t\t\t\traise exc",
+        "peekOfCode": "\t\t\tself.traceback = fmt_traceback(exc)\n\t\t\tself.result = self.traceback\n\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif WEBGUARD_RAISE_ON_ERROR:\n\t\t\t\traise exc",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20497,7 +20497,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\tself.result = self.traceback\n\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif RENGINE_RAISE_ON_ERROR:\n\t\t\t\traise exc\n\t\t\tlogger.exception(exc)",
+        "peekOfCode": "\t\t\tself.result = self.traceback\n\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif WEBGUARD_RAISE_ON_ERROR:\n\t\t\t\traise exc\n\t\t\tlogger.exception(exc)",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20506,7 +20506,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif RENGINE_RAISE_ON_ERROR:\n\t\t\t\traise exc\n\t\t\tlogger.exception(exc)\n\t\tfinally:",
+        "peekOfCode": "\t\t\tself.output_path = get_traceback_path(\n\t\t\t\tself.task_name,\n\t\t\t\tself.results_dir,\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id)\n\t\t\tos.makedirs(os.path.dirname(self.output_path), exist_ok=True)\n\t\t\tif WEBGUARD_RAISE_ON_ERROR:\n\t\t\t\traise exc\n\t\t\tlogger.exception(exc)\n\t\tfinally:",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20515,7 +20515,7 @@
         "kind": 5,
         "importPath": "web.webGuard.celery_custom_task",
         "description": "web.webGuard.celery_custom_task",
-        "peekOfCode": "\t\t\t\tmsg = f'Task {self.task_name} status is {self.status_str}'\n\t\t\t\tmsg += f' | Error: {self.error}' if self.error else ''\n\t\t\t\tlogger.warning(msg)\n\t\t\t\tself.update_scan_activity()\n\t\t# Set task result in cache if task was successful\n\t\tif RENGINE_CACHE_ENABLED and self.status == SUCCESS_TASK and result:\n\t\t\tcache.set(record_key, json.dumps(result))\n\t\t\tcache.expire(record_key, 600) # 10mn cache\n\t\treturn self.result\n\tdef write_results(self):",
+        "peekOfCode": "\t\t\t\tmsg = f'Task {self.task_name} status is {self.status_str}'\n\t\t\t\tmsg += f' | Error: {self.error}' if self.error else ''\n\t\t\t\tlogger.warning(msg)\n\t\t\t\tself.update_scan_activity()\n\t\t# Set task result in cache if task was successful\n\t\tif WEBGUARD_CACHE_ENABLED and self.status == SUCCESS_TASK and result:\n\t\t\tcache.set(record_key, json.dumps(result))\n\t\t\tcache.expire(record_key, 600) # 10mn cache\n\t\treturn self.result\n\tdef write_results(self):",
         "detail": "web.webGuard.celery_custom_task",
         "documentation": {}
     },
@@ -20893,7 +20893,7 @@
         "kind": 2,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "def get_task_header_message(name, scan_history_id, subscan_id):\n\tmsg = f'`{name}` [#{scan_history_id}'\n\tif subscan_id:\n\t\tmsg += f'_#{subscan_id}]'\n\tmsg += 'status'\n\treturn msg\ndef get_task_cache_key(func_name, *args, **kwargs):\n\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in RENGINE_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'",
+        "peekOfCode": "def get_task_header_message(name, scan_history_id, subscan_id):\n\tmsg = f'`{name}` [#{scan_history_id}'\n\tif subscan_id:\n\t\tmsg += f'_#{subscan_id}]'\n\tmsg += 'status'\n\treturn msg\ndef get_task_cache_key(func_name, *args, **kwargs):\n\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in WEBGUARD_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -20902,7 +20902,7 @@
         "kind": 2,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "def get_task_cache_key(func_name, *args, **kwargs):\n\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in RENGINE_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):\n\ttitle = f'#{scan_history_id}'\n\tif subscan_id:\n\t\ttitle += f'-{subscan_id}'\n\ttitle += f'_{filename}'\n\treturn title",
+        "peekOfCode": "def get_task_cache_key(func_name, *args, **kwargs):\n\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in WEBGUARD_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):\n\ttitle = f'#{scan_history_id}'\n\tif subscan_id:\n\t\ttitle += f'-{subscan_id}'\n\ttitle += f'_{filename}'\n\treturn title",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -21775,7 +21775,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\t\t\tquery = query.filter(http_url__contains=url)\n\t# Select distinct endpoints and order\n\tendpoints = query.distinct('http_url').order_by('http_url').all()\n\t# If is_alive is True, select only endpoints that are alive\n\tif is_alive:\n\t\tendpoints = [e for e in endpoints if e.is_alive]\n\t# Grab only http_url from endpoint objects\n\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{RENGINE_HOME}/fixtures/extensions.txt'",
+        "peekOfCode": "\t\t\tquery = query.filter(http_url__contains=url)\n\t# Select distinct endpoints and order\n\tendpoints = query.distinct('http_url').order_by('http_url').all()\n\t# If is_alive is True, select only endpoints that are alive\n\tif is_alive:\n\t\tendpoints = [e for e in endpoints if e.is_alive]\n\t# Grab only http_url from endpoint objects\n\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{WEBGUARD_HOME}/fixtures/extensions.txt'",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -21784,7 +21784,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\tendpoints = query.distinct('http_url').order_by('http_url').all()\n\t# If is_alive is True, select only endpoints that are alive\n\tif is_alive:\n\t\tendpoints = [e for e in endpoints if e.is_alive]\n\t# Grab only http_url from endpoint objects\n\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{RENGINE_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())",
+        "peekOfCode": "\tendpoints = query.distinct('http_url').order_by('http_url').all()\n\t# If is_alive is True, select only endpoints that are alive\n\tif is_alive:\n\t\tendpoints = [e for e in endpoints if e.is_alive]\n\t# Grab only http_url from endpoint objects\n\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{WEBGUARD_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -21793,7 +21793,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\t\tendpoints = [e for e in endpoints if e.is_alive]\n\t# Grab only http_url from endpoint objects\n\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{RENGINE_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())\n\t\tendpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]\n\tif not endpoints:\n\t\tlogger.error(f'No endpoints were found in query !')",
+        "peekOfCode": "\t\tendpoints = [e for e in endpoints if e.is_alive]\n\t# Grab only http_url from endpoint objects\n\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{WEBGUARD_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())\n\t\tendpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]\n\tif not endpoints:\n\t\tlogger.error(f'No endpoints were found in query !')",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -21802,7 +21802,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{RENGINE_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())\n\t\tendpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]\n\tif not endpoints:\n\t\tlogger.error(f'No endpoints were found in query !')\n\tif write_filepath:\n\t\twith open(write_filepath, 'w') as f:",
+        "peekOfCode": "\tendpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]\n\tif ignore_files: # ignore all files\n\t\textensions_path = f'{WEBGUARD_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())\n\t\tendpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]\n\tif not endpoints:\n\t\tlogger.error(f'No endpoints were found in query !')\n\tif write_filepath:\n\t\twith open(write_filepath, 'w') as f:",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -21811,7 +21811,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\t\textensions_path = f'{RENGINE_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())\n\t\tendpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]\n\tif not endpoints:\n\t\tlogger.error(f'No endpoints were found in query !')\n\tif write_filepath:\n\t\twith open(write_filepath, 'w') as f:\n\t\t\tf.write('\\n'.join(endpoints))\n\treturn endpoints",
+        "peekOfCode": "\t\textensions_path = f'{WEBGUARD_HOME}/fixtures/extensions.txt'\n\t\twith open(extensions_path, 'r') as f:\n\t\t\textensions = tuple(f.strip() for f in f.readlines())\n\t\tendpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]\n\tif not endpoints:\n\t\tlogger.error(f'No endpoints were found in query !')\n\tif write_filepath:\n\t\twith open(write_filepath, 'w') as f:\n\t\t\tf.write('\\n'.join(endpoints))\n\treturn endpoints",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -22810,7 +22810,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\tmsg = f'`{name}` [#{scan_history_id}'\n\tif subscan_id:\n\t\tmsg += f'_#{subscan_id}]'\n\tmsg += 'status'\n\treturn msg\ndef get_task_cache_key(func_name, *args, **kwargs):\n\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in RENGINE_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):",
+        "peekOfCode": "\tmsg = f'`{name}` [#{scan_history_id}'\n\tif subscan_id:\n\t\tmsg += f'_#{subscan_id}]'\n\tmsg += 'status'\n\treturn msg\ndef get_task_cache_key(func_name, *args, **kwargs):\n\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in WEBGUARD_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -22819,7 +22819,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in RENGINE_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):\n\ttitle = f'#{scan_history_id}'\n\tif subscan_id:\n\t\ttitle += f'-{subscan_id}'\n\ttitle += f'_{filename}'\n\treturn title\ndef get_traceback_path(task_name, results_dir, scan_history_id=None, subscan_id=None):",
+        "peekOfCode": "\targs_str = '_'.join([str(arg) for arg in args])\n\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in WEBGUARD_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):\n\ttitle = f'#{scan_history_id}'\n\tif subscan_id:\n\t\ttitle += f'-{subscan_id}'\n\ttitle += f'_{filename}'\n\treturn title\ndef get_traceback_path(task_name, results_dir, scan_history_id=None, subscan_id=None):",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -22828,7 +22828,7 @@
         "kind": 5,
         "importPath": "web.webGuard.common_func",
         "description": "web.webGuard.common_func",
-        "peekOfCode": "\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in RENGINE_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):\n\ttitle = f'#{scan_history_id}'\n\tif subscan_id:\n\t\ttitle += f'-{subscan_id}'\n\ttitle += f'_{filename}'\n\treturn title\ndef get_traceback_path(task_name, results_dir, scan_history_id=None, subscan_id=None):\n\tpath = results_dir",
+        "peekOfCode": "\tkwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in WEBGUARD_TASK_IGNORE_CACHE_KWARGS])\n\treturn f'{func_name}__{args_str}__{kwargs_str}'\ndef get_output_file_name(scan_history_id, subscan_id, filename):\n\ttitle = f'#{scan_history_id}'\n\tif subscan_id:\n\t\ttitle += f'-{subscan_id}'\n\ttitle += f'_{filename}'\n\treturn title\ndef get_traceback_path(task_name, results_dir, scan_history_id=None, subscan_id=None):\n\tpath = results_dir",
         "detail": "web.webGuard.common_func",
         "documentation": {}
     },
@@ -23764,7 +23764,7 @@
         "kind": 2,
         "importPath": "web.webGuard.context_processors",
         "description": "web.webGuard.context_processors",
-        "peekOfCode": "def version_context(request):\n    return {\n        'RENGINE_CURRENT_VERSION': settings.RENGINE_CURRENT_VERSION\n    }\ndef user_preferences(request):\n    if hasattr(request, 'user_preferences'):\n        return {'user_preferences': request.user_preferences}\n    return {}",
+        "peekOfCode": "def version_context(request):\n    return {\n        'WEBGUARD_CURRENT_VERSION': settings.WEBGUARD_CURRENT_VERSION\n    }\ndef user_preferences(request):\n    if hasattr(request, 'user_preferences'):\n        return {'user_preferences': request.user_preferences}\n    return {}",
         "detail": "web.webGuard.context_processors",
         "documentation": {}
     },
@@ -25411,7 +25411,7 @@
         "kind": 2,
         "importPath": "web.webGuard.init",
         "description": "web.webGuard.init",
-        "peekOfCode": "def first_run(secret_file, base_dir):\n    if 'RENGINE_SECRET_KEY' in os.environ:\n        secret_key = os.environ['RENGINE_SECRET_KEY']\n    elif os.path.isfile(secret_file):\n        secret_key = open(secret_file).read().strip()\n    else:\n        try:\n            secret_key = get_random()\n            secret = open(secret_file, 'w')\n            secret.write(secret_key)",
+        "peekOfCode": "def first_run(secret_file, base_dir):\n    if 'WEBGUARD_SECRET_KEY' in os.environ:\n        secret_key = os.environ['WEBGUARD_SECRET_KEY']\n    elif os.path.isfile(secret_file):\n        secret_key = open(secret_file).read().strip()\n    else:\n        try:\n            secret_key = get_random()\n            secret = open(secret_file, 'w')\n            secret.write(secret_key)",
         "detail": "web.webGuard.init",
         "documentation": {}
     },
@@ -25429,7 +25429,7 @@
         "kind": 5,
         "importPath": "web.webGuard.init",
         "description": "web.webGuard.init",
-        "peekOfCode": "logger = logging.getLogger(__name__)\n'''\nBased on\nhttps://github.com/MobSF/Mobile-Security-Framework-MobSF/blob/master/MobSF/init.py\n'''\ndef first_run(secret_file, base_dir):\n    if 'RENGINE_SECRET_KEY' in os.environ:\n        secret_key = os.environ['RENGINE_SECRET_KEY']\n    elif os.path.isfile(secret_file):\n        secret_key = open(secret_file).read().strip()",
+        "peekOfCode": "logger = logging.getLogger(__name__)\n'''\nBased on\nhttps://github.com/MobSF/Mobile-Security-Framework-MobSF/blob/master/MobSF/init.py\n'''\ndef first_run(secret_file, base_dir):\n    if 'WEBGUARD_SECRET_KEY' in os.environ:\n        secret_key = os.environ['WEBGUARD_SECRET_KEY']\n    elif os.path.isfile(secret_file):\n        secret_key = open(secret_file).read().strip()",
         "detail": "web.webGuard.init",
         "documentation": {}
     },
@@ -25762,7 +25762,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "env = environ.FileAwareEnv()\nimport mimetypes\nimport os\nfrom webGuard.init import first_run\nfrom webGuard.utilities import RengineTaskFormatter\nmimetypes.add_type(\"text/javascript\", \".js\", True)\nmimetypes.add_type(\"text/css\", \".css\", True)\n# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n#       RENGINE CONFIGURATIONS\n# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "peekOfCode": "env = environ.FileAwareEnv()\nimport mimetypes\nimport os\nfrom webGuard.init import first_run\nfrom webGuard.utilities import WebguardTaskFormatter\nmimetypes.add_type(\"text/javascript\", \".js\", True)\nmimetypes.add_type(\"text/css\", \".css\", True)\n# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n#       WEBGUARD CONFIGURATIONS\n# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25771,52 +25771,52 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n# Take environment variables from .env file\nenviron.Env.read_env(os.path.join(BASE_DIR, os.pardir, '.env'))\n# Root env vars\nRENGINE_HOME = env('RENGINE_HOME', default='/usr/src/app')\nRENGINE_RESULTS = env('RENGINE_RESULTS', default=f'{RENGINE_HOME}/scan_results')\nRENGINE_CACHE_ENABLED = env.bool('RENGINE_CACHE_ENABLED', default=False)\nRENGINE_RECORD_ENABLED = env.bool('RENGINE_RECORD_ENABLED', default=True)\nRENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)\n# Common env vars",
+        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n# Take environment variables from .env file\nenviron.Env.read_env(os.path.join(BASE_DIR, os.pardir, '.env'))\n# Root env vars\nWEBGUARD_HOME = env('WEBGUARD_HOME', default='/usr/src/app')\nWEBGUARD_RESULTS = env('WEBGUARD_RESULTS', default=f'{WEBGUARD_HOME}/scan_results')\nWEBGUARD_CACHE_ENABLED = env.bool('WEBGUARD_CACHE_ENABLED', default=False)\nWEBGUARD_RECORD_ENABLED = env.bool('WEBGUARD_RECORD_ENABLED', default=True)\nWEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)\n# Common env vars",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_HOME",
+        "label": "WEBGUARD_HOME",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_HOME = env('RENGINE_HOME', default='/usr/src/app')\nRENGINE_RESULTS = env('RENGINE_RESULTS', default=f'{RENGINE_HOME}/scan_results')\nRENGINE_CACHE_ENABLED = env.bool('RENGINE_CACHE_ENABLED', default=False)\nRENGINE_RECORD_ENABLED = env.bool('RENGINE_RECORD_ENABLED', default=True)\nRENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')",
+        "peekOfCode": "WEBGUARD_HOME = env('WEBGUARD_HOME', default='/usr/src/app')\nWEBGUARD_RESULTS = env('WEBGUARD_RESULTS', default=f'{WEBGUARD_HOME}/scan_results')\nWEBGUARD_CACHE_ENABLED = env.bool('WEBGUARD_CACHE_ENABLED', default=False)\nWEBGUARD_RECORD_ENABLED = env.bool('WEBGUARD_RECORD_ENABLED', default=True)\nWEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_RESULTS",
+        "label": "WEBGUARD_RESULTS",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_RESULTS = env('RENGINE_RESULTS', default=f'{RENGINE_HOME}/scan_results')\nRENGINE_CACHE_ENABLED = env.bool('RENGINE_CACHE_ENABLED', default=False)\nRENGINE_RECORD_ENABLED = env.bool('RENGINE_RECORD_ENABLED', default=True)\nRENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)",
+        "peekOfCode": "WEBGUARD_RESULTS = env('WEBGUARD_RESULTS', default=f'{WEBGUARD_HOME}/scan_results')\nWEBGUARD_CACHE_ENABLED = env.bool('WEBGUARD_CACHE_ENABLED', default=False)\nWEBGUARD_RECORD_ENABLED = env.bool('WEBGUARD_RECORD_ENABLED', default=True)\nWEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_CACHE_ENABLED",
+        "label": "WEBGUARD_CACHE_ENABLED",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_CACHE_ENABLED = env.bool('RENGINE_CACHE_ENABLED', default=False)\nRENGINE_RECORD_ENABLED = env.bool('RENGINE_RECORD_ENABLED', default=True)\nRENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second",
+        "peekOfCode": "WEBGUARD_CACHE_ENABLED = env.bool('WEBGUARD_CACHE_ENABLED', default=False)\nWEBGUARD_RECORD_ENABLED = env.bool('WEBGUARD_RECORD_ENABLED', default=True)\nWEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_RECORD_ENABLED",
+        "label": "WEBGUARD_RECORD_ENABLED",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_RECORD_ENABLED = env.bool('RENGINE_RECORD_ENABLED', default=True)\nRENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds",
+        "peekOfCode": "WEBGUARD_RECORD_ENABLED = env.bool('WEBGUARD_RECORD_ENABLED', default=True)\nWEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_RAISE_ON_ERROR",
+        "label": "WEBGUARD_RAISE_ON_ERROR",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_RAISE_ON_ERROR = env.bool('RENGINE_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)",
+        "peekOfCode": "WEBGUARD_RAISE_ON_ERROR = env.bool('WEBGUARD_RAISE_ON_ERROR', default=False)\n# Common env vars\nDEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25825,7 +25825,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)",
+        "peekOfCode": "DEBUG = env.bool('DEBUG', default=False)\nDOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25834,7 +25834,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals",
+        "peekOfCode": "DOMAIN_NAME = env('DOMAIN_NAME', default='localhost:8000')\nTEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25843,7 +25843,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "TEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']",
+        "peekOfCode": "TEMPLATE_DEBUG = env.bool('TEMPLATE_DEBUG', default=False)\nSECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25852,7 +25852,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "SECRET_FILE = os.path.join(RENGINE_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)",
+        "peekOfCode": "SECRET_FILE = os.path.join(WEBGUARD_HOME, 'secret')\nDEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25861,7 +25861,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version",
+        "peekOfCode": "DEFAULT_ENABLE_HTTP_CRAWL = env.bool('DEFAULT_ENABLE_HTTP_CRAWL', default=True)\nDEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25870,7 +25870,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version",
+        "peekOfCode": "DEFAULT_RATE_LIMIT = env.int('DEFAULT_RATE_LIMIT', default=150) # requests / second\nDEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25879,7 +25879,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')",
+        "peekOfCode": "DEFAULT_HTTP_TIMEOUT = env.int('DEFAULT_HTTP_TIMEOUT', default=5) # seconds\nDEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25888,7 +25888,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):",
+        "peekOfCode": "DEFAULT_RETRIES = env.int('DEFAULT_RETRIES', default=1)\nDEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25897,7 +25897,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:",
+        "peekOfCode": "DEFAULT_THREADS = env.int('DEFAULT_THREADS', default=30)\nDEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25906,7 +25906,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "DEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()",
+        "peekOfCode": "DEFAULT_GET_GPT_REPORT = env.bool('DEFAULT_GET_GPT_REPORT', default=True)\n# Globals\nALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25915,7 +25915,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "ALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()\nelse:\n    _version = 'unknown'",
+        "peekOfCode": "ALLOWED_HOSTS = ['*']\nSECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()\nelse:\n    _version = 'unknown'",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25924,7 +25924,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "SECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Rengine version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()\nelse:\n    _version = 'unknown'\n# removes v from _version if exists",
+        "peekOfCode": "SECRET_KEY = first_run(SECRET_FILE, BASE_DIR)\n# Webguard version\n# reads current version from a file called .version\nVERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()\nelse:\n    _version = 'unknown'\n# removes v from _version if exists",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -25933,16 +25933,16 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "VERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()\nelse:\n    _version = 'unknown'\n# removes v from _version if exists\nif _version.startswith('v'):\n    _version = _version[1:]\nRENGINE_CURRENT_VERSION = _version",
+        "peekOfCode": "VERSION_FILE = os.path.join(BASE_DIR, '.version')\nif os.path.exists(VERSION_FILE):\n    with open(VERSION_FILE, 'r') as f:\n        _version = f.read().strip()\nelse:\n    _version = 'unknown'\n# removes v from _version if exists\nif _version.startswith('v'):\n    _version = _version[1:]\nWEBGUARD_CURRENT_VERSION = _version",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_CURRENT_VERSION",
+        "label": "WEBGUARD_CURRENT_VERSION",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_CURRENT_VERSION = _version\n# Databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql',\n        'NAME': env('POSTGRES_DB'),\n        'USER': env('POSTGRES_USER'),\n        'PASSWORD': env('POSTGRES_PASSWORD'),\n        'HOST': env('POSTGRES_HOST'),\n        'PORT': env('POSTGRES_PORT'),",
+        "peekOfCode": "WEBGUARD_CURRENT_VERSION = _version\n# Databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql',\n        'NAME': env('POSTGRES_DB'),\n        'USER': env('POSTGRES_USER'),\n        'PASSWORD': env('POSTGRES_PASSWORD'),\n        'HOST': env('POSTGRES_HOST'),\n        'PORT': env('POSTGRES_PORT'),",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -26248,7 +26248,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True\n'''\nROLES and PERMISSIONS\n'''\nROLEPERMISSIONS_MODULE = 'webGuard.roles'\nROLEPERMISSIONS_REDIRECT_TO_LOGIN = True\n'''\nCache settings\n'''\nRENGINE_TASK_IGNORE_CACHE_KWARGS = ['ctx']",
+        "peekOfCode": "CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True\n'''\nROLES and PERMISSIONS\n'''\nROLEPERMISSIONS_MODULE = 'webGuard.roles'\nROLEPERMISSIONS_REDIRECT_TO_LOGIN = True\n'''\nCache settings\n'''\nWEBGUARD_TASK_IGNORE_CACHE_KWARGS = ['ctx']",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -26257,7 +26257,7 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "ROLEPERMISSIONS_MODULE = 'webGuard.roles'\nROLEPERMISSIONS_REDIRECT_TO_LOGIN = True\n'''\nCache settings\n'''\nRENGINE_TASK_IGNORE_CACHE_KWARGS = ['ctx']\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n'''\nLOGGING settings\n'''",
+        "peekOfCode": "ROLEPERMISSIONS_MODULE = 'webGuard.roles'\nROLEPERMISSIONS_REDIRECT_TO_LOGIN = True\n'''\nCache settings\n'''\nWEBGUARD_TASK_IGNORE_CACHE_KWARGS = ['ctx']\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n'''\nLOGGING settings\n'''",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -26266,16 +26266,16 @@
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True\n'''\nCache settings\n'''\nRENGINE_TASK_IGNORE_CACHE_KWARGS = ['ctx']\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n'''\nLOGGING settings\n'''\nLOGGING = {",
+        "peekOfCode": "ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True\n'''\nCache settings\n'''\nWEBGUARD_TASK_IGNORE_CACHE_KWARGS = ['ctx']\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n'''\nLOGGING settings\n'''\nLOGGING = {",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
     {
-        "label": "RENGINE_TASK_IGNORE_CACHE_KWARGS",
+        "label": "WEBGUARD_TASK_IGNORE_CACHE_KWARGS",
         "kind": 5,
         "importPath": "web.webGuard.settings",
         "description": "web.webGuard.settings",
-        "peekOfCode": "RENGINE_TASK_IGNORE_CACHE_KWARGS = ['ctx']\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n'''\nLOGGING settings\n'''\nLOGGING = {\n    'version': 1,\n    'disable_existing_loggers': True,\n    'handlers': {\n        'file': {",
+        "peekOfCode": "WEBGUARD_TASK_IGNORE_CACHE_KWARGS = ['ctx']\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n'''\nLOGGING settings\n'''\nLOGGING = {\n    'version': 1,\n    'disable_existing_loggers': True,\n    'handlers': {\n        'file': {",
         "detail": "web.webGuard.settings",
         "documentation": {}
     },
@@ -26320,7 +26320,7 @@
         "kind": 2,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "def initiate_scan(\n\t\tscan_history_id,\n\t\tdomain_id,\n\t\tengine_id=None,\n\t\tscan_type=LIVE_SCAN,\n\t\tresults_dir=RENGINE_RESULTS,\n\t\timported_subdomains=[],\n\t\tout_of_scope_subdomains=[],\n\t\tinitiated_by_id=None,\n\t\tstarting_point_path='',",
+        "peekOfCode": "def initiate_scan(\n\t\tscan_history_id,\n\t\tdomain_id,\n\t\tengine_id=None,\n\t\tscan_type=LIVE_SCAN,\n\t\tresults_dir=WEBGUARD_RESULTS,\n\t\timported_subdomains=[],\n\t\tout_of_scope_subdomains=[],\n\t\tinitiated_by_id=None,\n\t\tstarting_point_path='',",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -26329,7 +26329,7 @@
         "kind": 2,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "def initiate_subscan(\n\t\tscan_history_id,\n\t\tsubdomain_id,\n\t\tengine_id=None,\n\t\tscan_type=None,\n\t\tresults_dir=RENGINE_RESULTS,\n\t\tstarting_point_path='',\n\t\texcluded_paths=[],\n\t):\n\t\"\"\"Initiate a new subscan.",
+        "peekOfCode": "def initiate_subscan(\n\t\tscan_history_id,\n\t\tsubdomain_id,\n\t\tengine_id=None,\n\t\tscan_type=None,\n\t\tresults_dir=WEBGUARD_RESULTS,\n\t\tstarting_point_path='',\n\t\texcluded_paths=[],\n\t):\n\t\"\"\"Initiate a new subscan.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -28111,7 +28111,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in removed])\n\t\t\tself.notify(fields={'Removed subdomains': subdomains_str})\n\tif send_interesting and self.scan_id and self.domain_id:\n\t\tinteresting_subdomains = get_interesting_subdomains(self.scan_id, self.domain_id)\n\t\tif interesting_subdomains:\n\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in interesting_subdomains])\n\t\t\tself.notify(fields={'Interesting subdomains': subdomains_str})\n\treturn SubdomainSerializer(subdomains, many=True).data\n@app.task(name='osint', queue='main_scan_queue', base=RengineTask, bind=True)\ndef osint(self, host=None, ctx={}, description=None):",
+        "peekOfCode": "\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in removed])\n\t\t\tself.notify(fields={'Removed subdomains': subdomains_str})\n\tif send_interesting and self.scan_id and self.domain_id:\n\t\tinteresting_subdomains = get_interesting_subdomains(self.scan_id, self.domain_id)\n\t\tif interesting_subdomains:\n\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in interesting_subdomains])\n\t\t\tself.notify(fields={'Interesting subdomains': subdomains_str})\n\treturn SubdomainSerializer(subdomains, many=True).data\n@app.task(name='osint', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef osint(self, host=None, ctx={}, description=None):",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -28120,7 +28120,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tinteresting_subdomains = get_interesting_subdomains(self.scan_id, self.domain_id)\n\t\tif interesting_subdomains:\n\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in interesting_subdomains])\n\t\t\tself.notify(fields={'Interesting subdomains': subdomains_str})\n\treturn SubdomainSerializer(subdomains, many=True).data\n@app.task(name='osint', queue='main_scan_queue', base=RengineTask, bind=True)\ndef osint(self, host=None, ctx={}, description=None):\n\t\"\"\"Run Open-Source Intelligence tools on selected domain.\n\tArgs:\n\t\thost (str): Hostname to scan.",
+        "peekOfCode": "\t\tinteresting_subdomains = get_interesting_subdomains(self.scan_id, self.domain_id)\n\t\tif interesting_subdomains:\n\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in interesting_subdomains])\n\t\t\tself.notify(fields={'Interesting subdomains': subdomains_str})\n\treturn SubdomainSerializer(subdomains, many=True).data\n@app.task(name='osint', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef osint(self, host=None, ctx={}, description=None):\n\t\"\"\"Run Open-Source Intelligence tools on selected domain.\n\tArgs:\n\t\thost (str): Hostname to scan.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -28129,7 +28129,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in interesting_subdomains])\n\t\t\tself.notify(fields={'Interesting subdomains': subdomains_str})\n\treturn SubdomainSerializer(subdomains, many=True).data\n@app.task(name='osint', queue='main_scan_queue', base=RengineTask, bind=True)\ndef osint(self, host=None, ctx={}, description=None):\n\t\"\"\"Run Open-Source Intelligence tools on selected domain.\n\tArgs:\n\t\thost (str): Hostname to scan.\n\tReturns:\n\t\tdict: Results from osint discovery and dorking.",
+        "peekOfCode": "\t\t\tsubdomains_str = '\\n'.join([f'• `{subdomain}`' for subdomain in interesting_subdomains])\n\t\t\tself.notify(fields={'Interesting subdomains': subdomains_str})\n\treturn SubdomainSerializer(subdomains, many=True).data\n@app.task(name='osint', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef osint(self, host=None, ctx={}, description=None):\n\t\"\"\"Run Open-Source Intelligence tools on selected domain.\n\tArgs:\n\t\thost (str): Hostname to scan.\n\tReturns:\n\t\tdict: Results from osint discovery and dorking.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -28876,7 +28876,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\temail_address = cred['target']\n\t\tpwn_num = cred['pwn_num']\n\t\tpwn_data = cred.get('data', [])\n\t\temail, created = save_email(email_address, scan_history=scan)\n\t\t# if email:\n\t\t# \tself.notify(fields={'Emails': f'• `{email.address}`'})\n\treturn creds\n@app.task(name='screenshot', queue='main_scan_queue', base=RengineTask, bind=True)\ndef screenshot(self, ctx={}, description=None):\n\t\"\"\"Uses EyeWitness to gather screenshot of a domain and/or url.",
+        "peekOfCode": "\t\temail_address = cred['target']\n\t\tpwn_num = cred['pwn_num']\n\t\tpwn_data = cred.get('data', [])\n\t\temail, created = save_email(email_address, scan_history=scan)\n\t\t# if email:\n\t\t# \tself.notify(fields={'Emails': f'• `{email.address}`'})\n\treturn creds\n@app.task(name='screenshot', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef screenshot(self, ctx={}, description=None):\n\t\"\"\"Uses EyeWitness to gather screenshot of a domain and/or url.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -28885,7 +28885,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tpwn_num = cred['pwn_num']\n\t\tpwn_data = cred.get('data', [])\n\t\temail, created = save_email(email_address, scan_history=scan)\n\t\t# if email:\n\t\t# \tself.notify(fields={'Emails': f'• `{email.address}`'})\n\treturn creds\n@app.task(name='screenshot', queue='main_scan_queue', base=RengineTask, bind=True)\ndef screenshot(self, ctx={}, description=None):\n\t\"\"\"Uses EyeWitness to gather screenshot of a domain and/or url.\n\tArgs:",
+        "peekOfCode": "\t\tpwn_num = cred['pwn_num']\n\t\tpwn_data = cred.get('data', [])\n\t\temail, created = save_email(email_address, scan_history=scan)\n\t\t# if email:\n\t\t# \tself.notify(fields={'Emails': f'• `{email.address}`'})\n\treturn creds\n@app.task(name='screenshot', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef screenshot(self, ctx={}, description=None):\n\t\"\"\"Uses EyeWitness to gather screenshot of a domain and/or url.\n\tArgs:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -28894,7 +28894,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tpwn_data = cred.get('data', [])\n\t\temail, created = save_email(email_address, scan_history=scan)\n\t\t# if email:\n\t\t# \tself.notify(fields={'Emails': f'• `{email.address}`'})\n\treturn creds\n@app.task(name='screenshot', queue='main_scan_queue', base=RengineTask, bind=True)\ndef screenshot(self, ctx={}, description=None):\n\t\"\"\"Uses EyeWitness to gather screenshot of a domain and/or url.\n\tArgs:\n\t\tdescription (str, optional): Task description shown in UI.",
+        "peekOfCode": "\t\tpwn_data = cred.get('data', [])\n\t\temail, created = save_email(email_address, scan_history=scan)\n\t\t# if email:\n\t\t# \tself.notify(fields={'Emails': f'• `{email.address}`'})\n\treturn creds\n@app.task(name='screenshot', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef screenshot(self, ctx={}, description=None):\n\t\"\"\"Uses EyeWitness to gather screenshot of a domain and/or url.\n\tArgs:\n\t\tdescription (str, optional): Task description shown in UI.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -29128,7 +29128,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tscreenshots_str = '• ' + '\\n• '.join([f'`{path}`' for path in screenshot_paths])\n\tself.notify(fields={'Screenshots': screenshots_str})\n\tif send_output_file:\n\t\tfor path in screenshot_paths:\n\t\t\ttitle = get_output_file_name(\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id,\n\t\t\t\tself.filename)\n\t\t\tsend_file_to_discord.delay(path, title)\n@app.task(name='port_scan', queue='main_scan_queue', base=RengineTask, bind=True)",
+        "peekOfCode": "\tscreenshots_str = '• ' + '\\n• '.join([f'`{path}`' for path in screenshot_paths])\n\tself.notify(fields={'Screenshots': screenshots_str})\n\tif send_output_file:\n\t\tfor path in screenshot_paths:\n\t\t\ttitle = get_output_file_name(\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id,\n\t\t\t\tself.filename)\n\t\t\tsend_file_to_discord.delay(path, title)\n@app.task(name='port_scan', queue='main_scan_queue', base=WebguardTask, bind=True)",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -29137,7 +29137,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\ttitle = get_output_file_name(\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id,\n\t\t\t\tself.filename)\n\t\t\tsend_file_to_discord.delay(path, title)\n@app.task(name='port_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef port_scan(self, hosts=[], ctx={}, description=None):\n\t\"\"\"Run port scan.\n\tArgs:\n\t\thosts (list, optional): Hosts to run port scan on.",
+        "peekOfCode": "\t\t\ttitle = get_output_file_name(\n\t\t\t\tself.scan_id,\n\t\t\t\tself.subscan_id,\n\t\t\t\tself.filename)\n\t\t\tsend_file_to_discord.delay(path, title)\n@app.task(name='port_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef port_scan(self, hosts=[], ctx={}, description=None):\n\t\"\"\"Run port scan.\n\tArgs:\n\t\thosts (list, optional): Hosts to run port scan on.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -29560,7 +29560,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\ttask = group(sigs).apply_async()\n\t\twith allow_join_result():\n\t\t\tresults = task.get()\n\treturn ports_data\n@app.task(name='nmap', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nmap(\n\t\tself,\n\t\tcmd=None,\n\t\tports=[],\n\t\thost=None,",
+        "peekOfCode": "\t\ttask = group(sigs).apply_async()\n\t\twith allow_join_result():\n\t\t\tresults = task.get()\n\treturn ports_data\n@app.task(name='nmap', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nmap(\n\t\tself,\n\t\tcmd=None,\n\t\tports=[],\n\t\thost=None,",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -29569,7 +29569,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\tresults = task.get()\n\treturn ports_data\n@app.task(name='nmap', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nmap(\n\t\tself,\n\t\tcmd=None,\n\t\tports=[],\n\t\thost=None,\n\t\tinput_file=None,\n\t\tscript=None,",
+        "peekOfCode": "\t\t\tresults = task.get()\n\treturn ports_data\n@app.task(name='nmap', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nmap(\n\t\tself,\n\t\tcmd=None,\n\t\tports=[],\n\t\thost=None,\n\t\tinput_file=None,\n\t\tscript=None,",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -29794,7 +29794,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tsubdomain = get_subdomain_from_url(http_url)\n\t\tlogger.info(f'Wafw00f Subdomain : {subdomain}')\n\t\tsubdomain_query, _ = Subdomain.objects.get_or_create(scan_history=self.scan, name=subdomain)\n\t\tsubdomain_query.waf.add(waf)\n\t\tsubdomain_query.save()\n\treturn wafs\n@app.task(name='dir_file_fuzz', queue='main_scan_queue', base=RengineTask, bind=True)\ndef dir_file_fuzz(self, ctx={}, description=None):\n\t\"\"\"Perform directory scan, and currently uses `ffuf` as a default tool.\n\tArgs:",
+        "peekOfCode": "\t\tsubdomain = get_subdomain_from_url(http_url)\n\t\tlogger.info(f'Wafw00f Subdomain : {subdomain}')\n\t\tsubdomain_query, _ = Subdomain.objects.get_or_create(scan_history=self.scan, name=subdomain)\n\t\tsubdomain_query.waf.add(waf)\n\t\tsubdomain_query.save()\n\treturn wafs\n@app.task(name='dir_file_fuzz', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef dir_file_fuzz(self, ctx={}, description=None):\n\t\"\"\"Perform directory scan, and currently uses `ffuf` as a default tool.\n\tArgs:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30235,7 +30235,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\t\tsubdomain_name = get_subdomain_from_url(endpoint.http_url)\n\t\t\t\tsubdomain = Subdomain.objects.get(name=subdomain_name, scan_history=self.scan)\n\t\t\tsubdomain.directories.add(dirscan)\n\t\t\tsubdomain.save()\n\t# Crawl discovered URLs\n\tif enable_http_crawl:\n\t\tctx['track'] = False\n\t\thttp_crawl(urls, ctx=ctx)\n\treturn results\n@app.task(name='fetch_url', queue='main_scan_queue', base=RengineTask, bind=True)",
+        "peekOfCode": "\t\t\t\tsubdomain_name = get_subdomain_from_url(endpoint.http_url)\n\t\t\t\tsubdomain = Subdomain.objects.get(name=subdomain_name, scan_history=self.scan)\n\t\t\tsubdomain.directories.add(dirscan)\n\t\t\tsubdomain.save()\n\t# Crawl discovered URLs\n\tif enable_http_crawl:\n\t\tctx['track'] = False\n\t\thttp_crawl(urls, ctx=ctx)\n\treturn results\n@app.task(name='fetch_url', queue='main_scan_queue', base=WebguardTask, bind=True)",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30244,7 +30244,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\t\tsubdomain = Subdomain.objects.get(name=subdomain_name, scan_history=self.scan)\n\t\t\tsubdomain.directories.add(dirscan)\n\t\t\tsubdomain.save()\n\t# Crawl discovered URLs\n\tif enable_http_crawl:\n\t\tctx['track'] = False\n\t\thttp_crawl(urls, ctx=ctx)\n\treturn results\n@app.task(name='fetch_url', queue='main_scan_queue', base=RengineTask, bind=True)\ndef fetch_url(self, urls=[], ctx={}, description=None):",
+        "peekOfCode": "\t\t\t\tsubdomain = Subdomain.objects.get(name=subdomain_name, scan_history=self.scan)\n\t\t\tsubdomain.directories.add(dirscan)\n\t\t\tsubdomain.save()\n\t# Crawl discovered URLs\n\tif enable_http_crawl:\n\t\tctx['track'] = False\n\t\thttp_crawl(urls, ctx=ctx)\n\treturn results\n@app.task(name='fetch_url', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef fetch_url(self, urls=[], ctx={}, description=None):",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30253,7 +30253,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tctx['track'] = False\n\t\thttp_crawl(urls, ctx=ctx)\n\treturn results\n@app.task(name='fetch_url', queue='main_scan_queue', base=RengineTask, bind=True)\ndef fetch_url(self, urls=[], ctx={}, description=None):\n\t\"\"\"Fetch URLs using different tools like gauplus, gau, gospider, waybackurls ...\n\tArgs:\n\t\turls (list): List of URLs to start from.\n\t\tdescription (str, optional): Task description shown in UI.\n\t\"\"\"",
+        "peekOfCode": "\t\tctx['track'] = False\n\t\thttp_crawl(urls, ctx=ctx)\n\treturn results\n@app.task(name='fetch_url', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef fetch_url(self, urls=[], ctx={}, description=None):\n\t\"\"\"Fetch URLs using different tools like gauplus, gau, gospider, waybackurls ...\n\tArgs:\n\t\turls (list): List of URLs to start from.\n\t\tdescription (str, optional): Task description shown in UI.\n\t\"\"\"",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30721,7 +30721,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tfailed = False\n\t\tregex = re.compile(CURL_REGEX_HTTP_STATUS, re.MULTILINE)\n\t\ttry:\n\t\t\thttp_status = int(regex.findall(response)[0])\n\t\texcept (KeyError, TypeError, IndexError):\n\t\t\tpass\n\treturn {\n\t\t'http_status': http_status,\n\t}\n@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=RengineTask)",
+        "peekOfCode": "\t\tfailed = False\n\t\tregex = re.compile(CURL_REGEX_HTTP_STATUS, re.MULTILINE)\n\t\ttry:\n\t\t\thttp_status = int(regex.findall(response)[0])\n\t\texcept (KeyError, TypeError, IndexError):\n\t\t\tpass\n\treturn {\n\t\t'http_status': http_status,\n\t}\n@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=WebguardTask)",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30730,7 +30730,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\tregex = re.compile(CURL_REGEX_HTTP_STATUS, re.MULTILINE)\n\t\ttry:\n\t\t\thttp_status = int(regex.findall(response)[0])\n\t\texcept (KeyError, TypeError, IndexError):\n\t\t\tpass\n\treturn {\n\t\t'http_status': http_status,\n\t}\n@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=RengineTask)\ndef vulnerability_scan(self, urls=[], ctx={}, description=None):",
+        "peekOfCode": "\t\tregex = re.compile(CURL_REGEX_HTTP_STATUS, re.MULTILINE)\n\t\ttry:\n\t\t\thttp_status = int(regex.findall(response)[0])\n\t\texcept (KeyError, TypeError, IndexError):\n\t\t\tpass\n\treturn {\n\t\t'http_status': http_status,\n\t}\n@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=WebguardTask)\ndef vulnerability_scan(self, urls=[], ctx={}, description=None):",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30739,7 +30739,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\thttp_status = int(regex.findall(response)[0])\n\t\texcept (KeyError, TypeError, IndexError):\n\t\t\tpass\n\treturn {\n\t\t'http_status': http_status,\n\t}\n@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=RengineTask)\ndef vulnerability_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"\n\t\tThis function will serve as an entrypoint to vulnerability scan.",
+        "peekOfCode": "\t\t\thttp_status = int(regex.findall(response)[0])\n\t\texcept (KeyError, TypeError, IndexError):\n\t\t\tpass\n\treturn {\n\t\t'http_status': http_status,\n\t}\n@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=WebguardTask)\ndef vulnerability_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"\n\t\tThis function will serve as an entrypoint to vulnerability scan.",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30838,7 +30838,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tcelery_group = group(grouped_tasks)\n\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan completed...')\n\t# return results\n\treturn None\n@app.task(name='nuclei_individual_severity_module', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nuclei_individual_severity_module(self, cmd, severity, enable_http_crawl, should_fetch_gpt_report, ctx={}, description=None):",
+        "peekOfCode": "\tcelery_group = group(grouped_tasks)\n\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan completed...')\n\t# return results\n\treturn None\n@app.task(name='nuclei_individual_severity_module', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nuclei_individual_severity_module(self, cmd, severity, enable_http_crawl, should_fetch_gpt_report, ctx={}, description=None):",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -30847,7 +30847,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan completed...')\n\t# return results\n\treturn None\n@app.task(name='nuclei_individual_severity_module', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nuclei_individual_severity_module(self, cmd, severity, enable_http_crawl, should_fetch_gpt_report, ctx={}, description=None):\n\t'''",
+        "peekOfCode": "\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan completed...')\n\t# return results\n\treturn None\n@app.task(name='nuclei_individual_severity_module', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nuclei_individual_severity_module(self, cmd, severity, enable_http_crawl, should_fetch_gpt_report, ctx={}, description=None):\n\t'''",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31333,7 +31333,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tgpt_report.title = title\n\tgpt_report.description = description\n\tgpt_report.impact = impact\n\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=RengineTask, bind=True)",
+        "peekOfCode": "\tgpt_report.title = title\n\tgpt_report.description = description\n\tgpt_report.impact = impact\n\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=WebguardTask, bind=True)",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31342,7 +31342,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tgpt_report.description = description\n\tgpt_report.impact = impact\n\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nuclei_scan(self, urls=[], ctx={}, description=None):",
+        "peekOfCode": "\tgpt_report.description = description\n\tgpt_report.impact = impact\n\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nuclei_scan(self, urls=[], ctx={}, description=None):",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31351,7 +31351,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tgpt_report.impact = impact\n\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nuclei_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"HTTP vulnerability scan using Nuclei",
+        "peekOfCode": "\tgpt_report.impact = impact\n\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nuclei_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"HTTP vulnerability scan using Nuclei",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31360,7 +31360,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef nuclei_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"HTTP vulnerability scan using Nuclei\n\tArgs:",
+        "peekOfCode": "\tgpt_report.remediation = remediation\n\tgpt_report.save()\n\tfor url in references:\n\t\tref, created = VulnerabilityReference.objects.get_or_create(url=url)\n\t\tgpt_report.references.add(ref)\n\t\tgpt_report.save()\n@app.task(name='nuclei_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef nuclei_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"HTTP vulnerability scan using Nuclei\n\tArgs:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31648,7 +31648,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tcelery_group = group(grouped_tasks)\n\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan with all severities completed...')\n\treturn None\n@app.task(name='dalfox_xss_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef dalfox_xss_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"XSS Scan using dalfox",
+        "peekOfCode": "\tcelery_group = group(grouped_tasks)\n\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan with all severities completed...')\n\treturn None\n@app.task(name='dalfox_xss_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef dalfox_xss_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"XSS Scan using dalfox",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31657,7 +31657,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan with all severities completed...')\n\treturn None\n@app.task(name='dalfox_xss_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef dalfox_xss_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"XSS Scan using dalfox\n\tArgs:",
+        "peekOfCode": "\tjob = celery_group.apply_async()\n\twhile not job.ready():\n\t\t# wait for all jobs to complete\n\t\ttime.sleep(5)\n\tlogger.info('Vulnerability scan with all severities completed...')\n\treturn None\n@app.task(name='dalfox_xss_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef dalfox_xss_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"XSS Scan using dalfox\n\tArgs:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31882,7 +31882,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\tfuture_to_gpt = {executor.submit(get_vulnerability_gpt_report, vuln): vuln for vuln in _vulns}\n\t\t\t# Wait for all tasks to complete\n\t\t\tfor future in concurrent.futures.as_completed(future_to_gpt):\n\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='crlfuzz_scan', queue='main_scan_queue', base=RengineTask, bind=True)",
+        "peekOfCode": "\t\t\tfuture_to_gpt = {executor.submit(get_vulnerability_gpt_report, vuln): vuln for vuln in _vulns}\n\t\t\t# Wait for all tasks to complete\n\t\t\tfor future in concurrent.futures.as_completed(future_to_gpt):\n\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='crlfuzz_scan', queue='main_scan_queue', base=WebguardTask, bind=True)",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -31891,7 +31891,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='crlfuzz_scan', queue='main_scan_queue', base=RengineTask, bind=True)\ndef crlfuzz_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"CRLF Fuzzing with CRLFuzz\n\tArgs:",
+        "peekOfCode": "\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='crlfuzz_scan', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef crlfuzz_scan(self, urls=[], ctx={}, description=None):\n\t\"\"\"CRLF Fuzzing with CRLFuzz\n\tArgs:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -32107,7 +32107,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\tfuture_to_gpt = {executor.submit(get_vulnerability_gpt_report, vuln): vuln for vuln in _vulns}\n\t\t\t# Wait for all tasks to complete\n\t\t\tfor future in concurrent.futures.as_completed(future_to_gpt):\n\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='s3scanner', queue='main_scan_queue', base=RengineTask, bind=True)",
+        "peekOfCode": "\t\t\tfuture_to_gpt = {executor.submit(get_vulnerability_gpt_report, vuln): vuln for vuln in _vulns}\n\t\t\t# Wait for all tasks to complete\n\t\t\tfor future in concurrent.futures.as_completed(future_to_gpt):\n\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='s3scanner', queue='main_scan_queue', base=WebguardTask, bind=True)",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -32116,7 +32116,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='s3scanner', queue='main_scan_queue', base=RengineTask, bind=True)\ndef s3scanner(self, ctx={}, description=None):\n\t\"\"\"Bucket Scanner\n\tArgs:",
+        "peekOfCode": "\t\t\t\tgpt = future_to_gpt[future]\n\t\t\t\ttry:\n\t\t\t\t\tfuture.result()\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tlogger.error(f\"Exception for Vulnerability {vuln}: {e}\")\n\treturn results\n@app.task(name='s3scanner', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef s3scanner(self, ctx={}, description=None):\n\t\"\"\"Bucket Scanner\n\tArgs:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -32188,7 +32188,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\t\t\t\tresult = parse_s3scanner_result(line)\n\t\t\t\ts3bucket, created = S3Bucket.objects.get_or_create(**result)\n\t\t\t\tscan_history.buckets.add(s3bucket)\n\t\t\t\tlogger.info(f\"s3 bucket added {result['provider']}-{result['name']}-{result['region']}\")\n@app.task(name='http_crawl', queue='main_scan_queue', base=RengineTask, bind=True)\ndef http_crawl(\n\t\tself,\n\t\turls=[],\n\t\tmethod=None,\n\t\trecrawl=False,",
+        "peekOfCode": "\t\t\t\tresult = parse_s3scanner_result(line)\n\t\t\t\ts3bucket, created = S3Bucket.objects.get_or_create(**result)\n\t\t\t\tscan_history.buckets.add(s3bucket)\n\t\t\t\tlogger.info(f\"s3 bucket added {result['provider']}-{result['name']}-{result['region']}\")\n@app.task(name='http_crawl', queue='main_scan_queue', base=WebguardTask, bind=True)\ndef http_crawl(\n\t\tself,\n\t\turls=[],\n\t\tmethod=None,\n\t\trecrawl=False,",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -35113,7 +35113,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tdomain_id = ctx['domain_id']\n\tdomain = Domain.objects.get(pk=domain_id)\n\tresults_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t# Validate each subdomain and de-duplicate entries\n\tsubdomains = list(set([\n\t\tsubdomain for subdomain in subdomains\n\t\tif validators.domain(subdomain) and domain.name == get_domain_from_subdomain(subdomain)\n\t]))\n\tif not subdomains:\n\t\treturn",
+        "peekOfCode": "\tdomain_id = ctx['domain_id']\n\tdomain = Domain.objects.get(pk=domain_id)\n\tresults_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t# Validate each subdomain and de-duplicate entries\n\tsubdomains = list(set([\n\t\tsubdomain for subdomain in subdomains\n\t\tif validators.domain(subdomain) and domain.name == get_domain_from_subdomain(subdomain)\n\t]))\n\tif not subdomains:\n\t\treturn",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -35122,7 +35122,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tdomain = Domain.objects.get(pk=domain_id)\n\tresults_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t# Validate each subdomain and de-duplicate entries\n\tsubdomains = list(set([\n\t\tsubdomain for subdomain in subdomains\n\t\tif validators.domain(subdomain) and domain.name == get_domain_from_subdomain(subdomain)\n\t]))\n\tif not subdomains:\n\t\treturn\n\tlogger.warning(f'Found {len(subdomains)} imported subdomains.')",
+        "peekOfCode": "\tdomain = Domain.objects.get(pk=domain_id)\n\tresults_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t# Validate each subdomain and de-duplicate entries\n\tsubdomains = list(set([\n\t\tsubdomain for subdomain in subdomains\n\t\tif validators.domain(subdomain) and domain.name == get_domain_from_subdomain(subdomain)\n\t]))\n\tif not subdomains:\n\t\treturn\n\tlogger.warning(f'Found {len(subdomains)} imported subdomains.')",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -35131,7 +35131,7 @@
         "kind": 5,
         "importPath": "web.webGuard.tasks",
         "description": "web.webGuard.tasks",
-        "peekOfCode": "\tresults_dir = ctx.get('results_dir', RENGINE_RESULTS)\n\t# Validate each subdomain and de-duplicate entries\n\tsubdomains = list(set([\n\t\tsubdomain for subdomain in subdomains\n\t\tif validators.domain(subdomain) and domain.name == get_domain_from_subdomain(subdomain)\n\t]))\n\tif not subdomains:\n\t\treturn\n\tlogger.warning(f'Found {len(subdomains)} imported subdomains.')\n\twith open(f'{results_dir}/from_imported.txt', 'w+') as output_file:",
+        "peekOfCode": "\tresults_dir = ctx.get('results_dir', WEBGUARD_RESULTS)\n\t# Validate each subdomain and de-duplicate entries\n\tsubdomains = list(set([\n\t\tsubdomain for subdomain in subdomains\n\t\tif validators.domain(subdomain) and domain.name == get_domain_from_subdomain(subdomain)\n\t]))\n\tif not subdomains:\n\t\treturn\n\tlogger.warning(f'Found {len(subdomains)} imported subdomains.')\n\twith open(f'{results_dir}/from_imported.txt', 'w+') as output_file:",
         "detail": "web.webGuard.tasks",
         "documentation": {}
     },
@@ -35298,11 +35298,11 @@
         "documentation": {}
     },
     {
-        "label": "RengineTaskFormatter",
+        "label": "WebguardTaskFormatter",
         "kind": 6,
         "importPath": "web.webGuard.utilities",
         "description": "web.webGuard.utilities",
-        "peekOfCode": "class RengineTaskFormatter(ColorFormatter):\n\tdef __init__(self, *args, **kwargs):\n\t\tsuper().__init__(*args, **kwargs)\n\t\ttry:\n\t\t\tself.get_current_task = get_current_task\n\t\texcept ImportError:\n\t\t\tself.get_current_task = lambda: None\n\tdef format(self, record):\n\t\ttask = self.get_current_task()\n\t\tif task and task.request:",
+        "peekOfCode": "class WebguardTaskFormatter(ColorFormatter):\n\tdef __init__(self, *args, **kwargs):\n\t\tsuper().__init__(*args, **kwargs)\n\t\ttry:\n\t\t\tself.get_current_task = get_current_task\n\t\texcept ImportError:\n\t\t\tself.get_current_task = lambda: None\n\tdef format(self, record):\n\t\ttask = self.get_current_task()\n\t\tif task and task.request:",
         "detail": "web.webGuard.utilities",
         "documentation": {}
     },
@@ -35347,7 +35347,7 @@
         "kind": 2,
         "importPath": "web.webGuard.utilities",
         "description": "web.webGuard.utilities",
-        "peekOfCode": "def return_iterable(string):\n\tif not isinstance(string, (list, tuple)):\n\t\tstring = [string]\n\treturn string\n# Logging formatters\nclass RengineTaskFormatter(ColorFormatter):\n\tdef __init__(self, *args, **kwargs):\n\t\tsuper().__init__(*args, **kwargs)\n\t\ttry:\n\t\t\tself.get_current_task = get_current_task",
+        "peekOfCode": "def return_iterable(string):\n\tif not isinstance(string, (list, tuple)):\n\t\tstring = [string]\n\treturn string\n# Logging formatters\nclass WebguardTaskFormatter(ColorFormatter):\n\tdef __init__(self, *args, **kwargs):\n\t\tsuper().__init__(*args, **kwargs)\n\t\ttry:\n\t\t\tself.get_current_task = get_current_task",
         "detail": "web.webGuard.utilities",
         "documentation": {}
     },
@@ -35464,7 +35464,7 @@
         "kind": 5,
         "importPath": "web.webGuard.utilities",
         "description": "web.webGuard.utilities",
-        "peekOfCode": "\t\tstring = [string]\n\treturn string\n# Logging formatters\nclass RengineTaskFormatter(ColorFormatter):\n\tdef __init__(self, *args, **kwargs):\n\t\tsuper().__init__(*args, **kwargs)\n\t\ttry:\n\t\t\tself.get_current_task = get_current_task\n\t\texcept ImportError:\n\t\t\tself.get_current_task = lambda: None",
+        "peekOfCode": "\t\tstring = [string]\n\treturn string\n# Logging formatters\nclass WebguardTaskFormatter(ColorFormatter):\n\tdef __init__(self, *args, **kwargs):\n\t\tsuper().__init__(*args, **kwargs)\n\t\ttry:\n\t\t\tself.get_current_task = get_current_task\n\t\texcept ImportError:\n\t\t\tself.get_current_task = lambda: None",
         "detail": "web.webGuard.utilities",
         "documentation": {}
     },

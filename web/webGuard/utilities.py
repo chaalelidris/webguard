@@ -49,7 +49,7 @@ def return_iterable(string):
 
 # Logging formatters
 
-class RengineTaskFormatter(ColorFormatter):
+class WebguardTaskFormatter(ColorFormatter):
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)

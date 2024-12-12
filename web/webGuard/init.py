@@ -12,8 +12,8 @@ https://github.com/MobSF/Mobile-Security-Framework-MobSF/blob/master/MobSF/init.
 
 
 def first_run(secret_file, base_dir):
-    if 'RENGINE_SECRET_KEY' in os.environ:
-        secret_key = os.environ['RENGINE_SECRET_KEY']
+    if 'WEBGUARD_SECRET_KEY' in os.environ:
+        secret_key = os.environ['WEBGUARD_SECRET_KEY']
     elif os.path.isfile(secret_file):
         secret_key = open(secret_file).read().strip()
     else:

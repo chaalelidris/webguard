@@ -2,7 +2,7 @@ import logging
 import os
 import unittest
 
-os.environ['RENGINE_SECRET_KEY'] = 'secret'
+os.environ['WEBGUARD_SECRET_KEY'] = 'secret'
 os.environ['CELERY_ALWAYS_EAGER'] = 'True'
 
 from celery.utils.log import get_task_logger

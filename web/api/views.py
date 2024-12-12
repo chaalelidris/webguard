@@ -1207,7 +1207,7 @@ class ListInterestingKeywords(APIView):
 		return Response(keywords)
 
 
-class RengineUpdateCheck(APIView):
+class WebguardUpdateCheck(APIView):
 	def get(self, request):
 		req = self.request
 		github_api = \
@@ -1220,7 +1220,7 @@ class RengineUpdateCheck(APIView):
 
 		# get current version_number
 		# remove quotes from current_version
-		current_version = RENGINE_CURRENT_VERSION
+		current_version = WEBGUARD_CURRENT_VERSION
 
 		# for consistency remove v from both if exists
 		latest_version = re.search(r'v(\d+\.)?(\d+\.)?(\*|\d+)',
