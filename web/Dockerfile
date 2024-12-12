@@ -6,15 +6,15 @@ ARG GOVERSION=1.21.5
 
 RUN ARCH=$(dpkg --print-architecture) \ 
     && if [ "${ARCH}" ! "arm64" ] || [ "${ARCH}" ! "amd64" ]; then \
-      echo "reNgine not supported, encountered unknown architecture: ${TARGETPLATFORM}" \
-      && exit 1; \
+    echo "webGuard not supported, encountered unknown architecture: ${TARGETPLATFORM}" \
+    && exit 1; \
     fi
 
 # Labels and Credits
 LABEL \
-    name="reNgine" \
+    name="webGuard" \
     author="Yogesh Ojha <yogesh.ojha11@gmail.com>" \
-    description="reNgine is a automated pipeline of recon process, useful for information gathering during web application penetration testing."
+    description="webGuard is a automated pipeline of recon process, useful for information gathering during web application penetration testing."
 
 # Environment Variables
 ENV DEBIAN_FRONTEND="noninteractive" \
@@ -60,9 +60,9 @@ RUN ARCH=$(dpkg --print-architecture) \
 
 RUN ARCH=$(dpkg --print-architecture) \ 
     && if [ "${ARCH}" = "arm64" ]; then \
-      GECKOPATH="geckodriver-v${GECKOVERSION}-linux-aarch64.tar.gz"; \
+    GECKOPATH="geckodriver-v${GECKOVERSION}-linux-aarch64.tar.gz"; \
     elif [ "${ARCH}" = "amd64" ]; then \
-      GECKOPATH="geckodriver-v${GECKOVERSION}-linux64.tar.gz"; \
+    GECKOPATH="geckodriver-v${GECKOVERSION}-linux64.tar.gz"; \
     fi \
     && wget https://github.com/mozilla/geckodriver/releases/download/v${GECKOVERSION}/${GECKOPATH} \
     && tar -xvf ${GECKOPATH} \
