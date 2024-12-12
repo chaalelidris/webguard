@@ -1,11 +1,11 @@
 #!/bin/bash
 
 cat ../web/art/webGuard.txt
-echo "Uninstalling reNgine"
+echo "Uninstalling webGuard"
 
 if [ "$EUID" -ne 0 ]
   then
-  echo -e "\e[31mError uninstalling reNgine, Please run this script as root!\e[0m"
+  echo -e "\e[31mError uninstalling webGuard, Please run this script as root!\e[0m"
   echo -e "\e[31mExample: sudo ./uninstall.sh\e[0m"
   exit
 fi
@@ -35,24 +35,24 @@ if [ -z "$CONFIRM" ] || { [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "Y" ] && [ "$
     exit 0
 fi
 
-print_status "${INFO}Proceeding with uninstalling reNgine${RESET}"
+print_status "${INFO}Proceeding with uninstalling webGuard${RESET}"
 
-print_status "Stopping all containers related to reNgine..."
+print_status "Stopping all containers related to webGuard..."
 docker stop $(docker ps -a -q --filter name=rengine) 2>/dev/null
 
-print_status "Removing all containers related to reNgine..."
+print_status "Removing all containers related to webGuard..."
 docker rm $(docker ps -a -q --filter name=rengine) 2>/dev/null
 
-print_status "Removing all volumes related to reNgine..."
+print_status "Removing all volumes related to webGuard..."
 docker volume rm $(docker volume ls -q --filter name=rengine) 2>/dev/null
 
-print_status "Removing all networks related to reNgine..."
+print_status "Removing all networks related to webGuard..."
 docker network rm $(docker network ls -q --filter name=rengine) 2>/dev/null
 
-print_status "Removing all images related to reNgine..."
+print_status "Removing all images related to webGuard..."
 docker rmi $(docker images -q --filter reference=rengine) 2>/dev/null
 
 print_status "Performing final cleanup"
 docker system prune -f --volumes --filter "label=com.docker.compose.project=rengine"
 
-print_status "${SUCCESS}reNgine uninstall process has been completed.${RESET}"
+print_status "${SUCCESS}webGuard uninstall process has been completed.${RESET}"
