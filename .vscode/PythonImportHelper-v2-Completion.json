@@ -5782,7 +5782,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\t\t\tprogram_name = program_details['attributes']['name']\n\t\t\t\tassets = []\n\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by reNgine now",
+        "peekOfCode": "\t\t\t\tprogram_name = program_details['attributes']['name']\n\t\t\t\tassets = []\n\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by webGuard now",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -5791,7 +5791,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\t\t\tassets = []\n\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by reNgine now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:",
+        "peekOfCode": "\t\t\t\tassets = []\n\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by webGuard now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -5800,7 +5800,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by reNgine now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)",
+        "peekOfCode": "\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by webGuard now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -5809,7 +5809,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by reNgine now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t\t# in some cases asset_type is OTHER and may contain the asset\n\t\t\t\t\telif asset_type == 'OTHER' and ('.' in asset_identifier or asset_identifier.startswith('http')):",
+        "peekOfCode": "\t\t\t\t\tasset_type = scope['attributes']['asset_type']\n\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by webGuard now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t\t# in some cases asset_type is OTHER and may contain the asset\n\t\t\t\t\telif asset_type == 'OTHER' and ('.' in asset_identifier or asset_identifier.startswith('http')):",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -5818,7 +5818,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by reNgine now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t\t# in some cases asset_type is OTHER and may contain the asset\n\t\t\t\t\telif asset_type == 'OTHER' and ('.' in asset_identifier or asset_identifier.startswith('http')):\n\t\t\t\t\t\tassets.append(asset_identifier)",
+        "peekOfCode": "\t\t\t\t\tasset_identifier = scope['attributes']['asset_identifier']\n\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by webGuard now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t\t# in some cases asset_type is OTHER and may contain the asset\n\t\t\t\t\telif asset_type == 'OTHER' and ('.' in asset_identifier or asset_identifier.startswith('http')):\n\t\t\t\t\t\tassets.append(asset_identifier)",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -5827,7 +5827,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by reNgine now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t\t# in some cases asset_type is OTHER and may contain the asset\n\t\t\t\t\telif asset_type == 'OTHER' and ('.' in asset_identifier or asset_identifier.startswith('http')):\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t# cleanup assets",
+        "peekOfCode": "\t\t\t\t\teligible_for_submission = scope['attributes']['eligible_for_submission']\n\t\t\t\t\t# for now we should ignore the scope that are not eligible for submission\n\t\t\t\t\t# in future release we will add this in target out_of_scope\n\t\t\t\t\t# we need to filter the scope that are supported by webGuard now\n\t\t\t\t\tif asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t\t# in some cases asset_type is OTHER and may contain the asset\n\t\t\t\t\telif asset_type == 'OTHER' and ('.' in asset_identifier or asset_identifier.startswith('http')):\n\t\t\t\t\t\tassets.append(asset_identifier)\n\t\t\t\t# cleanup assets",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -15754,7 +15754,7 @@
         "kind": 2,
         "importPath": "web.dashboard.views",
         "description": "web.dashboard.views",
-        "peekOfCode": "def on_user_logged_out(sender, request, **kwargs):\n    messages.add_message(\n        request,\n        messages.INFO,\n        'You have been successfully logged out. Thank you ' +\n        'for using reNgine.')\n@receiver(user_logged_in)\ndef on_user_logged_in(sender, request, **kwargs):\n    messages.add_message(\n        request,",
+        "peekOfCode": "def on_user_logged_out(sender, request, **kwargs):\n    messages.add_message(\n        request,\n        messages.INFO,\n        'You have been successfully logged out. Thank you ' +\n        'for using webGuard.')\n@receiver(user_logged_in)\ndef on_user_logged_in(sender, request, **kwargs):\n    messages.add_message(\n        request,",
         "detail": "web.dashboard.views",
         "documentation": {}
     },

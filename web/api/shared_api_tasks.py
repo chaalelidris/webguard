@@ -61,7 +61,7 @@ def import_hackerone_programs_task(handles, project_slug, is_sync = False):
 					# for now we should ignore the scope that are not eligible for submission
 					# in future release we will add this in target out_of_scope
 
-					# we need to filter the scope that are supported by reNgine now
+					# we need to filter the scope that are supported by webGuard now
 					if asset_type in HACKERONE_ALLOWED_ASSET_TYPES and eligible_for_submission:
 						assets.append(asset_identifier)
 					
