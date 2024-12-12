@@ -1,5 +1,5 @@
 from rolepermissions.roles import AbstractUserRole
-from reNgine.definitions import *
+from webGuard.definitions import *
 
 class SysAdmin(AbstractUserRole):
     available_permissions = {

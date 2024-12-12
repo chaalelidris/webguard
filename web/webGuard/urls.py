@@ -8,7 +8,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-from reNgine.views import serve_protected_media
+from webGuard.views import serve_protected_media
 
 schema_view = get_schema_view(
    openapi.Info(

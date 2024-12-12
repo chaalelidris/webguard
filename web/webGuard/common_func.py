@@ -21,14 +21,14 @@ from discord_webhook import DiscordEmbed, DiscordWebhook
 from django.db.models import Q
 from dotted_dict import DottedDict
 
-from reNgine.common_serializers import *
-from reNgine.definitions import *
-from reNgine.settings import *
+from webGuard.common_serializers import *
+from webGuard.definitions import *
+from webGuard.settings import *
 from scanEngine.models import *
 from dashboard.models import *
 from startScan.models import *
 from targetApp.models import *
-from reNgine.utilities import is_valid_url
+from webGuard.utilities import is_valid_url
 
 
 logger = get_task_logger(__name__)

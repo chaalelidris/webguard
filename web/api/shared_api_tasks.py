@@ -1,10 +1,10 @@
 # include all the celery tasks to be used in the API, do not put in tasks.py
 import requests
 
-from reNgine.common_func import create_inappnotification, get_hackerone_key_username
-from reNgine.definitions import PROJECT_LEVEL_NOTIFICATION, HACKERONE_ALLOWED_ASSET_TYPES
-from reNgine.celery import app
-from reNgine.database_utils import bulk_import_targets
+from webGuard.common_func import create_inappnotification, get_hackerone_key_username
+from webGuard.definitions import PROJECT_LEVEL_NOTIFICATION, HACKERONE_ALLOWED_ASSET_TYPES
+from webGuard.celery import app
+from webGuard.database_utils import bulk_import_targets
 
 @app.task(name='import_hackerone_programs_task', bind=False, queue='api_queue')
 def import_hackerone_programs_task(handles, project_slug, is_sync = False):

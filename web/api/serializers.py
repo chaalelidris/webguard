@@ -2,7 +2,7 @@ from dashboard.models import *
 from django.contrib.humanize.templatetags.humanize import (naturalday, naturaltime)
 from django.db.models import F, JSONField, Value
 from recon_note.models import *
-from reNgine.common_func import *
+from webGuard.common_func import *
 from rest_framework import serializers
 from scanEngine.models import *
 from startScan.models import *

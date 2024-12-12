@@ -4,7 +4,7 @@ import django
 from celery import Celery
 from celery.signals import setup_logging
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'reNgine.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webGuard.settings')
 django.setup()
 
 # Celery app

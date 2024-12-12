@@ -22,13 +22,13 @@ from django.core.cache import cache
 
 from dashboard.models import *
 from recon_note.models import *
-from reNgine.celery import app
-from reNgine.common_func import *
-from reNgine.database_utils import *
-from reNgine.definitions import ABORTED_TASK
-from reNgine.tasks import *
-from reNgine.llm import *
-from reNgine.utilities import is_safe_path
+from webGuard.celery import app
+from webGuard.common_func import *
+from webGuard.database_utils import *
+from webGuard.definitions import ABORTED_TASK
+from webGuard.tasks import *
+from webGuard.llm import *
+from webGuard.utilities import is_safe_path
 from scanEngine.models import *
 from startScan.models import *
 from startScan.models import EndPoint

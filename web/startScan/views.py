@@ -14,11 +14,11 @@ from django_celery_beat.models import (ClockedSchedule, IntervalSchedule, Period
 from rolepermissions.decorators import has_permission_decorator
 
 
-from reNgine.celery import app
-from reNgine.charts import *
-from reNgine.common_func import *
-from reNgine.definitions import ABORTED_TASK, SUCCESS_TASK
-from reNgine.tasks import create_scan_activity, initiate_scan, run_command
+from webGuard.celery import app
+from webGuard.charts import *
+from webGuard.common_func import *
+from webGuard.definitions import ABORTED_TASK, SUCCESS_TASK
+from webGuard.tasks import create_scan_activity, initiate_scan, run_command
 from scanEngine.models import EngineType
 from startScan.models import *
 from targetApp.models import *

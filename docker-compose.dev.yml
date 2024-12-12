@@ -28,7 +28,7 @@ services:
       context: ./web
     restart: always
     entrypoint: /usr/src/app/celery-entrypoint.sh
-    # command: watchmedo auto-restart --recursive --pattern="*.py" --directory="/usr/src/app/reNgine/" -- celery -A reNgine.tasks worker --autoscale=10,0 -l INFO
+    # command: watchmedo auto-restart --recursive --pattern="*.py" --directory="/usr/src/app/webGuard/" -- celery -A webGuard.tasks worker --autoscale=10,0 -l INFO
     volumes:
       - ./web:/usr/src/app
       - wg_github_repos:/usr/src/github
@@ -59,7 +59,7 @@ services:
     container_name: webguard_celery_beat
     build: ./web
     entrypoint: /usr/src/app/beat-entrypoint.sh
-    command: celery -A reNgine beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: celery -A webGuard beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
     depends_on:
       - celery
       - db

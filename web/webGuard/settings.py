@@ -5,8 +5,8 @@ env = environ.FileAwareEnv()
 import mimetypes
 import os
 
-from reNgine.init import first_run
-from reNgine.utilities import RengineTaskFormatter
+from webGuard.init import first_run
+from webGuard.utilities import RengineTaskFormatter
 
 mimetypes.add_type("text/javascript", ".js", True)
 mimetypes.add_type("text/css", ".css", True)
@@ -105,7 +105,7 @@ MIDDLEWARE = [
     'login_required.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'reNgine.middleware.UserPreferencesMiddleware',
+    'webGuard.middleware.UserPreferencesMiddleware',
 ]
 TEMPLATES = [
     {
@@ -118,13 +118,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'reNgine.context_processors.projects',
-                'reNgine.context_processors.version_context',
-                'reNgine.context_processors.user_preferences',
+                'webGuard.context_processors.projects',
+                'webGuard.context_processors.version_context',
+                'webGuard.context_processors.user_preferences',
             ],
     },
 }]
-ROOT_URLCONF = 'reNgine.urls'
+ROOT_URLCONF = 'webGuard.urls'
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -139,7 +139,7 @@ REST_FRAMEWORK = {
     ),
     'PAGE_SIZE': 500,
 }
-WSGI_APPLICATION = 'reNgine.wsgi.application'
+WSGI_APPLICATION = 'webGuard.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -209,7 +209,7 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 '''
 ROLES and PERMISSIONS
 '''
-ROLEPERMISSIONS_MODULE = 'reNgine.roles'
+ROLEPERMISSIONS_MODULE = 'webGuard.roles'
 ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
 
 '''
@@ -316,7 +316,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False
         },
-        'reNgine.tasks': {
+        'webGuard.tasks': {
             'handlers': ['task'],
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': False

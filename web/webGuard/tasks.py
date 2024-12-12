@@ -24,13 +24,13 @@ from django.shortcuts import get_object_or_404
 from pycvesearch import CVESearch
 from metafinder.extractor import extract_metadata_from_google_search
 
-from reNgine.celery import app
-from reNgine.celery_custom_task import RengineTask
-from reNgine.common_func import *
-from reNgine.definitions import *
-from reNgine.settings import *
-from reNgine.llm import *
-from reNgine.utilities import *
+from webGuard.celery import app
+from webGuard.celery_custom_task import RengineTask
+from webGuard.common_func import *
+from webGuard.definitions import *
+from webGuard.settings import *
+from webGuard.llm import *
+from webGuard.utilities import *
 from scanEngine.models import (EngineType, InstalledExternalTool, Notification, Proxy)
 from startScan.models import *
 from startScan.models import EndPoint, Subdomain, Vulnerability
