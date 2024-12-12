@@ -289,7 +289,7 @@ def rengine_settings(request, slug):
     context['rengine_settings_li'] = 'active'
     context['settings_ul_show'] = 'show'
 
-    return render(request, 'scanEngine/settings/rengine.html', context)
+    return render(request, 'scanEngine/settings/webguard.html', context)
 
 
 @has_permission_decorator(PERM_MODIFY_SCAN_CONFIGURATIONS, redirect_url=FOUR_OH_FOUR_URL)
