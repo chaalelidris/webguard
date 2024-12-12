@@ -31153,7 +31153,7 @@
         "kind": 5,
         "importPath": "web.reNgine.urls",
         "description": "web.reNgine.urls",
-        "peekOfCode": "urlpatterns = [\n    url(r'^swagger(?P<format>\\.json|\\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),\n    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),\n    path(\n        'admin/',\n        admin.site.urls),\n    path(\n        '',\n        include('dashboard.urls')),\n    path(",
+        "peekOfCode": "urlpatterns = [\n    url(r'^swagger(?P<format>\\.json|\\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),\n    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),\n    path(\n        'admin/',\n        admin.site.urls),\n    path(\n        'login/',\n        auth_views.LoginView.as_view(template_name='base/login.html'),\n        name='login'),",
         "detail": "web.reNgine.urls",
         "documentation": {}
     },
@@ -35599,7 +35599,7 @@
         "kind": 2,
         "importPath": "web.manage",
         "description": "web.manage",
-        "peekOfCode": "def main():\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'reNgine.settings')\n    # show rengine artwork\n    f = open('art/reNgine.txt', 'r')\n    file_contents = f.read()\n    print (file_contents)\n    f.close()\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:",
+        "peekOfCode": "def main():\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'reNgine.settings')\n    # show rengine artwork\n    f = open('art/webGuard.txt', 'r')\n    file_contents = f.read()\n    print (file_contents)\n    f.close()\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:",
         "detail": "web.manage",
         "documentation": {}
     }

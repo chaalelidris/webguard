@@ -28,6 +28,10 @@ urlpatterns = [
         'admin/',
         admin.site.urls),
     path(
+        'login/',
+        auth_views.LoginView.as_view(template_name='base/login.html'),
+        name='login'),
+    path(
         '',
         include('dashboard.urls')),
     path(
