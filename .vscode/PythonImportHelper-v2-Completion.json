@@ -5773,7 +5773,7 @@
         "kind": 5,
         "importPath": "web.api.shared_api_tasks",
         "description": "web.api.shared_api_tasks",
-        "peekOfCode": "\t\tprogram_details = fetch_program_details_from_hackerone(handle)\n\t\tif program_details:\n\t\t\t# Thanks, some parts of this logics were originally written by @null-ref-0000\n\t\t\t# via PR https://github.com/yogeshojha/rengine/pull/1410\n\t\t\ttry:\n\t\t\t\tprogram_name = program_details['attributes']['name']\n\t\t\t\tassets = []\n\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']",
+        "peekOfCode": "\t\tprogram_details = fetch_program_details_from_hackerone(handle)\n\t\tif program_details:\n\t\t\t# Thanks, some parts of this logics were originally written by @null-ref-0000\n\t\t\t# via PR https://github.com/yogeshojha/webguard/pull/1410\n\t\t\ttry:\n\t\t\t\tprogram_name = program_details['attributes']['name']\n\t\t\t\tassets = []\n\t\t\t\tscopes = program_details['relationships']['structured_scopes']['data']\n\t\t\t\tfor scope in scopes:\n\t\t\t\t\tasset_type = scope['attributes']['asset_type']",
         "detail": "web.api.shared_api_tasks",
         "documentation": {}
     },
@@ -6250,7 +6250,7 @@
         "kind": 6,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "class ListInterestingKeywords(APIView):\n\tdef get(self, request, format=None):\n\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/rengine/releases'",
+        "peekOfCode": "class ListInterestingKeywords(APIView):\n\tdef get(self, request, format=None):\n\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -6259,7 +6259,7 @@
         "kind": 6,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "class RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/rengine/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number",
+        "peekOfCode": "class RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9634,7 +9634,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/rengine/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:",
+        "peekOfCode": "\t\treq = self.request\n\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9643,7 +9643,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/rengine/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})",
+        "peekOfCode": "\t\tkeywords = get_lookup_keywords()\n\t\treturn Response(keywords)\nclass RengineUpdateCheck(APIView):\n\tdef get(self, request):\n\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9652,7 +9652,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/rengine/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION",
+        "peekOfCode": "\t\treq = self.request\n\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -9661,7 +9661,7 @@
         "kind": 5,
         "importPath": "web.api.views",
         "description": "web.api.views",
-        "peekOfCode": "\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/rengine/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists",
+        "peekOfCode": "\t\tgithub_api = \\\n\t\t\t'https://api.github.com/repos/yogeshojha/webguard/releases'\n\t\tresponse = requests.get(github_api).json()\n\t\tif 'message' in response:\n\t\t\treturn Response({'status': False, 'message': 'RateLimited'})\n\t\treturn_response = {}\n\t\t# get current version_number\n\t\t# remove quotes from current_version\n\t\tcurrent_version = RENGINE_CURRENT_VERSION\n\t\t# for consistency remove v from both if exists",
         "detail": "web.api.views",
         "documentation": {}
     },
@@ -16132,7 +16132,7 @@
         "kind": 6,
         "importPath": "web.scanEngine.models",
         "description": "web.scanEngine.models",
-        "peekOfCode": "class VulnerabilityReportSetting(models.Model):\n    id = models.AutoField(primary_key=True)\n    primary_color = models.CharField(max_length=10, null=True, blank=True, default='#FFB74D')\n    secondary_color = models.CharField(max_length=10, null=True, blank=True, default='#212121')\n    company_name = models.CharField(max_length=100, null=True, blank=True)\n    company_address = models.CharField(max_length=200, null=True, blank=True)\n    company_email = models.CharField(max_length=100, null=True, blank=True)\n    company_website = models.CharField(max_length=100, null=True, blank=True)\n    show_rengine_banner = models.BooleanField(default=True)\n    show_executive_summary = models.BooleanField(default=True)",
+        "peekOfCode": "class VulnerabilityReportSetting(models.Model):\n    id = models.AutoField(primary_key=True)\n    primary_color = models.CharField(max_length=10, null=True, blank=True, default='#FFB74D')\n    secondary_color = models.CharField(max_length=10, null=True, blank=True, default='#212121')\n    company_name = models.CharField(max_length=100, null=True, blank=True)\n    company_address = models.CharField(max_length=200, null=True, blank=True)\n    company_email = models.CharField(max_length=100, null=True, blank=True)\n    company_website = models.CharField(max_length=100, null=True, blank=True)\n    show_webguard_banner = models.BooleanField(default=True)\n    show_executive_summary = models.BooleanField(default=True)",
         "detail": "web.scanEngine.models",
         "documentation": {}
     },
@@ -16236,11 +16236,11 @@
         "documentation": {}
     },
     {
-        "label": "rengine_settings",
+        "label": "webguard_settings",
         "kind": 2,
         "importPath": "web.scanEngine.views",
         "description": "web.scanEngine.views",
-        "peekOfCode": "def rengine_settings(request, slug):\n    context = {}\n    total, used, _ = shutil.disk_usage(\"/\")\n    total = total // (2**30)\n    used = used // (2**30)\n    context['total'] = total\n    context['used'] = used\n    context['free'] = total-used\n    context['consumed_percent'] = int(100 * float(used)/float(total))\n    context['settings_nav_active'] = 'active'",
+        "peekOfCode": "def webguard_settings(request, slug):\n    context = {}\n    total, used, _ = shutil.disk_usage(\"/\")\n    total = total // (2**30)\n    used = used // (2**30)\n    context['total'] = total\n    context['used'] = used\n    context['free'] = total-used\n    context['consumed_percent'] = int(100 * float(used)/float(total))\n    context['settings_nav_active'] = 'active'",
         "detail": "web.scanEngine.views",
         "documentation": {}
     },
@@ -35599,7 +35599,7 @@
         "kind": 2,
         "importPath": "web.manage",
         "description": "web.manage",
-        "peekOfCode": "def main():\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webGuard.settings')\n    # show rengine artwork\n    f = open('art/webGuard.txt', 'r')\n    file_contents = f.read()\n    print (file_contents)\n    f.close()\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:",
+        "peekOfCode": "def main():\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webGuard.settings')\n    # show webguard artwork\n    f = open('art/webGuard.txt', 'r')\n    file_contents = f.read()\n    print (file_contents)\n    f.close()\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:",
         "detail": "web.manage",
         "documentation": {}
     }

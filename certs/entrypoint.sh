@@ -54,7 +54,7 @@ if (! test -f ca.key) || (! test -f ca.crt); then
 fi
 
 # Create a new certificate for the DOMAIN_NAME
-cert ${DOMAIN_NAME} rengine
+cert ${DOMAIN_NAME} webguard
 
 # Print all cert files
 ls -l /certs

@@ -76,7 +76,7 @@ class TestOnlineScan(unittest.TestCase):
             print(url)
 
     def test_subdomain_discovery(self):
-        domain = DOMAIN_NAME.lstrip('rengine.')
+        domain = DOMAIN_NAME.lstrip('webguard.')
         subdomains = subdomain_discovery(domain, ctx=self.ctx)
         if DEBUG:
             print(json.dumps(subdomains, indent=4))

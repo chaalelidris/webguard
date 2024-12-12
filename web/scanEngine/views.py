@@ -274,7 +274,7 @@ def tool_specific_settings(request, slug):
 
 
 @has_permission_decorator(PERM_MODIFY_SYSTEM_CONFIGURATIONS, redirect_url=FOUR_OH_FOUR_URL)
-def rengine_settings(request, slug):
+def webguard_settings(request, slug):
     context = {}
 
     total, used, _ = shutil.disk_usage("/")
@@ -286,7 +286,7 @@ def rengine_settings(request, slug):
     context['consumed_percent'] = int(100 * float(used)/float(total))
 
     context['settings_nav_active'] = 'active'
-    context['rengine_settings_li'] = 'active'
+    context['webguard_settings_li'] = 'active'
     context['settings_ul_show'] = 'show'
 
     return render(request, 'scanEngine/settings/webguard.html', context)
