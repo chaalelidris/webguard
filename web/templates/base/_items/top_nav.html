@@ -5,23 +5,15 @@
     <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
       <div class="collapse navbar-collapse" id="topnav-menu-content">
         <ul class="navbar-nav">
-          <li class="nav-item dropdown {{target_data_active}}">
-            <a class="nav-link arrow-none" href="{% url 'dashboardIndex' current_project.slug %}">
-              <i class="fe-home me-1"></i> Dashboard
-            </a>
+          <li class="nav-item dropdown {{ target_data_active }}">
+            <a class="nav-link arrow-none" href="{% url 'dashboardIndex' current_project.slug %}"><i class="fe-home me-1"></i> Dashboard</a>
           </li>
-    
-          <li class="nav-item dropdown {{target_data_active}}">
-            <a class="nav-link arrow-none" href="{% url 'list_target' current_project.slug %}">
-              <i class="fe-crosshair me-1"></i> Targets
-            </a>
+
+          <li class="nav-item dropdown {{ target_data_active }}">
+            <a class="nav-link arrow-none" href="{% url 'list_target' current_project.slug %}"><i class="fe-crosshair me-1"></i> Targets</a>
           </li>
-          <li class="nav-item dropdown {{scan_history_active}} {{scheduled_scan_active}}">
-            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-history" role="button"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fe-activity me-1"></i> Scan History
-              <div class="arrow-down"></div>
-            </a>
+          <li class="nav-item dropdown {{ scan_history_active }} {{ scheduled_scan_active }}">
+            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-history" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe-activity me-1"></i> Scan History<div class="arrow-down"></div></a>
             <div class="dropdown-menu" aria-labelledby="topnav-history">
               <a href="{% url 'scan_history' current_project.slug %}" class="dropdown-item">Scan History</a>
               <a href="{% url 'subscan_history' current_project.slug %}" class="dropdown-item">Sub Scan History</a>
@@ -32,89 +24,70 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link arrow-none" href="{% url 'all_vulns' current_project.slug %}">
-              <i class="fe-alert-triangle me-1"></i> Vulnerabilities
-            </a>
+            <a class="nav-link arrow-none" href="{% url 'all_vulns' current_project.slug %}"><i class="fe-alert-triangle me-1"></i> Vulnerabilities</a>
           </li>
-          <li class="nav-item dropdown {{recon_note_active}}">
-            <a class="nav-link arrow-none" href="{% url 'list_note' current_project.slug %}">
-              <i class="fe-check-square me-1"></i> Todo
-            </a>
+          <li class="nav-item dropdown {{ recon_note_active }}">
+            <a class="nav-link arrow-none" href="{% url 'list_note' current_project.slug %}"><i class="fe-check-square me-1"></i> Todo</a>
           </li>
-          <li class="nav-item dropdown {{organization_active}}">
-            <a class="nav-link arrow-none" href="{% url 'list_organization' current_project.slug %}">
-              <i class="fe-briefcase me-1"></i> Organization
-            </a>
+          <li class="nav-item dropdown {{ organization_active }}">
+            <a class="nav-link arrow-none" href="{% url 'list_organization' current_project.slug %}"><i class="fe-briefcase me-1"></i> Organization</a>
           </li>
-          <li class="nav-item dropdown {{scan_engine_nav_active}}">
-            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-scanengine" role="button"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fe-cpu me-1"></i> Scan Engine
-              <div class="arrow-down"></div>
-            </a>
+          <li class="nav-item dropdown {{ scan_engine_nav_active }}">
+            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-scanengine" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe-cpu me-1"></i> Scan Engine<div class="arrow-down"></div></a>
             <div class="dropdown-menu" aria-labelledby="topnav-scanengine">
               {% if user|can:'modify_scan_configurations' %}
-              <a href="{% url 'scan_engine_index' current_project.slug %}" class="dropdown-item">Scan Engines</a>
+                <a href="{% url 'scan_engine_index' current_project.slug %}" class="dropdown-item">Scan Engines</a>
               {% endif %}
               {% if user|can:'modify_wordlists' %}
-              <a href="{% url 'wordlist_list' current_project.slug %}" class="dropdown-item">Wordlists</a>
+                <a href="{% url 'wordlist_list' current_project.slug %}" class="dropdown-item">Wordlists</a>
               {% endif %}
               {% if user|can:'modify_interesting_lookup' %}
-             
+
               {% endif %}
             </div>
           </li>
           {% if user_preferences.bug_bounty_mode %}
-            <li class="nav-item dropdown {{bountyhub_active}}">
-            
+            <li class="nav-item dropdown {{ bountyhub_active }}">
               <ul class="dropdown-menu" aria-labelledby="bountyHubDropdown">
                 <li class="dropdown-item dropdown">
-                  <a class="dropdown-toggle" href="#" id="hackerOneDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    HackerOne
-                  </a>
+                  <a class="dropdown-toggle" href="#" id="hackerOneDropdown" data-bs-toggle="dropdown" aria-expanded="false">HackerOne</a>
                   <ul class="dropdown-menu" aria-labelledby="hackerOneDropdown">
-                    <li><a class="dropdown-item" href="{% url 'list_bountyhub_programs' current_project.slug %}">
-                      <i class="fe-life-buoy me-1"></i> Programs Dashboard
-                    </a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleSyncBookmarkedProgramsSwal()">
-                      <i class="fe-refresh-cw me-1"></i> Sync Bookmarked Programs
-                    </a></li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'list_bountyhub_programs' current_project.slug %}"><i class="fe-life-buoy me-1"></i> Programs Dashboard</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#" onclick="handleSyncBookmarkedProgramsSwal()"><i class="fe-refresh-cw me-1"></i> Sync Bookmarked Programs</a>
+                    </li>
                   </ul>
                 </li>
               </ul>
             </li>
           {% endif %}
-          <li class="nav-item dropdown {{settings_nav_active}}">
-            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-settings" role="button"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fe-settings me-1"></i> Settings
-              <div class="arrow-down"></div>
-            </a>
+          <li class="nav-item dropdown {{ settings_nav_active }}">
+            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-settings" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe-settings me-1"></i> Settings<div class="arrow-down"></div></a>
             <div class="dropdown-menu" aria-labelledby="topnav-settings">
               {% if user|can:'modify_scan_configurations' %}
-              
+
               {% endif %}
               {% if user|can:'modify_system_configurations' %}
-              
-             
+
               {% endif %}
               {% if user|can:'modify_scan_report' %}
-              <a href="{% url 'report_settings' current_project.slug %}" class="dropdown-item">Report Settings</a>
+                <a href="{% url 'report_settings' current_project.slug %}" class="dropdown-item">Report Settings</a>
               {% endif %}
               {% if user|can:'modify_system_configurations' %}
-              <a href="{% url 'webguard_settings' current_project.slug %}" class="dropdown-item">General Settings</a>
+                <a href="{% url 'webguard_settings' current_project.slug %}" class="dropdown-item">General Settings</a>
               {% endif %}
               {% if user|can:'modify_scan_configurations' %}
                 {% if user_preferences.bug_bounty_mode %}
-                
+
                 {% endif %}
-              
               {% endif %}
             </div>
           </li>
         </ul>
       </div>
-      <span class="badge bg-blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Current Project">{{current_project.name}}</span>
+      <span class="badge bg-blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Current Project">{{ current_project.name }}</span>
     </nav>
   </div>
 </div>
