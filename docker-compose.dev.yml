@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_PORT=${POSTGRES_PORT}
     volumes:
-      - wg_postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     networks:
       - webguard_network
     ports:
@@ -31,12 +31,12 @@ services:
     # command: watchmedo auto-restart --recursive --pattern="*.py" --directory="/usr/src/app/webGuard/" -- celery -A webGuard.tasks worker --autoscale=10,0 -l INFO
     volumes:
       - ./web:/usr/src/app
-      - wg_github_repos:/usr/src/github
-      - wg_wordlist:/usr/src/wg_wordlist
-      - wg_scan_results:/usr/src/wg_scan_results
-      - wg_gf_patterns:/root/.gf
-      - wg_nuclei_templates:/root/nuclei-templates
-      - wg_tool_config:/root/.config
+      - github_repos:/usr/src/github
+      - wordlist:/usr/src/wordlist
+      - scan_results:/usr/src/scan_results
+      - gf_patterns:/root/.gf
+      - nuclei_templates:/root/nuclei-templates
+      - tool_config:/root/.config
     environment:
       - DEBUG=1
       - CELERY_BROKER=redis://redis:6379/0
@@ -74,12 +74,12 @@ services:
       - POSTGRES_HOST=${POSTGRES_HOST}
     volumes:
       - ./web:/usr/src/app
-      - wg_github_repos:/usr/src/github
-      - wg_wordlist:/usr/src/wg_wordlist
-      - wg_scan_results:/usr/src/wg_scan_results
-      - wg_gf_patterns:/root/.gf
-      - wg_nuclei_templates:/root/nuclei-templates
-      - wg_tool_config:/root/.config
+      - github_repos:/usr/src/github
+      - wordlist:/usr/src/wordlist
+      - scan_results:/usr/src/scan_results
+      - gf_patterns:/root/.gf
+      - nuclei_templates:/root/nuclei-templates
+      - tool_config:/root/.config
     networks:
       - webguard_network
 
@@ -102,12 +102,12 @@ services:
       - POSTGRES_HOST=${POSTGRES_HOST}
     volumes:
       - ./web:/usr/src/app
-      - wg_github_repos:/usr/src/github
-      - wg_wordlist:/usr/src/wg_wordlist
-      - wg_scan_results:/usr/src/wg_scan_results
-      - wg_gf_patterns:/root/.gf
-      - wg_nuclei_templates:/root/nuclei-templates
-      - wg_tool_config:/root/.config
+      - github_repos:/usr/src/github
+      - wordlist:/usr/src/wordlist
+      - scan_results:/usr/src/scan_results
+      - gf_patterns:/root/.gf
+      - nuclei_templates:/root/nuclei-templates
+      - tool_config:/root/.config
     ports:
       - "8001:8000"
     depends_on:
@@ -120,7 +120,7 @@ services:
     container_name: webguard_ollama
     image: ollama/ollama
     volumes:
-      - wg_ollama_data:/root/.ollama
+      - ollama_data:/root/.ollama
     networks:
       - webguard_network
     restart: always
@@ -128,11 +128,11 @@ services:
 networks:
   webguard_network:
 volumes:
-  wg_tool_config:
-  wg_postgres_data:
-  wg_gf_patterns:
-  wg_nuclei_templates:
-  wg_github_repos:
-  wg_wordlist:
-  wg_scan_results:
-  wg_ollama_data:
+  tool_config:
+  postgres_data:
+  gf_patterns:
+  nuclei_templates:
+  github_repos:
+  wordlist:
+  scan_results:
+  ollama_data:
