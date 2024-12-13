@@ -9,7 +9,7 @@ body[data-layout-mode="horizontal"] .container-fluid {
 }
 
 .navbar-light .navbar-nav .nav-link.active,
-.navbar-light .navbar-nav .show > .nav-link {
+.navbar-light .navbar-nav .show>.nav-link {
   color: #3283f6;
 }
 
@@ -90,15 +90,12 @@ input[type="text"][disabled] {
 }
 
 /* jquery steps for scan engine  */
-.wizard > .content > .body {
+.wizard>.content>.body {
   padding: 1% !important;
 }
 
 /* select2 badges */
-.select2-container--default
-  .select2-selection--multiple
-  .select2-selection__rendered
-  li {
+.select2-container--default .select2-selection--multiple .select2-selection__rendered li {
   list-style: none;
 }
 
@@ -111,18 +108,18 @@ input[type="text"][disabled] {
   margin-top: 6px !important;
 }
 
-.select2-container--default
-  .select2-selection--multiple
-  .select2-selection__choice__remove {
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
   color: #fff !important;
 }
 
 .select2-selection__rendered {
   line-height: 31px !important;
 }
+
 .select2-container .select2-selection--single {
   height: 35px !important;
 }
+
 .select2-selection__arrow {
   height: 34px !important;
 }
@@ -266,6 +263,7 @@ table.domain_details_table td:nth-child(1) {
 .search-input.active .autocom-box li {
   display: block;
 }
+
 .autocom-box li:hover {
   background: #efefef;
 }
@@ -402,9 +400,11 @@ mark {
   overflow-y: auto;
   padding-left: 20px;
 }
+
 .scan-config-modal .config-list li {
   padding: 5px 0;
 }
+
 .scan-config-modal .badge {
   margin-left: 5px;
 }
@@ -573,24 +573,31 @@ mark {
   0% {
     transform: translateX(0) rotate(0);
   }
+
   15% {
     transform: translateX(-5px) rotate(-5deg);
   }
+
   30% {
     transform: translateX(5px) rotate(5deg);
   }
+
   45% {
     transform: translateX(-4px) rotate(-4deg);
   }
+
   60% {
     transform: translateX(4px) rotate(4deg);
   }
+
   75% {
     transform: translateX(-2px) rotate(-2deg);
   }
+
   90% {
     transform: translateX(2px) rotate(2deg);
   }
+
   100% {
     transform: translateX(0) rotate(0);
   }
@@ -604,10 +611,12 @@ mark {
   transition: all 0.3s ease;
   cursor: pointer;
 }
+
 .card-selectable:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
 .card-selected {
   border: 2px solid #007bff;
   background-color: rgba(0, 123, 255, 0.05);
@@ -617,10 +626,12 @@ mark {
   cursor: pointer;
   transition: color 0.3s ease;
 }
+
 .bbp-bookmark-label:hover {
   color: #ffc107;
 }
-.bbp-bookmark-checkbox:checked + .bbp-bookmark-label {
+
+.bbp-bookmark-checkbox:checked+.bbp-bookmark-label {
   color: #ffc107;
 }
 
@@ -691,6 +702,7 @@ mark {
 .clear-selections-link i {
   font-size: 16px;
 }
+
 .program-card-wrapper {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
@@ -705,9 +717,11 @@ mark {
     transform: translateX(-50%) scale(0.9);
     opacity: 0.7;
   }
+
   50% {
     transform: translateX(-50%) scale(1.05);
   }
+
   100% {
     transform: translateX(-50%) scale(1);
     opacity: 1;
@@ -719,6 +733,7 @@ mark {
     transform: translateX(-50%) scale(1);
     opacity: 1;
   }
+
   100% {
     transform: translateX(-50%) scale(0.9);
     opacity: 0.7;
@@ -734,9 +749,11 @@ mark {
   0% {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
@@ -746,6 +763,7 @@ mark {
   0% {
     background-color: #007bff;
   }
+
   100% {
     background-color: #007bff;
   }
@@ -856,11 +874,13 @@ mark {
 }
 
 .program-modal-body::-webkit-scrollbar {
-  display: none; /* replace with data scrollbar */
+  display: none;
+  /* replace with data scrollbar */
 }
 
 .program-modal-body {
-  scrollbar-width: none; /* firefox */
+  scrollbar-width: none;
+  /* firefox */
 }
 
 .bg-card-blue {
@@ -881,4 +901,8 @@ mark {
 
 .bg-card-activity {
   background-color: rgb(200, 213, 230);
+}
+
+.bg-gray-light {
+  background-color: rgb(248, 249, 250);
 }
