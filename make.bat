@@ -2,8 +2,12 @@
 
 :: Credits: https://github.com/ninjhacks
 
-set COMPOSE_ALL_FILES  = -f docker-compose.yml
-set SERVICES           = db web proxy redis celery celery-beat ollama
+set COMPOSE_ALL_FILES=-f docker-compose.yml
+set SERVICES=db web proxy redis celery celery-beat ollama
+
+:: Development environment.
+set COMPOSE_DEV_FILES=-f docker-compose.dev.yml
+set SERVICES_DEV=db web redis celery celery-beat ollama
 
 :: Check if 'docker compose' command is available
 docker compose version >nul 2>&1
@@ -20,10 +24,14 @@ if "%1" == "certs" %DOCKER_COMPOSE% -f docker-compose.setup.yml run --rm certs
 if "%1" == "setup" %DOCKER_COMPOSE% -f docker-compose.setup.yml run --rm certs
 :: Build and start all services.
 if "%1" == "up" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% up -d --build %SERVICES%
+:: Build and start all services.
+if "%1" == "devup" %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% up -d --build %SERVICES_DEV%
 :: Build all services.
 if "%1" == "build" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% build %SERVICES%
 :: Generate Username (Use only after make up).
 if "%1" == "username" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% exec web python3 manage.py createsuperuser
+:: Generate Username (Use only after make up) for development.
+if "%1" == "devusername" %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% exec web python3 manage.py createsuperuser
 :: Apply migrations
 if "%1" == "migrate" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% exec web python3 manage.py migrate
 :: Pull Docker images.
@@ -42,5 +50,7 @@ if "%1" == "logs" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% logs --follow --tail=1000
 if "%1" == "images" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% images %SERVICES%
 :: Remove containers and delete volume data.
 if "%1" == "prune" %DOCKER_COMPOSE% %COMPOSE_ALL_FILES% stop %SERVICES% & docker-compose %COMPOSE_ALL_FILES% rm -f %SERVICES% & docker volume prune -f
+:: Remove containers and delete volume data for development.
+if "%1" == "devprune" %DOCKER_COMPOSE% %COMPOSE_DEV_FILES% stop %SERVICES_DEV% & docker-compose %COMPOSE_DEV_FILES% rm -f %SERVICES_DEV% & docker volume prune -f
 :: Show this help.
 if "%1" == "help" @echo Make application Docker images and manage containers using Docker Compose files only for windows.
