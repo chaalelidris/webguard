@@ -849,3 +849,24 @@ mark{
 .program-modal-body {
   scrollbar-width: none; /* firefox */
 }
+
+.bg-card-blue {
+  background-color: rgb(218, 233, 253);
+}
+
+.bg-card-green {
+  background-color: rgb(223, 240, 216);
+}
+
+.bg-card-yellow {
+  background-color: rgb(255, 244, 229);
+}
+
+.bg-card-red {
+  background-color: rgb(253, 236, 234);
+}
+
+
+.bg-card-activity-feed {
+  background-color:rgb(218, 233, 253);
+}
