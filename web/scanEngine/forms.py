@@ -1,6 +1,6 @@
 from django import forms
 from django_ace import AceWidget
-from webGuard.validators import validate_short_name
+from reNgine.validators import validate_short_name
 from scanEngine.models import *
 
 
@@ -533,12 +533,12 @@ class ReportForm(forms.ModelForm):
             "placeholder": "Footer Text © Your Company",
         }))
 
-    show_webguard_banner = forms.BooleanField(
+    show_rengine_banner = forms.BooleanField(
         required=False,
         widget=forms.CheckboxInput(
             attrs={
                 "class": "form-check-input",
-                "id": "show_webguard_banner",
+                "id": "show_rengine_banner",
             }))
 
     show_executive_summary = forms.BooleanField(
@@ -577,7 +577,7 @@ class ReportForm(forms.ModelForm):
         self.initial['company_address'] = key.company_address
         self.initial['company_website'] = key.company_website
         self.initial['company_email'] = key.company_email
-        self.initial['show_webguard_banner'] = key.show_webguard_banner
+        self.initial['show_rengine_banner'] = key.show_rengine_banner
         self.initial['show_executive_summary'] = key.show_executive_summary
         self.initial['executive_summary_description'] = key.executive_summary_description
         self.initial['show_footer'] = key.show_footer
@@ -586,14 +586,14 @@ class ReportForm(forms.ModelForm):
         self.initial['secondary_color'] = key.secondary_color
 
     def set_initial(self):
-        self.initial['show_webguard_banner'] = True
+        self.initial['show_rengine_banner'] = True
         self.initial['show_footer'] = False
         self.initial['show_executive_summary'] = False
         self.initial['primary_color'] = '#FFB74D'
         self.initial['secondary_color'] = '#212121'
         self.initial['executive_summary_description'] = '''On **{scan_date}**, **{target_name}** engaged **{company_name}** to perform a security audit on their Web application.
 
-**{company_name}** performed both Security Audit and Reconnaissance using automated tool webGuard. https://github.com/yogeshojha/webguard .
+**{company_name}** performed both Security Audit and Reconnaissance using automated tool reNgine. https://github.com/yogeshojha/rengine .
 
 ## Observations
 

@@ -2,12 +2,12 @@ import logging
 import os
 import unittest
 
-os.environ['WEBGUARD_SECRET_KEY'] = 'secret'
+os.environ['RENGINE_SECRET_KEY'] = 'secret'
 os.environ['CELERY_ALWAYS_EAGER'] = 'True'
 
 from celery.utils.log import get_task_logger
-from webGuard.settings import DEBUG
-from webGuard.tasks import parse_nmap_results, parse_nmap_vuln_output, parse_nmap_vulscan_output
+from reNgine.settings import DEBUG
+from reNgine.tasks import parse_nmap_results, parse_nmap_vuln_output, parse_nmap_vulscan_output
 import pathlib
 
 logger = get_task_logger(__name__)

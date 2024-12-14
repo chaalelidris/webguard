@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from webGuard.definitions import logger
+from reNgine.definitions import logger
 
 
 class StartscanConfig(AppConfig):

@@ -61,9 +61,9 @@ urlpatterns = [
         views.llm_toolkit_section,
         name='llm_toolkit'),
     path(
-        '<slug:slug>/webguard_settings',
-        views.webguard_settings,
-        name='webguard_settings'),
+        '<slug:slug>/rengine_settings',
+        views.rengine_settings,
+        name='rengine_settings'),
     path(
         '<slug:slug>/notification_settings',
         views.notification_settings,

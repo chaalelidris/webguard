@@ -1,6 +1,5 @@
 services:
   db:
-    container_name: webguard_db
     restart: always
     image: "postgres:12.3-alpine"
     environment:
@@ -11,24 +10,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     networks:
-      - webguard_network
+      - rengine_network
     ports:
-      - "5433:5432"
+      - "5432:5432"
 
   redis:
-    container_name: webguard_redis
     image: "redis:alpine"
     hostname: redis
     networks:
-      - webguard_network
+      - rengine_network
 
   celery:
-    container_name: webguard_celery
     build:
       context: ./web
     restart: always
     entrypoint: /usr/src/app/celery-entrypoint.sh
-    # command: watchmedo auto-restart --recursive --pattern="*.py" --directory="/usr/src/app/webGuard/" -- celery -A webGuard.tasks worker --autoscale=10,0 -l INFO
+    # command: watchmedo auto-restart --recursive --pattern="*.py" --directory="/usr/src/app/reNgine/" -- celery -A reNgine.tasks worker --autoscale=10,0 -l INFO
     volumes:
       - ./web:/usr/src/app
       - github_repos:/usr/src/github
@@ -53,13 +50,12 @@ services:
       - db
       - redis
     networks:
-      - webguard_network
+      - rengine_network
 
   celery-beat:
-    container_name: webguard_celery_beat
     build: ./web
     entrypoint: /usr/src/app/beat-entrypoint.sh
-    command: celery -A webGuard beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: celery -A reNgine beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
     depends_on:
       - celery
       - db
@@ -81,15 +77,14 @@ services:
       - nuclei_templates:/root/nuclei-templates
       - tool_config:/root/.config
     networks:
-      - webguard_network
+      - rengine_network
 
   web:
-    container_name: webguard_web
     build:
       context: ./web
     entrypoint: /usr/src/app/entrypoint.sh
     restart: always
-    #image: docker.pkg.github.com/yogeshojha/webguard/webguard:latest
+    image: docker.pkg.github.com/yogeshojha/rengine/rengine:latest
     environment:
       - DEBUG=1
       - CELERY_BROKER=redis://redis:6379/0
@@ -109,24 +104,23 @@ services:
       - nuclei_templates:/root/nuclei-templates
       - tool_config:/root/.config
     ports:
-      - "8001:8000"
+      - "8000:8000"
     depends_on:
       - db
       - celery
       - celery-beat
     networks:
-      - webguard_network
+      - rengine_network
   ollama:
-    container_name: webguard_ollama
     image: ollama/ollama
     volumes:
       - ollama_data:/root/.ollama
     networks:
-      - webguard_network
+      - rengine_network
     restart: always
 
 networks:
-  webguard_network:
+  rengine_network:
 volumes:
   tool_config:
   postgres_data:

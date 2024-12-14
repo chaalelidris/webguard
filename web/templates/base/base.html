@@ -57,7 +57,7 @@
     {% endblock custom_js_css_link %}
   </head>
 
-  <body class="loading" data-layout-mode="horizontal" data-webguard-version="{{ WEBGUARD_CURRENT_VERSION }}" data-current-project="{{ current_project.slug }}">
+  <body class="loading" data-layout-mode="horizontal" data-rengine-version="{{ RENGINE_CURRENT_VERSION }}" data-current-project="{{ current_project.slug }}">
     <!-- Topbar begins -->
     {% include 'base/_items/top_bar.html' %}
     {# topbar ends #}
@@ -122,7 +122,7 @@
         $(window).on('hashchange', handleHashInUrl);
         render_search_history('{{current_project.slug}}');
 
-        // webguard will also check everyday if update exists for webguard
+        // rengine will also check everyday if update exists for rengine
         checkDailyUpdate();
 
         getScanStatusSidebar(project='{{current_project.slug}}', reload=false);
@@ -131,7 +131,7 @@
         tippy('.top-activity-counter', {
           content: 'Scan Activity',
         });
-        if (localStorage.getItem('webguard-theme') == "dark") {
+        if (localStorage.getItem('rengine-theme') == "dark") {
           $('#dark-mode-check').prop("checked", true).change();
         }
         else{

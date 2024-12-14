@@ -1,5 +1,5 @@
 from django.db import models
-from webGuard.definitions import *
+from reNgine.definitions import *
 from django.contrib.auth.models import User
 
 

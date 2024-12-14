@@ -102,7 +102,7 @@
               <a href="{% url 'report_settings' current_project.slug %}" class="dropdown-item">Report Settings</a>
               {% endif %}
               {% if user|can:'modify_system_configurations' %}
-              <a href="{% url 'webguard_settings' current_project.slug %}" class="dropdown-item">General Settings</a>
+              <a href="{% url 'rengine_settings' current_project.slug %}" class="dropdown-item">General Settings</a>
               {% endif %}
               {% if user|can:'modify_scan_configurations' %}
                 {% if user_preferences.bug_bounty_mode %}

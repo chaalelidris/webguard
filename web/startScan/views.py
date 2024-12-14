@@ -14,11 +14,11 @@ from django_celery_beat.models import (ClockedSchedule, IntervalSchedule, Period
 from rolepermissions.decorators import has_permission_decorator
 
 
-from webGuard.celery import app
-from webGuard.charts import *
-from webGuard.common_func import *
-from webGuard.definitions import ABORTED_TASK, SUCCESS_TASK
-from webGuard.tasks import create_scan_activity, initiate_scan, run_command
+from reNgine.celery import app
+from reNgine.charts import *
+from reNgine.common_func import *
+from reNgine.definitions import ABORTED_TASK, SUCCESS_TASK
+from reNgine.tasks import create_scan_activity, initiate_scan, run_command
 from scanEngine.models import EngineType
 from startScan.models import *
 from targetApp.models import *
@@ -1096,7 +1096,7 @@ def create_report(request, id):
         data['company_address'] = report.company_address
         data['company_email'] = report.company_email
         data['company_website'] = report.company_website
-        data['show_webguard_banner'] = report.show_webguard_banner
+        data['show_rengine_banner'] = report.show_rengine_banner
         data['show_footer'] = report.show_footer
         data['footer_text'] = report.footer_text
         data['show_executive_summary'] = report.show_executive_summary

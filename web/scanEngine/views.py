@@ -11,8 +11,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from rolepermissions.decorators import has_permission_decorator
 
-from webGuard.common_func import *
-from webGuard.tasks import (run_command, send_discord_message, send_slack_message,send_lark_message, send_telegram_message)
+from reNgine.common_func import *
+from reNgine.tasks import (run_command, send_discord_message, send_slack_message,send_lark_message, send_telegram_message)
 from scanEngine.forms import *
 from scanEngine.forms import ConfigurationForm
 from scanEngine.models import *
@@ -274,7 +274,7 @@ def tool_specific_settings(request, slug):
 
 
 @has_permission_decorator(PERM_MODIFY_SYSTEM_CONFIGURATIONS, redirect_url=FOUR_OH_FOUR_URL)
-def webguard_settings(request, slug):
+def rengine_settings(request, slug):
     context = {}
 
     total, used, _ = shutil.disk_usage("/")
@@ -286,10 +286,10 @@ def webguard_settings(request, slug):
     context['consumed_percent'] = int(100 * float(used)/float(total))
 
     context['settings_nav_active'] = 'active'
-    context['webguard_settings_li'] = 'active'
+    context['rengine_settings_li'] = 'active'
     context['settings_ul_show'] = 'show'
 
-    return render(request, 'scanEngine/settings/webguard.html', context)
+    return render(request, 'scanEngine/settings/rengine.html', context)
 
 
 @has_permission_decorator(PERM_MODIFY_SCAN_CONFIGURATIONS, redirect_url=FOUR_OH_FOUR_URL)
@@ -311,10 +311,10 @@ def notification_settings(request, slug):
 
         if form.is_valid():
             form.save()
-            send_slack_message('*webGuard*\nCongratulations! your notification services are working.')
-            send_lark_message('*webGuard*\nCongratulations! your notification services are working.')
-            send_telegram_message('*webGuard*\nCongratulations! your notification services are working.')
-            send_discord_message('**webGuard**\nCongratulations! your notification services are working.')
+            send_slack_message('*reNgine*\nCongratulations! your notification services are working.')
+            send_lark_message('*reNgine*\nCongratulations! your notification services are working.')
+            send_telegram_message('*reNgine*\nCongratulations! your notification services are working.')
+            send_discord_message('**reNgine**\nCongratulations! your notification services are working.')
             messages.add_message(
                 request,
                 messages.INFO,
