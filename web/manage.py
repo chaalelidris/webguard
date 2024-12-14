@@ -5,8 +5,8 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'reNgine.settings')
-    # show rengine artwork
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webGuard.settings')
+    # show webguard artwork
     f = open('art/webGuard.txt', 'r')
     file_contents = f.read()
     print (file_contents)

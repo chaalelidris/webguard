@@ -24,13 +24,13 @@ from django.shortcuts import get_object_or_404
 from pycvesearch import CVESearch
 from metafinder.extractor import extract_metadata_from_google_search
 
-from reNgine.celery import app
-from reNgine.celery_custom_task import RengineTask
-from reNgine.common_func import *
-from reNgine.definitions import *
-from reNgine.settings import *
-from reNgine.llm import *
-from reNgine.utilities import *
+from webGuard.celery import app
+from webGuard.celery_custom_task import WebguardTask
+from webGuard.common_func import *
+from webGuard.definitions import *
+from webGuard.settings import *
+from webGuard.llm import *
+from webGuard.utilities import *
 from scanEngine.models import (EngineType, InstalledExternalTool, Notification, Proxy)
 from startScan.models import *
 from startScan.models import EndPoint, Subdomain, Vulnerability
@@ -54,7 +54,7 @@ def initiate_scan(
 		domain_id,
 		engine_id=None,
 		scan_type=LIVE_SCAN,
-		results_dir=RENGINE_RESULTS,
+		results_dir=WEBGUARD_RESULTS,
 		imported_subdomains=[],
 		out_of_scope_subdomains=[],
 		initiated_by_id=None,
@@ -234,7 +234,7 @@ def initiate_subscan(
 		subdomain_id,
 		engine_id=None,
 		scan_type=None,
-		results_dir=RENGINE_RESULTS,
+		results_dir=WEBGUARD_RESULTS,
 		starting_point_path='',
 		excluded_paths=[],
 	):
@@ -284,7 +284,7 @@ def initiate_subscan(
 	# Run task
 	method = globals().get(scan_type)
 	if not method:
-		logger.warning(f'Task {scan_type} is not supported by reNgine. Skipping')
+		logger.warning(f'Task {scan_type} is not supported by webGuard. Skipping')
 		return
 	scan.tasks.append(scan_type)
 	scan.save()
@@ -392,10 +392,10 @@ def report(ctx={}, description=None):
 
 
 #------------------------- #
-# Tracked reNgine tasks    #
+# Tracked webGuard tasks    #
 #--------------------------#
 
-@app.task(name='subdomain_discovery', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='subdomain_discovery', queue='main_scan_queue', base=WebguardTask, bind=True)
 def subdomain_discovery(
 		self,
 		host=None,
@@ -527,7 +527,7 @@ def subdomain_discovery(
 			cmd = cmd.replace('{PATH}', custom_tool.github_clone_path) if '{PATH}' in cmd else cmd
 		else:
 			logger.warning(
-				f'Subdomain discovery tool "{tool}" is not supported by reNgine. Skipping.')
+				f'Subdomain discovery tool "{tool}" is not supported by webGuard. Skipping.')
 			continue
 
 		# Run tool
@@ -629,7 +629,7 @@ def subdomain_discovery(
 	return SubdomainSerializer(subdomains, many=True).data
 
 
-@app.task(name='osint', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='osint', queue='main_scan_queue', base=WebguardTask, bind=True)
 def osint(self, host=None, ctx={}, description=None):
 	"""Run Open-Source Intelligence tools on selected domain.
 
@@ -1193,7 +1193,7 @@ def h8mail(config, host, scan_history_id, activity_id, results_dir, ctx={}):
 	return creds
 
 
-@app.task(name='screenshot', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='screenshot', queue='main_scan_queue', base=WebguardTask, bind=True)
 def screenshot(self, ctx={}, description=None):
 	"""Uses EyeWitness to gather screenshot of a domain and/or url.
 
@@ -1296,7 +1296,7 @@ def screenshot(self, ctx={}, description=None):
 			send_file_to_discord.delay(path, title)
 
 
-@app.task(name='port_scan', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='port_scan', queue='main_scan_queue', base=WebguardTask, bind=True)
 def port_scan(self, hosts=[], ctx={}, description=None):
 	"""Run port scan.
 
@@ -1477,7 +1477,7 @@ def port_scan(self, hosts=[], ctx={}, description=None):
 	return ports_data
 
 
-@app.task(name='nmap', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='nmap', queue='main_scan_queue', base=WebguardTask, bind=True)
 def nmap(
 		self,
 		cmd=None,
@@ -1562,7 +1562,7 @@ def nmap(
 	return vulns
 
 
-@app.task(name='waf_detection', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='waf_detection', queue='main_scan_queue', base=WebguardTask, bind=True)
 def waf_detection(self, ctx={}, description=None):
 	"""
 	Uses wafw00f to check for the presence of a WAF.
@@ -1623,7 +1623,7 @@ def waf_detection(self, ctx={}, description=None):
 	return wafs
 
 
-@app.task(name='dir_file_fuzz', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='dir_file_fuzz', queue='main_scan_queue', base=WebguardTask, bind=True)
 def dir_file_fuzz(self, ctx={}, description=None):
 	"""Perform directory scan, and currently uses `ffuf` as a default tool.
 
@@ -1806,7 +1806,7 @@ def dir_file_fuzz(self, ctx={}, description=None):
 	return results
 
 
-@app.task(name='fetch_url', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='fetch_url', queue='main_scan_queue', base=WebguardTask, bind=True)
 def fetch_url(self, urls=[], ctx={}, description=None):
 	"""Fetch URLs using different tools like gauplus, gau, gospider, waybackurls ...
 
@@ -2055,7 +2055,7 @@ def parse_curl_output(response):
 	}
 
 
-@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=RengineTask)
+@app.task(name='vulnerability_scan', queue='main_scan_queue', bind=True, base=WebguardTask)
 def vulnerability_scan(self, urls=[], ctx={}, description=None):
 	"""
 		This function will serve as an entrypoint to vulnerability scan.
@@ -2112,7 +2112,7 @@ def vulnerability_scan(self, urls=[], ctx={}, description=None):
 	# return results
 	return None
 
-@app.task(name='nuclei_individual_severity_module', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='nuclei_individual_severity_module', queue='main_scan_queue', base=WebguardTask, bind=True)
 def nuclei_individual_severity_module(self, cmd, severity, enable_http_crawl, should_fetch_gpt_report, ctx={}, description=None):
 	'''
 		This celery task will run vulnerability scan in parallel.
@@ -2380,7 +2380,7 @@ def add_gpt_description_db(title, path, description, impact, remediation, refere
 		gpt_report.references.add(ref)
 		gpt_report.save()
 
-@app.task(name='nuclei_scan', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='nuclei_scan', queue='main_scan_queue', base=WebguardTask, bind=True)
 def nuclei_scan(self, urls=[], ctx={}, description=None):
 	"""HTTP vulnerability scan using Nuclei
 
@@ -2518,7 +2518,7 @@ def nuclei_scan(self, urls=[], ctx={}, description=None):
 
 	return None
 
-@app.task(name='dalfox_xss_scan', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='dalfox_xss_scan', queue='main_scan_queue', base=WebguardTask, bind=True)
 def dalfox_xss_scan(self, urls=[], ctx={}, description=None):
 	"""XSS Scan using dalfox
 
@@ -2655,7 +2655,7 @@ def dalfox_xss_scan(self, urls=[], ctx={}, description=None):
 	return results
 
 
-@app.task(name='crlfuzz_scan', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='crlfuzz_scan', queue='main_scan_queue', base=WebguardTask, bind=True)
 def crlfuzz_scan(self, urls=[], ctx={}, description=None):
 	"""CRLF Fuzzing with CRLFuzz
 
@@ -2787,7 +2787,7 @@ def crlfuzz_scan(self, urls=[], ctx={}, description=None):
 	return results
 
 
-@app.task(name='s3scanner', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='s3scanner', queue='main_scan_queue', base=WebguardTask, bind=True)
 def s3scanner(self, ctx={}, description=None):
 	"""Bucket Scanner
 
@@ -2819,7 +2819,7 @@ def s3scanner(self, ctx={}, description=None):
 				logger.info(f"s3 bucket added {result['provider']}-{result['name']}-{result['region']}")
 
 
-@app.task(name='http_crawl', queue='main_scan_queue', base=RengineTask, bind=True)
+@app.task(name='http_crawl', queue='main_scan_queue', base=WebguardTask, bind=True)
 def http_crawl(
 		self,
 		urls=[],
@@ -3282,7 +3282,7 @@ def send_file_to_discord(file_path, title=None):
 	webhook = DiscordWebhook(
 		url=notif.discord_hook_url,
 		rate_limit_retry=True,
-		username=title or "reNgine Discord Plugin"
+		username=title or "webGuard Discord Plugin"
 	)
 	with open(file_path, "rb") as f:
 		head, tail = os.path.split(file_path)
@@ -4612,7 +4612,7 @@ def save_imported_subdomains(subdomains, ctx={}):
 	"""
 	domain_id = ctx['domain_id']
 	domain = Domain.objects.get(pk=domain_id)
-	results_dir = ctx.get('results_dir', RENGINE_RESULTS)
+	results_dir = ctx.get('results_dir', WEBGUARD_RESULTS)
 
 	# Validate each subdomain and de-duplicate entries
 	subdomains = list(set([

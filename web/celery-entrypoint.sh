@@ -55,7 +55,7 @@ Pin-Priority: -1
 apt update
 apt install firefox -y
 
-# Temporary fix for whatportis bug - See https://github.com/yogeshojha/rengine/issues/984
+# Temporary fix for whatportis bug - See https://github.com/yogeshojha/webguard/issues/984
 sed -i 's/purge()/truncate()/g' /usr/local/lib/python3.10/dist-packages/whatportis/cli.py
 
 # update whatportis
@@ -120,7 +120,7 @@ then
   git clone https://github.com/scipag/vulscan /usr/src/github/scipag_vulscan
   echo "Symlinking to nmap script dir"
   ln -s /usr/src/github/scipag_vulscan /usr/share/nmap/scripts/vulscan
-  echo "Usage in reNgine, set vulscan/vulscan.nse in nmap_script scanEngine port_scan config parameter"
+  echo "Usage in webGuard, set vulscan/vulscan.nse in nmap_script scanEngine port_scan config parameter"
 fi
 
 # install h8mail
@@ -202,8 +202,8 @@ generate_worker_command() {
     local queue=$1
     local concurrency=$2
     local worker_name=$3
-    local app=${4:-"reNgine.tasks"}
-    local directory=${5:-"/usr/src/app/reNgine/"}
+    local app=${4:-"webGuard.tasks"}
+    local directory=${5:-"/usr/src/app/webGuard/"}
 
     local base_command="celery -A $app worker --pool=gevent --optimization=fair --autoscale=$concurrency,1 --loglevel=$loglevel -Q $queue -n $worker_name"
 
@@ -220,9 +220,9 @@ commands=""
 
 # Main scan worker
 if [ "$DEBUG" == "1" ]; then
-    commands+="watchmedo auto-restart --recursive --pattern=\"*.py\" --directory=\"/usr/src/app/reNgine/\" -- celery -A reNgine.tasks worker --loglevel=$loglevel --optimization=fair --autoscale=$MAX_CONCURRENCY,$MIN_CONCURRENCY -Q main_scan_queue &"$'\n'
+    commands+="watchmedo auto-restart --recursive --pattern=\"*.py\" --directory=\"/usr/src/app/webGuard/\" -- celery -A webGuard.tasks worker --loglevel=$loglevel --optimization=fair --autoscale=$MAX_CONCURRENCY,$MIN_CONCURRENCY -Q main_scan_queue &"$'\n'
 else
-    commands+="celery -A reNgine.tasks worker --loglevel=$loglevel --optimization=fair --autoscale=$MAX_CONCURRENCY,$MIN_CONCURRENCY -Q main_scan_queue &"$'\n'
+    commands+="celery -A webGuard.tasks worker --loglevel=$loglevel --optimization=fair --autoscale=$MAX_CONCURRENCY,$MIN_CONCURRENCY -Q main_scan_queue &"$'\n'
 fi
 
 # API shared task worker

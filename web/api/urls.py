@@ -185,9 +185,9 @@ urlpatterns = [
         OllamaManager.as_view(),
         name='ollama_manager'),
     path(
-        'rengine/update/',
-        RengineUpdateCheck.as_view(),
-        name='check_rengine_update'),
+        'webguard/update/',
+        WebguardUpdateCheck.as_view(),
+        name='check_webguard_update'),
     path(
         'action/subdomain/delete/',
         DeleteSubdomain.as_view(),

@@ -21,14 +21,14 @@ from discord_webhook import DiscordEmbed, DiscordWebhook
 from django.db.models import Q
 from dotted_dict import DottedDict
 
-from reNgine.common_serializers import *
-from reNgine.definitions import *
-from reNgine.settings import *
+from webGuard.common_serializers import *
+from webGuard.definitions import *
+from webGuard.settings import *
 from scanEngine.models import *
 from dashboard.models import *
 from startScan.models import *
 from targetApp.models import *
-from reNgine.utilities import is_valid_url
+from webGuard.utilities import is_valid_url
 
 
 logger = get_task_logger(__name__)
@@ -340,7 +340,7 @@ def get_http_urls(
 	# Grab only http_url from endpoint objects
 	endpoints = [e.http_url for e in endpoints if is_valid_url(e.http_url)]
 	if ignore_files: # ignore all files
-		extensions_path = f'{RENGINE_HOME}/fixtures/extensions.txt'
+		extensions_path = f'{WEBGUARD_HOME}/fixtures/extensions.txt'
 		with open(extensions_path, 'r') as f:
 			extensions = tuple(f.strip() for f in f.readlines())
 		endpoints = [e for e in endpoints if not urlparse(e).path.endswith(extensions)]
@@ -861,7 +861,7 @@ def get_task_header_message(name, scan_history_id, subscan_id):
 
 def get_task_cache_key(func_name, *args, **kwargs):
 	args_str = '_'.join([str(arg) for arg in args])
-	kwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in RENGINE_TASK_IGNORE_CACHE_KWARGS])
+	kwargs_str = '_'.join([f'{k}={v}' for k, v in kwargs.items() if k not in WEBGUARD_TASK_IGNORE_CACHE_KWARGS])
 	return f'{func_name}__{args_str}__{kwargs_str}'
 
 

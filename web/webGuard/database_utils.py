@@ -9,8 +9,8 @@ from django.utils import timezone
 from dashboard.models import Project
 from targetApp.models import Organization, Domain
 from startScan.models import EndPoint, IpAddress
-from reNgine.settings import LOGGING
-from reNgine.common_func import *
+from webGuard.settings import LOGGING
+from webGuard.common_func import *
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ def bulk_import_targets(
 	org_description: str = None, 
 	h1_team_handle: str = None):
 	""" 
-		Used to import targets in reNgine
+		Used to import targets in webGuard
 
 		Args:
 			targets (list[dict]): list of targets to import, [{'target': 'target1.com', 'description': 'desc1'}, ...]
@@ -60,7 +60,7 @@ def bulk_import_targets(
 		elif is_ip:
 			target_obj = store_ip(name, project, description, h1_team_handle)
 		else:
-			logger.warning(f'{name} is not supported by reNgine')
+			logger.warning(f'{name} is not supported by webGuard')
 			continue
 
 		if target_obj:
@@ -105,7 +105,7 @@ def remove_wildcard(input_string):
 
 def store_domain(domain_name, project, description, h1_team_handle):
 	"""
-		This function is used to store domain in reNgine
+		This function is used to store domain in webGuard
 	"""
 	existing_domain = Domain.objects.filter(name=domain_name).first()
 

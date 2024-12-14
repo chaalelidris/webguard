@@ -8,13 +8,13 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-from reNgine.views import serve_protected_media
+from webGuard.views import serve_protected_media
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="reNgine API",
+      title="webGuard API",
       default_version='v1',
-      description="reNgine: An Automated reconnaissance framework.",
+      description="webGuard: An Automated reconnaissance framework.",
       contact=openapi.Contact(email="yogesh.ojha11@gmail.com"),
    ),
    public=True,
@@ -61,5 +61,5 @@ urlpatterns = [
         name='serve_protected_media'
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-# ] + static(settings.MEDIA_URL, document_root=settings.RENGINE_RESULTS) + \
+# ] + static(settings.MEDIA_URL, document_root=settings.WEBGUARD_RESULTS) + \
     

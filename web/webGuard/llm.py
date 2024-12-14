@@ -1,8 +1,8 @@
 
 import openai
 import re
-from reNgine.common_func import get_open_ai_key, parse_llm_vulnerability_report
-from reNgine.definitions import VULNERABILITY_DESCRIPTION_SYSTEM_MESSAGE, ATTACK_SUGGESTION_GPT_SYSTEM_PROMPT, OLLAMA_INSTANCE
+from webGuard.common_func import get_open_ai_key, parse_llm_vulnerability_report
+from webGuard.definitions import VULNERABILITY_DESCRIPTION_SYSTEM_MESSAGE, ATTACK_SUGGESTION_GPT_SYSTEM_PROMPT, OLLAMA_INSTANCE
 from langchain_community.llms import Ollama
 
 from dashboard.models import OllamaSettings
