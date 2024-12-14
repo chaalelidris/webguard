@@ -151,11 +151,13 @@ function showAfterUpdatePopup() {
   // this function will show a popup after the update is done to tell user about the new features
   const currentVersion = document.body.getAttribute("data-webguard-version");
   const lastShownVersion = localStorage.getItem("lastShownUpdateVersion");
+
+  
 }
 
 $(document).ready(function () {
-  // show popup after update
-  showAfterUpdatePopup();
+    // show popup after update
+    showAfterUpdatePopup();
   // hide badge if update does not exists
   if (
     window.localStorage.getItem("update_available") &&
