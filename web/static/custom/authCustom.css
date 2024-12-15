@@ -1,0 +1,33 @@
+.card {
+  border-radius: 0.5rem;
+}
+
+.login-button {
+  border-radius: 0.5rem; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  background-color: #d21b54; /* Primary color */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  padding: 0.75rem 1.5rem; /* Add padding for size */
+  font-size: 1rem; /* Button font size */
+  font-weight: 600; /* Slightly bold text */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.login-button:hover {
+  background-color: #b31848; /* Slightly darker shade of #d21b54 */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4); /* Elevated shadow on hover */
+}
+
+.login-button:active {
+  background-color: #99153c; /* Even darker shade when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow when pressed */
+  transform: translateY(2px); /* Slight press effect */
+}
+
+.login-button:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 4px rgba(210, 27, 84, 0.5); /* Focus ring using #d21b54 */
+}
+
