@@ -7,6 +7,8 @@ include .env
 COMPOSE_PREFIX_CMD := COMPOSE_DOCKER_CLI_BUILD=1
 
 COMPOSE_ALL_FILES := -f docker-compose.yml
+COMPOSE_DEV_FILES := -f docker-compose.dev.yml
+
 SERVICES          := db web proxy redis celery celery-beat ollama
 
 # Check if 'docker compose' command is available, otherwise use 'docker-compose'
@@ -25,6 +27,8 @@ setup:			## Generate certificates.
 
 up:				## Build and start all services.
 	${COMPOSE_PREFIX_CMD} ${DOCKER_COMPOSE} ${COMPOSE_ALL_FILES} up -d --build ${SERVICES}
+up-dev:			## Build and start all services.
+	${COMPOSE_PREFIX_CMD} ${DOCKER_COMPOSE} ${COMPOSE_DEV_FILES} up --build 
 
 build:			## Build all services.
 	${COMPOSE_PREFIX_CMD} ${DOCKER_COMPOSE} ${COMPOSE_ALL_FILES} build ${SERVICES}
