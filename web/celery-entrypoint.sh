@@ -6,10 +6,7 @@ python3 manage.py migrate
 # make migrations for specific apps
 apps=(
     "targetApp"
-    "scanEngine"
-    "startScan"
     "dashboard"
-    "recon_note"
 )
 
 create_migrations() {

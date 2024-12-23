@@ -159,11 +159,5 @@ class Domain(models.Model):
 	def get_organization(self):
 		return Organization.objects.filter(domains__id=self.id)
 
-	def get_recent_scan_id(self):
-		ScanHistory = apps.get_model('startScan.ScanHistory')
-		obj = ScanHistory.objects.filter(domain__id=self.id).order_by('-id')
-		if obj:
-			return obj[0].id
-
 	def __str__(self):
 		return str(self.name)

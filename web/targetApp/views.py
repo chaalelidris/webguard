@@ -17,8 +17,6 @@ from rolepermissions.decorators import has_permission_decorator
 
 from webGuard.common_func import *
 from webGuard.tasks import run_command, sanitize_url
-from scanEngine.models import *
-from startScan.models import *
 from targetApp.forms import *
 from targetApp.models import *
 

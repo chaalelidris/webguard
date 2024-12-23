@@ -9,8 +9,6 @@ from webGuard.common_func import (fmt_traceback, get_output_file_name,
 								 get_task_cache_key, get_traceback_path)
 from webGuard.definitions import *
 from webGuard.settings import *
-from scanEngine.models import EngineType
-from startScan.models import ScanActivity, ScanHistory, SubScan
 
 logger = get_task_logger(__name__)
 

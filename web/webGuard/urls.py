@@ -34,26 +34,12 @@ urlpatterns = [
         'target/',
         include('targetApp.urls')),
     path(
-        'scanEngine/',
-        include('scanEngine.urls')),
-    path(
-        'scan/',
-        include('startScan.urls')),
-    path(
-        'recon_note/',
-        include('recon_note.urls')),
-    path(
         'login/',
         include('login.urls')),
     path(
         'logout/',
         auth_views.LogoutView.as_view(template_name='base/logout.html'),
         name='logout'),
-    path(
-        'api/',
-        include(
-            'api.urls',
-            'api')),
     path(
         'media/<path:path>', 
         serve_protected_media, 
