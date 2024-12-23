@@ -37,6 +37,11 @@ urlpatterns = [
         'login/',
         include('login.urls')),
     path(
+        'api/',
+        include(
+            'api.urls',
+            'api')),
+    path(
         'logout/',
         auth_views.LogoutView.as_view(template_name='base/logout.html'),
         name='logout'),
