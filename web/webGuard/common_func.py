@@ -24,9 +24,7 @@ from dotted_dict import DottedDict
 from webGuard.common_serializers import *
 from webGuard.definitions import *
 from webGuard.settings import *
-from scanEngine.models import *
 from dashboard.models import *
-from startScan.models import *
 from targetApp.models import *
 from webGuard.utilities import is_valid_url
 

@@ -6,10 +6,7 @@ python3 manage.py migrate
 # make migrations for specific apps
 apps=(
     "targetApp"
-    "scanEngine"
-    "startScan"
     "dashboard"
-    "recon_note"
 )
 
 create_migrations() {
@@ -36,11 +33,6 @@ echo "Migration process completed."
 
 
 python3 manage.py collectstatic --no-input --clear
-
-# Load default engines, keywords, and external tools
-python3 manage.py loaddata fixtures/default_scan_engines.yaml --app scanEngine.EngineType
-python3 manage.py loaddata fixtures/default_keywords.yaml --app scanEngine.InterestingLookupModel
-python3 manage.py loaddata fixtures/external_tools.yaml --app scanEngine.InstalledExternalTool
 
 # install firefox https://askubuntu.com/a/1404401
 echo '
@@ -235,7 +227,6 @@ fi
 # worker format: "queue_name:concurrency:worker_name"
 workers=(
     "initiate_scan_queue:30:initiate_scan_worker"
-    "subscan_queue:30:subscan_worker"
     "report_queue:20:report_worker"
     "send_notif_queue:10:send_notif_worker"
     "send_task_notif_queue:10:send_task_notif_worker"

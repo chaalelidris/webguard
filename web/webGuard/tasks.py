@@ -13,7 +13,6 @@ import base64
 
 from datetime import datetime
 from urllib.parse import urlparse
-from api.serializers import SubdomainSerializer
 from celery import chain, chord, group
 from celery.result import allow_join_result
 from celery.utils.log import get_task_logger
@@ -31,9 +30,6 @@ from webGuard.definitions import *
 from webGuard.settings import *
 from webGuard.llm import *
 from webGuard.utilities import *
-from scanEngine.models import (EngineType, InstalledExternalTool, Notification, Proxy)
-from startScan.models import *
-from startScan.models import EndPoint, Subdomain, Vulnerability
 from targetApp.models import Domain
 
 """
