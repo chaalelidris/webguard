@@ -1131,150 +1131,6 @@ def port_scan(self, hosts=[], ctx={}, description=None):
 	return ports_data
 
 
-@app.task(name='nmap', queue='main_scan_queue', base=WebguardTask, bind=True)
-def nmap(
-		self,
-		cmd=None,
-		ports=[],
-		host=None,
-		input_file=None,
-		script=None,
-		script_args=None,
-		max_rate=None,
-		ctx={},
-		description=None):
-	"""Run nmap on a host.
-
-	Args:
-		cmd (str, optional): Existing nmap command to complete.
-		ports (list, optional): List of ports to scan.
-		host (str, optional): Host to scan.
-		input_file (str, optional): Input hosts file.
-		script (str, optional): NSE script to run.
-		script_args (str, optional): NSE script args.
-		max_rate (int): Max rate.
-		description (str, optional): Task description shown in UI.
-	"""
-	notif = Notification.objects.first()
-	ports_str = ','.join(str(port) for port in ports)
-	self.filename = self.filename.replace('.txt', '.xml')
-	filename_vulns = self.filename.replace('.xml', '_vulns.json')
-	output_file = self.output_path
-	output_file_xml = f'{self.results_dir}/{host}_{self.filename}'
-	vulns_file = f'{self.results_dir}/{host}_{filename_vulns}'
-	logger.warning(f'Running nmap on {host}:{ports}')
-
-	# Build cmd
-	nmap_cmd = get_nmap_cmd(
-		cmd=cmd,
-		ports=ports_str,
-		script=script,
-		script_args=script_args,
-		max_rate=max_rate,
-		host=host,
-		input_file=input_file,
-		output_file=output_file_xml)
-
-	# Run cmd
-	run_command(
-		nmap_cmd,
-		shell=True,
-		history_file=self.history_file,
-		scan_id=self.scan_id,
-		activity_id=self.activity_id)
-
-	# Get nmap XML results and convert to JSON
-	vulns = parse_nmap_results(output_file_xml, output_file)
-	with open(vulns_file, 'w') as f:
-		json.dump(vulns, f, indent=4)
-
-	# Save vulnerabilities found by nmap
-	vulns_str = ''
-	for vuln_data in vulns:
-		# URL is not necessarily an HTTP URL when running nmap (can be any
-		# other vulnerable protocols). Look for existing endpoint and use its
-		# URL as vulnerability.http_url if it exists.
-		url = vuln_data['http_url']
-		endpoint = EndPoint.objects.filter(http_url__contains=url).first()
-		if endpoint:
-			vuln_data['http_url'] = endpoint.http_url
-		vuln, created = save_vulnerability(
-			target_domain=self.domain,
-			subdomain=self.subdomain,
-			scan_history=self.scan,
-			subscan=self.subscan,
-			endpoint=endpoint,
-			**vuln_data)
-		vulns_str += f'• {str(vuln)}\n'
-		if created:
-			logger.warning(str(vuln))
-
-	# Send only 1 notif for all vulns to reduce number of notifs
-	if notif and notif.send_vuln_notif and vulns_str:
-		logger.warning(vulns_str)
-		self.notify(fields={'CVEs': vulns_str})
-	return vulns
-
-
-@app.task(name='waf_detection', queue='main_scan_queue', base=WebguardTask, bind=True)
-def waf_detection(self, ctx={}, description=None):
-	"""
-	Uses wafw00f to check for the presence of a WAF.
-
-	Args:
-		description (str, optional): Task description shown in UI.
-
-	Returns:
-		list: List of startScan.models.Waf objects.
-	"""
-	input_path = f'{self.results_dir}/input_endpoints_waf_detection.txt'
-	config = self.yaml_configuration.get(WAF_DETECTION) or {}
-	enable_http_crawl = config.get(ENABLE_HTTP_CRAWL, DEFAULT_ENABLE_HTTP_CRAWL)
-
-	# Get alive endpoints from DB
-	get_http_urls(
-		is_alive=enable_http_crawl,
-		write_filepath=input_path,
-		get_only_default_urls=True,
-		ctx=ctx
-	)
-
-	cmd = f'wafw00f -i {input_path} -o {self.output_path}'
-	run_command(
-		cmd,
-		history_file=self.history_file,
-		scan_id=self.scan_id,
-		activity_id=self.activity_id)
-	if not os.path.isfile(self.output_path):
-		logger.error(f'Could not find {self.output_path}')
-		return
-
-	with open(self.output_path) as file:
-		wafs = file.readlines()
-
-	for line in wafs:
-		line = " ".join(line.split())
-		splitted = line.split(' ', 1)
-		waf_info = splitted[1].strip()
-		waf_name = waf_info[:waf_info.find('(')].strip()
-		waf_manufacturer = waf_info[waf_info.find('(')+1:waf_info.find(')')].strip().replace('.', '')
-		http_url = sanitize_url(splitted[0].strip())
-		if not waf_name or waf_name == 'None':
-			continue
-
-		# Add waf to db
-		waf, _ = Waf.objects.get_or_create(
-			name=waf_name,
-			manufacturer=waf_manufacturer
-		)
-
-		# Add waf info to Subdomain in DB
-		subdomain = get_subdomain_from_url(http_url)
-		logger.info(f'Wafw00f Subdomain : {subdomain}')
-		subdomain_query, _ = Subdomain.objects.get_or_create(scan_history=self.scan, name=subdomain)
-		subdomain_query.waf.add(waf)
-		subdomain_query.save()
-	return wafs
 
 
 @app.task(name='dir_file_fuzz', queue='main_scan_queue', base=WebguardTask, bind=True)
@@ -3881,62 +3737,7 @@ def extract_httpx_url(line):
 # OSInt utils #
 #-------------#
 
-def get_and_save_dork_results(lookup_target, results_dir, type, lookup_keywords=None, lookup_extensions=None, delay=3, page_count=2, scan_history=None):
-	"""
-		Uses gofuzz to dork and store information
 
-		Args:
-			lookup_target (str): target to look into such as stackoverflow or even the target itself
-			results_dir (str): Results directory
-			type (str): Dork Type Title
-			lookup_keywords (str): comma separated keywords or paths to look for
-			lookup_extensions (str): comma separated extensions to look for
-			delay (int): delay between each requests
-			page_count (int): pages in google to extract information
-			scan_history (startScan.ScanHistory): Scan History Object
-	"""
-	results = []
-	gofuzz_command = f'{GOFUZZ_EXEC_PATH} -t {lookup_target} -d {delay} -p {page_count}'
-
-	if lookup_extensions:
-		gofuzz_command += f' -e {lookup_extensions}'
-	elif lookup_keywords:
-		gofuzz_command += f' -w {lookup_keywords}'
-
-	output_file = f'{results_dir}/gofuzz.txt'
-	gofuzz_command += f' -o {output_file}'
-	history_file = f'{results_dir}/commands.txt'
-
-	try:
-		run_command(
-			gofuzz_command,
-			shell=False,
-			history_file=history_file,
-			scan_id=scan_history.id,
-		)
-
-		if not os.path.isfile(output_file):
-			return
-
-		with open(output_file) as f:
-			for line in f.readlines():
-				url = line.strip()
-				if url:
-					results.append(url)
-					dork, created = Dork.objects.get_or_create(
-						type=type,
-						url=url
-					)
-					if scan_history:
-						scan_history.dorks.add(dork)
-
-		# remove output file
-		os.remove(output_file)
-
-	except Exception as e:
-		logger.exception(e)
-
-	return results
 
 def save_metadata_info(meta_dict):
 	"""Extract metadata from Google Search.
@@ -3949,7 +3750,6 @@ def save_metadata_info(meta_dict):
 	"""
 	logger.warning(f'Getting metadata for {meta_dict.osint_target}')
 
-	scan_history = ScanHistory.objects.get(id=meta_dict.scan_id)
 
 	# Proxy settings
 	get_random_proxy()
@@ -4211,19 +4011,6 @@ def save_email(email_address, scan_history=None):
 	return email, created
 
 
-def save_employee(name, designation, scan_history=None):
-	employee, created = Employee.objects.get_or_create(
-		name=name,
-		designation=designation)
-	# if created:
-	# 	logger.warning(f'Found new employee {name}')
-
-	# Add employee to ScanHistory
-	if scan_history:
-		scan_history.employees.add(employee)
-		scan_history.save()
-
-	return employee, created
 
 
 def save_ip_address(ip_address, subdomain=None, subscan=None, **kwargs):
