@@ -91,10 +91,11 @@ class DomainSerializer(serializers.ModelSerializer):
 			return [org.name for org in Organization.objects.filter(domains__id=obj.id)]
 
 	def get_most_recent_scan(self, obj):
-		return obj.get_recent_scan_id()
+		return 
 
 	def get_insert_date(self, obj):
 		return naturalday(obj.insert_date).title()
+
 
 	def get_insert_date_humanized(self, obj):
 		return naturaltime(obj.insert_date).title()
@@ -107,19 +108,11 @@ class DomainSerializer(serializers.ModelSerializer):
 		if obj.start_scan_date:
 			return naturaltime(obj.start_scan_date).title()
 
-
-
-
-
-
-
 class OrganizationSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Organization
 		fields = '__all__'
-
-
 
 class OrganizationTargetsSerializer(serializers.ModelSerializer):
 

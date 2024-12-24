@@ -490,9 +490,6 @@ class ListTargetsDatatableViewSet(viewsets.ModelViewSet):
 			return qs.order_by(order_col)
 
 		return qs.order_by('-id')
-
-
-
 class WafDetector(APIView):
 	def get(self, request):
 		req = self.request
