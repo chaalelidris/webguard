@@ -40,9 +40,6 @@ urlpatterns = [
         'scan/',
         include('startScan.urls')),
     path(
-        'recon_note/',
-        include('recon_note.urls')),
-    path(
         'login/',
         include('login.urls')),
     path(

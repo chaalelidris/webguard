@@ -9,7 +9,6 @@ apps=(
     "scanEngine"
     "startScan"
     "dashboard"
-    "recon_note"
 )
 
 create_migrations() {

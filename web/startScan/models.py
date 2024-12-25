@@ -311,15 +311,6 @@ class Subdomain(models.Model):
 		)
 
 	@property
-	def get_todos(self):
-		TodoNote = apps.get_model('recon_note', 'TodoNote')
-		notes = TodoNote.objects
-		if self.scan_history:
-			notes = notes.filter(scan_history=self.scan_history)
-		notes = notes.filter(subdomain__id=self.id)
-		return notes.values()
-
-	@property
 	def get_subscan_count(self):
 		return (
 			SubScan.objects
