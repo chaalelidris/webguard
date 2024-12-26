@@ -19,7 +19,6 @@ from webGuard.charts import *
 from webGuard.common_func import *
 from webGuard.definitions import ABORTED_TASK, SUCCESS_TASK
 from webGuard.tasks import create_scan_activity, initiate_scan, run_command
-from scanEngine.models import EngineType
 from startScan.models import *
 from targetApp.models import *
 
@@ -36,188 +35,8 @@ def subscan_history(request, slug):
     return render(request, 'startScan/subscan_history.html', context)
 
 
-def detail_scan(request, id, slug):
-    ctx = {}
-
-    # Get scan objects
-    scan = get_object_or_404(ScanHistory, id=id)
-    domain_id = scan.domain.id
-    scan_engines = EngineType.objects.order_by('engine_name').all()
-    recent_scans = ScanHistory.objects.filter(domain__id=domain_id)
-    last_scans = (
-        ScanHistory.objects
-        .filter(domain__id=domain_id)
-        .filter(tasks__overlap=['subdomain_discovery'])
-        .filter(id__lte=id)
-        .filter(scan_status=2)
-    )
-
-    # Get all kind of objects associated with our ScanHistory object
-    emails = Email.objects.filter(emails__in=[scan])
-    employees = Employee.objects.filter(employees__in=[scan])
-    subdomains = Subdomain.objects.filter(scan_history=scan)
-    endpoints = EndPoint.objects.filter(scan_history=scan)
-    vulns = Vulnerability.objects.filter(scan_history=scan)
-    vulns_tags = VulnerabilityTags.objects.filter(vuln_tags__in=vulns)
-    ip_addresses = IpAddress.objects.filter(ip_addresses__in=subdomains)
-    geo_isos = CountryISO.objects.filter(ipaddress__in=ip_addresses)
-    scan_activity = ScanActivity.objects.filter(scan_of__id=id).order_by('time')
-    cves = CveId.objects.filter(cve_ids__in=vulns)
-    cwes = CweId.objects.filter(cwe_ids__in=vulns)
-
-    # HTTP statuses
-    http_statuses = (
-        subdomains
-        .exclude(http_status=0)
-        .values('http_status')
-        .annotate(Count('http_status'))
-    )
-
-    # CVEs / CWes
-    common_cves = (
-        cves
-        .annotate(nused=Count('cve_ids'))
-        .order_by('-nused')
-        .values('name', 'nused')
-        [:10]
-    )
-    common_cwes = (
-        cwes
-        .annotate(nused=Count('cwe_ids'))
-        .order_by('-nused')
-        .values('name', 'nused')
-        [:10]
-    )
-
-    # Tags
-    common_tags = (
-        vulns_tags
-        .annotate(nused=Count('vuln_tags'))
-        .order_by('-nused')
-        .values('name', 'nused')
-        [:7]
-    )
-
-    # Countries
-    asset_countries = (
-        geo_isos
-        .annotate(count=Count('iso'))
-        .order_by('-count')
-    )
-
-    # Subdomains
-    subdomain_count = (
-        subdomains
-        .values('name')
-        .distinct()
-        .count()
-    )
-    alive_count = (
-        subdomains
-        .values('name')
-        .distinct()
-        .filter(http_status__exact=200)
-        .count()
-    )
-    important_count = (
-        subdomains
-        .values('name')
-        .distinct()
-        .filter(is_important=True)
-        .count()
-    )
-
-    # Endpoints
-    endpoint_count = (
-        endpoints
-        .values('http_url')
-        .distinct()
-        .count()
-    )
-    endpoint_alive_count = (
-        endpoints
-        .filter(http_status__exact=200) # TODO: use is_alive() func as it's more precise
-        .values('http_url')
-        .distinct()
-        .count()
-    )
-
-    # Vulnerabilities
-    common_vulns = (
-        vulns
-        .exclude(severity=0)
-        .values('name', 'severity')
-        .annotate(count=Count('name'))
-        .order_by('-count')
-        [:10]
-    )
-    info_count = vulns.filter(severity=0).count()
-    low_count = vulns.filter(severity=1).count()
-    medium_count = vulns.filter(severity=2).count()
-    high_count = vulns.filter(severity=3).count()
-    critical_count = vulns.filter(severity=4).count()
-    unknown_count = vulns.filter(severity=-1).count()
-    total_count = vulns.count()
-    total_count_ignore_info = vulns.exclude(severity=0).count()
-
-    # Emails
-    exposed_count = emails.exclude(password__isnull=True).count()
-
-    # Build render context
-    ctx = {
-        'scan_history_id': id,
-        'history': scan,
-        'scan_activity': scan_activity,
-        'subdomain_count': subdomain_count,
-        'alive_count': alive_count,
-        'important_count': important_count,
-        'endpoint_count': endpoint_count,
-        'endpoint_alive_count': endpoint_alive_count,
-        'info_count': info_count,
-        'low_count': low_count,
-        'medium_count': medium_count,
-        'high_count': high_count,
-        'critical_count': critical_count,
-        'unknown_count': unknown_count,
-        'total_vulnerability_count': total_count,
-        'total_vul_ignore_info_count': total_count_ignore_info,
-        'vulnerability_list': vulns.order_by('-severity').all(),
-        'scan_history_active': 'active',
-        'scan_engines': scan_engines,
-        'exposed_count': exposed_count,
-        'email_count': emails.count(),
-        'employees_count': employees.count(),
-        'most_recent_scans': recent_scans.order_by('-start_scan_date')[:1],
-        'http_status_breakdown': http_statuses,
-        'most_common_cve': common_cves,
-        'most_common_cwe': common_cwes,
-        'most_common_tags': common_tags,
-        'most_common_vulnerability': common_vulns,
-        'asset_countries': asset_countries,
-    }
-
-    # Find number of matched GF patterns
-    if scan.used_gf_patterns:
-        count_gf = {}
-        for gf in scan.used_gf_patterns.split(','):
-            count_gf[gf] = (
-                endpoints
-                .filter(matched_gf_patterns__icontains=gf)
-                .count()
-            )
-            ctx['matched_gf_count'] = count_gf
-
-    # Find last scan for this domain
-    if last_scans.count() > 1:
-        last_scan = last_scans.order_by('-start_scan_date')[1]
-        ctx['last_scan'] = last_scan
-
-    return render(request, 'startScan/detail_scan.html', ctx)
-
-
 def all_subdomains(request, slug):
     subdomains = Subdomain.objects.filter(target_domain__project__slug=slug)
-    scan_engines = EngineType.objects.order_by('engine_name').all()
     alive_subdomains = subdomains.filter(http_status__exact=200) # TODO: replace this with is_alive() function
     important_subdomains = (
         subdomains
@@ -319,13 +138,7 @@ def start_scan_ui(request, slug, domain_id):
         subdomains_out = getattr(previous_scan, 'cfg_out_of_scope_subdomains', None)
         starting_point_path = getattr(previous_scan, 'cfg_starting_point_path', None)
         excluded_paths = getattr(previous_scan, 'cfg_excluded_paths', None)
-
-    engines = EngineType.objects.order_by('engine_name')
-    custom_engines_count = (
-        EngineType.objects
-        .filter(default_engine=False)
-        .count()
-    )
+   
     excluded_paths = ','.join(DEFAULT_EXCLUDED_PATHS) if not excluded_paths else ','.join(excluded_paths)
 
     # context values
@@ -333,7 +146,6 @@ def start_scan_ui(request, slug, domain_id):
         'scan_history_active': 'active',
         'domain': domain,
         'engines': engines,
-        'custom_engines_count': custom_engines_count,
         'excluded_paths': excluded_paths,
         'subdomains_in': subdomains_in,
         'subdomains_out': subdomains_out,
@@ -412,19 +224,11 @@ def start_multiple_scan(request, slug):
             domain_ids = ",".join(list_of_domain_id)
 
     # GET request
-    engines = EngineType.objects
-    custom_engine_count = (
-        engines
-        .filter(default_engine=False)
-        .count()
-    )
     excluded_paths = ','.join(DEFAULT_EXCLUDED_PATHS)
     context = {
         'scan_history_active': 'active',
-        'engines': engines,
         'domain_list': list_of_domain_name,
         'domain_ids': domain_ids,
-        'custom_engine_count': custom_engine_count,
         'excluded_paths': excluded_paths
     }
     return render(request, 'startScan/start_multiple_scan_ui.html', context)
@@ -595,9 +399,7 @@ def schedule_scan(request, host_id, slug):
         excluded_paths = [path.strip() for path in excluded_paths.split(',')]
 
         # Get engine type
-        engine = get_object_or_404(EngineType, id=engine_type)
         timestr = str(datetime.strftime(timezone.now(), '%Y_%m_%d_%H_%M_%S'))
-        task_name = f'{engine.engine_name} for {domain.name}: {timestr}'
         if scheduled_mode == 'periodic':
             frequency_value = int(request.POST['frequency'])
             frequency_type = request.POST['frequency_type']
@@ -618,7 +420,6 @@ def schedule_scan(request, host_id, slug):
                 period=period)
             kwargs = {
                 'domain_id': host_id,
-                'engine_id': engine.id,
                 'scan_history_id': 1,
                 'scan_type': SCHEDULED_SCAN,
                 'imported_subdomains': subdomains_in,
@@ -629,7 +430,6 @@ def schedule_scan(request, host_id, slug):
             }
             PeriodicTask.objects.create(
                 interval=schedule,
-                name=task_name,
                 task='initiate_scan',
                 kwargs=json.dumps(kwargs)
             )
@@ -640,7 +440,6 @@ def schedule_scan(request, host_id, slug):
             kwargs = {
                 'scan_history_id': 0,
                 'domain_id': host_id,
-                'engine_id': engine.id,
                 'scan_type': SCHEDULED_SCAN,
                 'imported_subdomains': subdomains_in,
                 'out_of_scope_subdomains': subdomains_out,
@@ -651,7 +450,6 @@ def schedule_scan(request, host_id, slug):
             PeriodicTask.objects.create(
                 clocked=clock,
                 one_off=True,
-                name=task_name,
                 task='initiate_scan',
                 kwargs=json.dumps(kwargs)
             )
@@ -663,18 +461,10 @@ def schedule_scan(request, host_id, slug):
         return HttpResponseRedirect(reverse('scheduled_scan_view', kwargs={'slug': slug}))
 
     # GET request
-    engines = EngineType.objects
-    custom_engine_count = (
-        engines
-        .filter(default_engine=False)
-        .count()
-    )
     excluded_paths = ','.join(DEFAULT_EXCLUDED_PATHS)
     context = {
         'scan_history_active': 'active',
         'domain': domain,
-        'engines': engines,
-        'custom_engine_count': custom_engine_count,
         'excluded_paths': excluded_paths
     }
     return render(request, 'startScan/schedule_scan_ui.html', context)
@@ -829,8 +619,6 @@ def start_organization_scan(request, id, slug):
         return HttpResponseRedirect(reverse('scan_history', kwargs={'slug': slug}))
 
     # GET request
-    engine = EngineType.objects.order_by('engine_name')
-    custom_engine_count = EngineType.objects.filter(default_engine=False).count()
     domain_list = organization.get_domains()
     excluded_paths = ','.join(DEFAULT_EXCLUDED_PATHS)
 
@@ -838,9 +626,7 @@ def start_organization_scan(request, id, slug):
         'organization_data_active': 'true',
         'list_organization_li': 'active',
         'organization': organization,
-        'engines': engine,
         'domain_list': domain_list,
-        'custom_engine_count': custom_engine_count,
         'excluded_paths': excluded_paths
     }
     return render(request, 'organization/start_scan.html', context)
@@ -851,7 +637,6 @@ def schedule_organization_scan(request, slug, id):
     organization =Organization.objects.get(id=id)
     if request.method == "POST":
         engine_type = int(request.POST['scan_mode'])
-        engine = get_object_or_404(EngineType, id=engine_type)
 
         # post vars
         scheduled_mode = request.POST['scheduled_mode']
@@ -941,15 +726,11 @@ def schedule_organization_scan(request, slug, id):
         return HttpResponseRedirect(reverse('scheduled_scan_view', kwargs={'slug': slug}))
 
     # GET request
-    engine = EngineType.objects
-    custom_engine_count = EngineType.objects.filter(default_engine=False).count()
     excluded_paths = ','.join(DEFAULT_EXCLUDED_PATHS)
     context = {
         'scan_history_active': 'active',
         'organization': organization,
         'domain_list': organization.get_domains(),
-        'engines': engine,
-        'custom_engine_count': custom_engine_count,
         'excluded_paths': excluded_paths
     }
     return render(request, 'organization/schedule_scan_ui.html', context)

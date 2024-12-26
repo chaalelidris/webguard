@@ -24,7 +24,6 @@ from dotted_dict import DottedDict
 from webGuard.common_serializers import *
 from webGuard.definitions import *
 from webGuard.settings import *
-from scanEngine.models import *
 from dashboard.models import *
 from startScan.models import *
 from targetApp.models import *
@@ -37,41 +36,6 @@ DISCORD_WEBHOOKS_CACHE = redis.Redis.from_url(CELERY_BROKER_URL)
 #------------------#
 # EngineType utils #
 #------------------#
-def dump_custom_scan_engines(results_dir):
-	"""Dump custom scan engines to YAML files.
-
-	Args:
-		results_dir (str): Results directory (will be created if non-existent).
-	"""
-	custom_engines = EngineType.objects.filter(default_engine=False)
-	if not os.path.exists(results_dir):
-		os.makedirs(results_dir, exist_ok=True)
-	for engine in custom_engines:
-		with open(os.path.join(results_dir, f"{engine.engine_name}.yaml"), 'w') as f:
-			f.write(engine.yaml_configuration)
-
-def load_custom_scan_engines(results_dir):
-	"""Load custom scan engines from YAML files. The filename without .yaml will
-	be used as the engine name.
-
-	Args:
-		results_dir (str): Results directory containing engines configs.
-	"""
-	config_paths = [
-		f for f in os.listdir(results_dir)
-		if os.path.isfile(os.path.join(results_dir, f)) and f.endswith('.yaml')
-	]
-	for path in config_paths:
-		engine_name = os.path.splitext(os.path.basename(path))[0]
-		full_path = os.path.join(results_dir, path)
-		with open(full_path, 'r') as f:
-			yaml_configuration = f.read()
-
-		engine, _ = EngineType.objects.get_or_create(engine_name=engine_name)
-		engine.yaml_configuration = yaml_configuration
-		engine.save()
-
-
 #--------------------------------#
 # InterestingLookupModel queries #
 #--------------------------------#
@@ -1087,12 +1051,10 @@ def create_scan_object(host_id, engine_id, initiated_by_id=None):
 	# get current time
 	current_scan_time = timezone.now()
 	# fetch engine and domain object
-	engine = EngineType.objects.get(pk=engine_id)
 	domain = Domain.objects.get(pk=host_id)
 	scan = ScanHistory()
 	scan.scan_status = INITIATED_TASK
 	scan.domain = domain
-	scan.scan_type = engine
 	scan.start_scan_date = current_scan_time
 	if initiated_by_id:
 		user = User.objects.get(pk=initiated_by_id)

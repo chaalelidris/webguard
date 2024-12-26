@@ -6,10 +6,8 @@ python3 manage.py migrate
 # make migrations for specific apps
 apps=(
     "targetApp"
-    "scanEngine"
     "startScan"
     "dashboard"
-    "recon_note"
 )
 
 create_migrations() {
@@ -37,10 +35,6 @@ echo "Migration process completed."
 
 python3 manage.py collectstatic --no-input --clear
 
-# Load default engines, keywords, and external tools
-python3 manage.py loaddata fixtures/default_scan_engines.yaml --app scanEngine.EngineType
-python3 manage.py loaddata fixtures/default_keywords.yaml --app scanEngine.InterestingLookupModel
-python3 manage.py loaddata fixtures/external_tools.yaml --app scanEngine.InstalledExternalTool
 
 # install firefox https://askubuntu.com/a/1404401
 echo '

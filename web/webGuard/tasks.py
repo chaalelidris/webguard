@@ -31,7 +31,6 @@ from webGuard.definitions import *
 from webGuard.settings import *
 from webGuard.llm import *
 from webGuard.utilities import *
-from scanEngine.models import (EngineType, InstalledExternalTool, Notification, Proxy)
 from startScan.models import *
 from startScan.models import EndPoint, Subdomain, Vulnerability
 from targetApp.models import Domain
@@ -80,7 +79,6 @@ def initiate_scan(
 	try:
 		# Get scan engine
 		engine_id = engine_id or scan.scan_type.id # scan history engine_id
-		engine = EngineType.objects.get(pk=engine_id)
 
 		# Get YAML config
 		config = yaml.safe_load(engine.yaml_configuration)
@@ -108,13 +106,10 @@ def initiate_scan(
 
 		scan = ScanHistory.objects.get(pk=scan_history_id)
 		scan.scan_status = RUNNING_TASK
-		scan.scan_type = engine
 		scan.celery_ids = [initiate_scan.request.id]
 		scan.domain = domain
 		scan.start_scan_date = timezone.now()
-		scan.tasks = engine.tasks
 		scan.results_dir = f'{results_dir}/{domain.name}_{scan.id}'
-		add_gf_patterns = gf_patterns and 'fetch_url' in engine.tasks
 		# add configs to scan object, cfg_ prefix is used to avoid conflicts with other scan object fields
 		scan.cfg_starting_point_path = starting_point_path
 		scan.cfg_excluded_paths = excluded_paths
@@ -257,7 +252,6 @@ def initiate_subscan(
 
 	# Get EngineType
 	engine_id = engine_id or scan.scan_type.id
-	engine = EngineType.objects.get(pk=engine_id)
 
 	# Get YAML config
 	config = yaml.safe_load(engine.yaml_configuration)
@@ -3091,7 +3085,6 @@ def send_scan_notif(
 		engine_id (int, optional): EngineType id.
 	"""
 	# Get domain, engine, scan_history objects
-	engine = EngineType.objects.filter(pk=engine_id).first()
 	scan = ScanHistory.objects.filter(pk=scan_history_id).first()
 	subscan = SubScan.objects.filter(pk=subscan_id).first()
 	tasks = ScanActivity.objects.filter(scan_of=scan) if scan else 0
@@ -3216,14 +3209,11 @@ def send_task_notif(
 	url = None
 	fields = {}
 	if add_meta_info:
-		engine = EngineType.objects.filter(pk=engine_id).first()
 		scan = ScanHistory.objects.filter(pk=scan_history_id).first()
 		subscan = SubScan.objects.filter(pk=subscan_id).first()
 		url = get_scan_url(scan_history_id)
 		if status:
 			fields['Status'] = f'**{status}**'
-		if engine:
-			fields['Engine'] = engine.engine_name
 		if scan:
 			fields['Scan ID'] = f'[#{scan.id}]({url})'
 		if subscan:

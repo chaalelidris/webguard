@@ -9,7 +9,6 @@ from webGuard.common_func import (fmt_traceback, get_output_file_name,
 								 get_task_cache_key, get_traceback_path)
 from webGuard.definitions import *
 from webGuard.settings import *
-from scanEngine.models import EngineType
 from startScan.models import ScanActivity, ScanHistory, SubScan
 
 logger = get_task_logger(__name__)
@@ -75,7 +74,6 @@ class WebguardTask(Task):
 		self.history_file = f'{self.results_dir}/commands.txt'
 		self.scan = ScanHistory.objects.filter(pk=self.scan_id).first()
 		self.subscan = SubScan.objects.filter(pk=self.subscan_id).first()
-		self.engine = EngineType.objects.filter(pk=self.engine_id).first()
 		self.domain = self.scan.domain if self.scan else None
 		self.domain_id = self.domain.id if self.domain else None
 		self.subdomain = self.subscan.subdomain if self.subscan else None

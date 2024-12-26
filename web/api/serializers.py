@@ -1,10 +1,8 @@
 from dashboard.models import *
 from django.contrib.humanize.templatetags.humanize import (naturalday, naturaltime)
 from django.db.models import F, JSONField, Value
-from recon_note.models import *
 from webGuard.common_func import *
 from rest_framework import serializers
-from scanEngine.models import *
 from startScan.models import *
 from targetApp.models import *
 from dashboard.models import InAppNotification
@@ -145,30 +143,6 @@ class SubScanResultSerializer(serializers.ModelSerializer):
 			return subscan.engine.engine_name
 		return ''
 
-
-class ReconNoteSerializer(serializers.ModelSerializer):
-
-	domain_name = serializers.SerializerMethodField('get_domain_name')
-	subdomain_name = serializers.SerializerMethodField('get_subdomain_name')
-	scan_started_time = serializers.SerializerMethodField('get_scan_started_time')
-
-	class Meta:
-		model = TodoNote
-		fields = '__all__'
-
-	def get_domain_name(self, note):
-		if note.scan_history:
-			return note.scan_history.domain.name
-
-	def get_subdomain_name(self, note):
-		if note.subdomain:
-			return note.subdomain.name
-
-	def get_scan_started_time(self, note):
-		if note.scan_history:
-			return note.scan_history.start_scan_date
-
-
 class OnlySubdomainNameSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Subdomain
@@ -280,25 +254,6 @@ class OrganizationSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Organization
 		fields = '__all__'
-
-
-class EngineSerializer(serializers.ModelSerializer):
-
-	tasks = serializers.SerializerMethodField('get_tasks')
-
-	def get_tasks(self, instance):
-		return instance.tasks
-
-	class Meta:
-		model = EngineType
-		fields = [
-			'id',
-			'default_engine',
-			'engine_name',
-			'yaml_configuration',
-			'tasks'
-		]
-
 
 class OrganizationTargetsSerializer(serializers.ModelSerializer):
 

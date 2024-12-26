@@ -7,7 +7,6 @@ from django.utils import timezone
 from webGuard.definitions import (CELERY_TASK_STATUSES,
 								 NUCLEI_REVERSE_SEVERITY_MAP)
 from webGuard.utilities import *
-from scanEngine.models import EngineType
 from targetApp.models import Domain
 
 
@@ -36,7 +35,6 @@ class ScanHistory(models.Model):
 	scan_status = models.IntegerField(choices=CELERY_TASK_STATUSES, default=-1)
 	results_dir = models.CharField(max_length=100, blank=True)
 	domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
-	scan_type = models.ForeignKey(EngineType, on_delete=models.CASCADE)
 	celery_ids = ArrayField(models.CharField(max_length=100), blank=True, default=list)
 	tasks = ArrayField(models.CharField(max_length=200), null=True)
 	stop_scan_date = models.DateTimeField(null=True, blank=True)
@@ -311,15 +309,6 @@ class Subdomain(models.Model):
 		)
 
 	@property
-	def get_todos(self):
-		TodoNote = apps.get_model('recon_note', 'TodoNote')
-		notes = TodoNote.objects
-		if self.scan_history:
-			notes = notes.filter(scan_history=self.scan_history)
-		notes = notes.filter(subdomain__id=self.id)
-		return notes.values()
-
-	@property
 	def get_subscan_count(self):
 		return (
 			SubScan.objects
@@ -339,7 +328,6 @@ class SubScan(models.Model):
 	subdomain = models.ForeignKey(Subdomain, on_delete=models.CASCADE)
 	stop_scan_date = models.DateTimeField(null=True, blank=True)
 	error_message = models.CharField(max_length=300, blank=True, null=True)
-	engine = models.ForeignKey(EngineType, on_delete=models.CASCADE, blank=True, null=True)
 	subdomain_subscan_ids = models.ManyToManyField('Subdomain', related_name='subdomain_subscan_ids', blank=True)
 
 	def get_completed_ago(self):

@@ -34,14 +34,8 @@ urlpatterns = [
         'target/',
         include('targetApp.urls')),
     path(
-        'scanEngine/',
-        include('scanEngine.urls')),
-    path(
         'scan/',
         include('startScan.urls')),
-    path(
-        'recon_note/',
-        include('recon_note.urls')),
     path(
         'login/',
         include('login.urls')),

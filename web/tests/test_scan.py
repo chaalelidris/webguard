@@ -33,9 +33,6 @@ class TestOnlineScan(unittest.TestCase):
             'screenshot': {}
         }
         self.domain, _ = Domain.objects.get_or_create(name=DOMAIN_NAME)
-        self.engine = EngineType(
-            engine_name='test_engine',
-            yaml_configuration=yaml.dump(self.yaml_configuration))
         self.engine.save()
         self.scan = ScanHistory(
             domain=self.domain,
