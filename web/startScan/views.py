@@ -34,6 +34,183 @@ def subscan_history(request, slug):
     context = {'scan_history_active': 'active', "subscans": subscans}
     return render(request, 'startScan/subscan_history.html', context)
 
+def detail_scan(request, id, slug):
+    ctx = {}
+
+    # Get scan objects
+    scan = get_object_or_404(ScanHistory, id=id)
+    domain_id = scan.domain.id
+    scan_engines = EngineType.objects.order_by('engine_name').all()
+    recent_scans = ScanHistory.objects.filter(domain__id=domain_id)
+    last_scans = (
+        ScanHistory.objects
+        .filter(domain__id=domain_id)
+        .filter(tasks__overlap=['subdomain_discovery'])
+        .filter(id__lte=id)
+        .filter(scan_status=2)
+    )
+
+    # Get all kind of objects associated with our ScanHistory object
+    emails = Email.objects.filter(emails__in=[scan])
+    employees = Employee.objects.filter(employees__in=[scan])
+    subdomains = Subdomain.objects.filter(scan_history=scan)
+    endpoints = EndPoint.objects.filter(scan_history=scan)
+    vulns = Vulnerability.objects.filter(scan_history=scan)
+    vulns_tags = VulnerabilityTags.objects.filter(vuln_tags__in=vulns)
+    ip_addresses = IpAddress.objects.filter(ip_addresses__in=subdomains)
+    geo_isos = CountryISO.objects.filter(ipaddress__in=ip_addresses)
+    scan_activity = ScanActivity.objects.filter(scan_of__id=id).order_by('time')
+    cves = CveId.objects.filter(cve_ids__in=vulns)
+    cwes = CweId.objects.filter(cwe_ids__in=vulns)
+
+    # HTTP statuses
+    http_statuses = (
+        subdomains
+        .exclude(http_status=0)
+        .values('http_status')
+        .annotate(Count('http_status'))
+    )
+
+    # CVEs / CWes
+    common_cves = (
+        cves
+        .annotate(nused=Count('cve_ids'))
+        .order_by('-nused')
+        .values('name', 'nused')
+        [:10]
+    )
+    common_cwes = (
+        cwes
+        .annotate(nused=Count('cwe_ids'))
+        .order_by('-nused')
+        .values('name', 'nused')
+        [:10]
+    )
+
+    # Tags
+    common_tags = (
+        vulns_tags
+        .annotate(nused=Count('vuln_tags'))
+        .order_by('-nused')
+        .values('name', 'nused')
+        [:7]
+    )
+
+    # Countries
+    asset_countries = (
+        geo_isos
+        .annotate(count=Count('iso'))
+        .order_by('-count')
+    )
+
+    # Subdomains
+    subdomain_count = (
+        subdomains
+        .values('name')
+        .distinct()
+        .count()
+    )
+    alive_count = (
+        subdomains
+        .values('name')
+        .distinct()
+        .filter(http_status__exact=200)
+        .count()
+    )
+    important_count = (
+        subdomains
+        .values('name')
+        .distinct()
+        .filter(is_important=True)
+        .count()
+    )
+
+    # Endpoints
+    endpoint_count = (
+        endpoints
+        .values('http_url')
+        .distinct()
+        .count()
+    )
+    endpoint_alive_count = (
+        endpoints
+        .filter(http_status__exact=200) # TODO: use is_alive() func as it's more precise
+        .values('http_url')
+        .distinct()
+        .count()
+    )
+
+    # Vulnerabilities
+    common_vulns = (
+        vulns
+        .exclude(severity=0)
+        .values('name', 'severity')
+        .annotate(count=Count('name'))
+        .order_by('-count')
+        [:10]
+    )
+    info_count = vulns.filter(severity=0).count()
+    low_count = vulns.filter(severity=1).count()
+    medium_count = vulns.filter(severity=2).count()
+    high_count = vulns.filter(severity=3).count()
+    critical_count = vulns.filter(severity=4).count()
+    unknown_count = vulns.filter(severity=-1).count()
+    total_count = vulns.count()
+    total_count_ignore_info = vulns.exclude(severity=0).count()
+
+    # Emails
+    exposed_count = emails.exclude(password__isnull=True).count()
+
+    # Build render context
+    ctx = {
+        'scan_history_id': id,
+        'history': scan,
+        'scan_activity': scan_activity,
+        'subdomain_count': subdomain_count,
+        'alive_count': alive_count,
+        'important_count': important_count,
+        'endpoint_count': endpoint_count,
+        'endpoint_alive_count': endpoint_alive_count,
+        'info_count': info_count,
+        'low_count': low_count,
+        'medium_count': medium_count,
+        'high_count': high_count,
+        'critical_count': critical_count,
+        'unknown_count': unknown_count,
+        'total_vulnerability_count': total_count,
+        'total_vul_ignore_info_count': total_count_ignore_info,
+        'vulnerability_list': vulns.order_by('-severity').all(),
+        'scan_history_active': 'active',
+        'scan_engines': scan_engines,
+        'exposed_count': exposed_count,
+        'email_count': emails.count(),
+        'employees_count': employees.count(),
+        'most_recent_scans': recent_scans.order_by('-start_scan_date')[:1],
+        'http_status_breakdown': http_statuses,
+        'most_common_cve': common_cves,
+        'most_common_cwe': common_cwes,
+        'most_common_tags': common_tags,
+        'most_common_vulnerability': common_vulns,
+        'asset_countries': asset_countries,
+    }
+
+    # Find number of matched GF patterns
+    if scan.used_gf_patterns:
+        count_gf = {}
+        for gf in scan.used_gf_patterns.split(','):
+            count_gf[gf] = (
+                endpoints
+                .filter(matched_gf_patterns__icontains=gf)
+                .count()
+            )
+            ctx['matched_gf_count'] = count_gf
+
+    # Find last scan for this domain
+    if last_scans.count() > 1:
+        last_scan = last_scans.order_by('-start_scan_date')[1]
+        ctx['last_scan'] = last_scan
+
+    return render(request, 'startScan/detail_scan.html', ctx)
 
 def all_subdomains(request, slug):
     subdomains = Subdomain.objects.filter(target_domain__project__slug=slug)

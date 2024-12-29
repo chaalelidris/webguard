@@ -13,7 +13,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ('targetApp', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('scanEngine', '0001_initial'),
     ]
 
     operations = [
@@ -165,7 +164,6 @@ class Migration(migrations.Migration):
                 ('emails', models.ManyToManyField(blank=True, related_name='emails', to='startScan.Email')),
                 ('employees', models.ManyToManyField(blank=True, related_name='employees', to='startScan.Employee')),
                 ('initiated_by', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='initiated_scans', to=settings.AUTH_USER_MODEL)),
-                ('scan_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='scanEngine.enginetype')),
             ],
         ),
         migrations.CreateModel(
@@ -205,7 +203,6 @@ class Migration(migrations.Migration):
                 ('celery_ids', django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=100), blank=True, default=list, size=None)),
                 ('stop_scan_date', models.DateTimeField(blank=True, null=True)),
                 ('error_message', models.CharField(blank=True, max_length=300, null=True)),
-                ('engine', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='scanEngine.enginetype')),
                 ('scan_history', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='startScan.scanhistory')),
                 ('subdomain', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='startScan.subdomain')),
                 ('subdomain_subscan_ids', models.ManyToManyField(blank=True, related_name='subdomain_subscan_ids', to='startScan.Subdomain')),

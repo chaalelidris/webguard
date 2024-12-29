@@ -97,10 +97,6 @@ urlpatterns = [
         ListOrganizations.as_view(),
         name='listOrganizations'),
     path(
-        'listEngines/',
-        ListEngines.as_view(),
-        name='listEngines'),
-    path(
         'listSubScans/',
         ListSubScans.as_view(),
         name='listSubScans'),
@@ -108,10 +104,6 @@ urlpatterns = [
         'listScanHistory/',
         ListScanHistory.as_view(),
         name='listScanHistory'),
-    path(
-        'listTodoNotes/',
-        ListTodoNotes.as_view(),
-        name='listTodoNotes'),
     path(
         'listInterestingKeywords/',
         ListInterestingKeywords.as_view(),
