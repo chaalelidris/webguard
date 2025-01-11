@@ -63,28 +63,6 @@
               </ul>
             </li>
           {% endif %}
-          <li class="nav-item dropdown {{settings_nav_active}}">
-            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-settings" role="button"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fe-settings me-1"></i> Settings
-              <div class="arrow-down"></div>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="topnav-settings">
-              {% if user|can:'modify_scan_configurations' %}
-              
-              {% endif %}
-              {% if user|can:'modify_system_configurations' %}
-              
-             
-              {% endif %} 
-              {% if user|can:'modify_scan_configurations' %}
-                {% if user_preferences.bug_bounty_mode %}
-                
-                {% endif %}
-              
-              {% endif %}
-            </div>
-          </li>
         </ul>
       </div>
       <span class="badge bg-blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Current Project">{{current_project.name}}</span>
