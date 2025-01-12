@@ -6,8 +6,6 @@ from plotly.io import to_image
 from django.db.models import Count
 from webGuard.definitions import NUCLEI_SEVERITY_MAP
 
-from startScan.models import *
-
 
 
 """

@@ -12,7 +12,6 @@ from webGuard.settings import DEBUG
 from webGuard.tasks import (dir_file_fuzz, fetch_url, http_crawl, initiate_scan,
                            osint, port_scan, subdomain_discovery,
                            vulnerability_scan)
-from startScan.models import *
 
 logger = get_task_logger(__name__)
 DOMAIN_NAME = os.environ['DOMAIN_NAME']

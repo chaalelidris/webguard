@@ -20,8 +20,6 @@ from rolepermissions.roles import assign_role, clear_roles
 from rolepermissions.decorators import has_permission_decorator
 from django.template.defaultfilters import slugify
 
-
-from startScan.models import *
 from targetApp.models import Domain
 from dashboard.models import *
 from webGuard.definitions import *
@@ -37,139 +35,19 @@ def index(request, slug):
         return HttpResponseRedirect(reverse('four_oh_four'))
 
     domains = Domain.objects.filter(project=project)
-    subdomains = Subdomain.objects.filter(scan_history__domain__project__slug=project)
-    endpoints = EndPoint.objects.filter(scan_history__domain__project__slug=project)
-    scan_histories = ScanHistory.objects.filter(domain__project=project)
-    vulnerabilities = Vulnerability.objects.filter(scan_history__domain__project__slug=project)
-    scan_activities = ScanActivity.objects.filter(scan_of__in=scan_histories)
 
     domain_count = domains.count()
-    endpoint_count = endpoints.count()
-    scan_count = scan_histories.count()
-    subdomain_count = subdomains.count()
-    subdomain_with_ip_count = subdomains.filter(ip_addresses__isnull=False).count()
-    alive_count = subdomains.exclude(http_status__exact=0).count()
-    endpoint_alive_count = endpoints.filter(http_status__exact=200).count()
-
-    info_count = vulnerabilities.filter(severity=0).count()
-    low_count = vulnerabilities.filter(severity=1).count()
-    medium_count = vulnerabilities.filter(severity=2).count()
-    high_count = vulnerabilities.filter(severity=3).count()
-    critical_count = vulnerabilities.filter(severity=4).count()
-    unknown_count = vulnerabilities.filter(severity=-1).count()
-
-    vulnerability_feed = vulnerabilities.order_by('-discovered_date')[:50]
-    activity_feed = scan_activities.order_by('-time')[:50]
-    total_vul_count = info_count + low_count + \
-        medium_count + high_count + critical_count + unknown_count
-    total_vul_ignore_info_count = low_count + \
-        medium_count + high_count + critical_count
-    last_week = timezone.now() - timedelta(days=7)
-
-    count_targets_by_date = domains.filter(
-        insert_date__gte=last_week).annotate(
-        date=TruncDay('insert_date')).values("date").annotate(
-            created_count=Count('id')).order_by("-date")
-    count_subdomains_by_date = subdomains.filter(
-        discovered_date__gte=last_week).annotate(
-        date=TruncDay('discovered_date')).values("date").annotate(
-            count=Count('id')).order_by("-date")
-    count_vulns_by_date = vulnerabilities.filter(
-        discovered_date__gte=last_week).annotate(
-        date=TruncDay('discovered_date')).values("date").annotate(
-            count=Count('id')).order_by("-date")
-    count_scans_by_date = scan_histories.filter(
-        start_scan_date__gte=last_week).annotate(
-        date=TruncDay('start_scan_date')).values("date").annotate(
-            count=Count('id')).order_by("-date")
-    count_endpoints_by_date = endpoints.filter(
-        discovered_date__gte=last_week).annotate(
-        date=TruncDay('discovered_date')).values("date").annotate(
-            count=Count('id')).order_by("-date")
 
     last_7_dates = [(timezone.now() - timedelta(days=i)).date()
                     for i in range(0, 7)]
 
-    targets_in_last_week = []
-    subdomains_in_last_week = []
-    vulns_in_last_week = []
-    scans_in_last_week = []
-    endpoints_in_last_week = []
-
-    for date in last_7_dates:
-        _target = count_targets_by_date.filter(date=date)
-        _subdomain = count_subdomains_by_date.filter(date=date)
-        _vuln = count_vulns_by_date.filter(date=date)
-        _scan = count_scans_by_date.filter(date=date)
-        _endpoint = count_endpoints_by_date.filter(date=date)
-        if _target:
-            targets_in_last_week.append(_target[0]['created_count'])
-        else:
-            targets_in_last_week.append(0)
-        if _subdomain:
-            subdomains_in_last_week.append(_subdomain[0]['count'])
-        else:
-            subdomains_in_last_week.append(0)
-        if _vuln:
-            vulns_in_last_week.append(_vuln[0]['count'])
-        else:
-            vulns_in_last_week.append(0)
-        if _scan:
-            scans_in_last_week.append(_scan[0]['count'])
-        else:
-            scans_in_last_week.append(0)
-        if _endpoint:
-            endpoints_in_last_week.append(_endpoint[0]['count'])
-        else:
-            endpoints_in_last_week.append(0)
-
-    targets_in_last_week.reverse()
-    subdomains_in_last_week.reverse()
-    vulns_in_last_week.reverse()
-    scans_in_last_week.reverse()
-    endpoints_in_last_week.reverse()
-
     context = {
         'dashboard_data_active': 'active',
         'domain_count': domain_count,
-        'endpoint_count': endpoint_count,
-        'scan_count': scan_count,
-        'subdomain_count': subdomain_count,
-        'subdomain_with_ip_count': subdomain_with_ip_count,
-        'alive_count': alive_count,
-        'endpoint_alive_count': endpoint_alive_count,
-        'info_count': info_count,
-        'low_count': low_count,
-        'medium_count': medium_count,
-        'high_count': high_count,
-        'critical_count': critical_count,
-        'unknown_count': unknown_count,
-        'total_vul_count': total_vul_count,
-        'total_vul_ignore_info_count': total_vul_ignore_info_count,
-        'vulnerability_feed': vulnerability_feed,
-        'activity_feed': activity_feed,
-        'targets_in_last_week': targets_in_last_week,
-        'subdomains_in_last_week': subdomains_in_last_week,
-        'vulns_in_last_week': vulns_in_last_week,
-        'scans_in_last_week': scans_in_last_week,
-        'endpoints_in_last_week': endpoints_in_last_week,
+        
         'last_7_dates': last_7_dates,
         'project': project
     }
-
-    ip_addresses = IpAddress.objects.filter(ip_addresses__in=subdomains)
-
-    context['total_ips'] = ip_addresses.count()
-    context['most_used_port'] = Port.objects.filter(ports__in=ip_addresses).annotate(count=Count('ports')).order_by('-count')[:7]
-    context['most_used_ip'] = ip_addresses.annotate(count=Count('ip_addresses')).order_by('-count').exclude(ip_addresses__isnull=True)[:7]
-    context['most_used_tech'] = Technology.objects.filter(technologies__in=subdomains).annotate(count=Count('technologies')).order_by('-count')[:7]
-
-    context['most_common_cve'] = CveId.objects.filter(cve_ids__in=vulnerabilities).annotate(nused=Count('cve_ids')).order_by('-nused').values('name', 'nused')[:7]
-    context['most_common_cwe'] = CweId.objects.filter(cwe_ids__in=vulnerabilities).annotate(nused=Count('cwe_ids')).order_by('-nused').values('name', 'nused')[:7]
-    context['most_common_tags'] = VulnerabilityTags.objects.filter(vuln_tags__in=vulnerabilities).annotate(nused=Count('vuln_tags')).order_by('-nused').values('name', 'nused')[:7]
-
-    context['asset_countries'] = CountryISO.objects.filter(ipaddress__in=ip_addresses).annotate(count=Count('ipaddress')).order_by('-count')
-
     return render(request, 'dashboard/index.html', context)
 
 

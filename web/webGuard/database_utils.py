@@ -8,7 +8,6 @@ from django.utils import timezone
 
 from dashboard.models import Project
 from targetApp.models import Organization, Domain
-from startScan.models import EndPoint, IpAddress
 from webGuard.settings import LOGGING
 from webGuard.common_func import *
 
