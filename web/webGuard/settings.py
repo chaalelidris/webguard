@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_datatables',
     'dashboard.apps.DashboardConfig',
-    'targetApp.apps.TargetappConfig',
     'login.apps.LoginConfig',
     'django_ace',
     'django_celery_beat',

@@ -20,7 +20,6 @@ from rolepermissions.roles import assign_role, clear_roles
 from rolepermissions.decorators import has_permission_decorator
 from django.template.defaultfilters import slugify
 
-from targetApp.models import Domain
 from dashboard.models import *
 from webGuard.definitions import *
 
@@ -34,16 +33,11 @@ def index(request, slug):
         # if project not found redirect to 404
         return HttpResponseRedirect(reverse('four_oh_four'))
 
-    domains = Domain.objects.filter(project=project)
-
-    domain_count = domains.count()
-
     last_7_dates = [(timezone.now() - timedelta(days=i)).date()
                     for i in range(0, 7)]
 
     context = {
         'dashboard_data_active': 'active',
-        'domain_count': domain_count,
         
         'last_7_dates': last_7_dates,
         'project': project

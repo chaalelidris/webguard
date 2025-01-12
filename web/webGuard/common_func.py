@@ -25,7 +25,6 @@ from webGuard.common_serializers import *
 from webGuard.definitions import *
 from webGuard.settings import *
 from dashboard.models import *
-from targetApp.models import *
 from webGuard.utilities import is_valid_url
 
 
@@ -41,13 +40,8 @@ def dump_custom_scan_engines(results_dir):
 	Args:
 		results_dir (str): Results directory (will be created if non-existent).
 	"""
-	custom_engines = EngineType.objects.filter(default_engine=False)
 	if not os.path.exists(results_dir):
 		os.makedirs(results_dir, exist_ok=True)
-	for engine in custom_engines:
-		with open(os.path.join(results_dir, f"{engine.engine_name}.yaml"), 'w') as f:
-			f.write(engine.yaml_configuration)
-
 def load_custom_scan_engines(results_dir):
 	"""Load custom scan engines from YAML files. The filename without .yaml will
 	be used as the engine name.
@@ -59,44 +53,11 @@ def load_custom_scan_engines(results_dir):
 		f for f in os.listdir(results_dir)
 		if os.path.isfile(os.path.join(results_dir, f)) and f.endswith('.yaml')
 	]
-	for path in config_paths:
-		engine_name = os.path.splitext(os.path.basename(path))[0]
-		full_path = os.path.join(results_dir, path)
-		with open(full_path, 'r') as f:
-			yaml_configuration = f.read()
-
-		engine, _ = EngineType.objects.get_or_create(engine_name=engine_name)
-		engine.yaml_configuration = yaml_configuration
-		engine.save()
 
 
 #--------------------------------#
 # InterestingLookupModel queries #
 #--------------------------------#
-def get_lookup_keywords():
-	"""Get lookup keywords from InterestingLookupModel.
-
-	Returns:
-		list: Lookup keywords.
-	"""
-	lookup_model = InterestingLookupModel.objects.first()
-	lookup_obj = InterestingLookupModel.objects.filter(custom_type=True).order_by('-id').first()
-	custom_lookup_keywords = []
-	default_lookup_keywords = []
-	if lookup_model:
-		default_lookup_keywords = [
-			key.strip()
-			for key in lookup_model.keywords.split(',')]
-	if lookup_obj:
-		custom_lookup_keywords = [
-			key.strip()
-			for key in lookup_obj.keywords.split(',')
-		]
-	lookup_keywords = default_lookup_keywords + custom_lookup_keywords
-	lookup_keywords = list(filter(None, lookup_keywords)) # remove empty strings from list
-	return lookup_keywords
-
-
 #-------------------#
 # SubDomain queries #
 #-------------------#
@@ -112,32 +73,7 @@ def get_subdomains(write_filepath=None, exclude_subdomains=False, ctx={}):
 	Returns:
 		list: List of subdomains matching query.
 	"""
-	domain_id = ctx.get('domain_id')
-	scan_id = ctx.get('scan_history_id')
-	subdomain_id = ctx.get('subdomain_id')
-	exclude_subdomains = ctx.get('exclude_subdomains', False)
 	url_filter = ctx.get('url_filter', '')
-	domain = Domain.objects.filter(pk=domain_id).first()
-	scan = ScanHistory.objects.filter(pk=scan_id).first()
-
-	query = Subdomain.objects
-	if domain:
-		query = query.filter(target_domain=domain)
-	if scan:
-		query = query.filter(scan_history=scan)
-	if subdomain_id:
-		query = query.filter(pk=subdomain_id)
-	elif domain and exclude_subdomains:
-		query = query.filter(name=domain.name)
-	subdomain_query = query.distinct('name').order_by('name')
-	subdomains = [
-		subdomain.name
-		for subdomain in subdomain_query.all()
-		if subdomain.name
-	]
-	if not subdomains:
-		logger.error('No subdomains were found in query !')
-
 	if url_filter:
 		subdomains = [f'{subdomain}/{url_filter}' for subdomain in subdomains]
 
@@ -147,41 +83,6 @@ def get_subdomains(write_filepath=None, exclude_subdomains=False, ctx={}):
 
 	return subdomains
 
-def get_new_added_subdomain(scan_id, domain_id):
-	"""Find domains added during the last scan.
-
-	Args:
-		scan_id (int): startScan.models.ScanHistory ID.
-		domain_id (int): startScan.models.Domain ID.
-
-	Returns:
-		django.models.querysets.QuerySet: query of newly added subdomains.
-	"""
-	scan = (
-		ScanHistory.objects
-		.filter(domain=domain_id)
-		.filter(tasks__overlap=['subdomain_discovery'])
-		.filter(id__lte=scan_id)
-	)
-	if not scan.count() > 1:
-		return
-	last_scan = scan.order_by('-start_scan_date')[1]
-	scanned_host_q1 = (
-		Subdomain.objects
-		.filter(scan_history__id=scan_id)
-		.values('name')
-	)
-	scanned_host_q2 = (
-		Subdomain.objects
-		.filter(scan_history__id=last_scan.id)
-		.values('name')
-	)
-	added_subdomain = scanned_host_q1.difference(scanned_host_q2)
-	return (
-		Subdomain.objects
-		.filter(scan_history=scan_id)
-		.filter(name__in=added_subdomain)
-	)
 
 
 def get_removed_subdomain(scan_id, domain_id):

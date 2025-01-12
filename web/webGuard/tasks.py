@@ -30,7 +30,6 @@ from webGuard.definitions import *
 from webGuard.settings import *
 from webGuard.llm import *
 from webGuard.utilities import *
-from targetApp.models import Domain
 
 """
 Celery tasks.

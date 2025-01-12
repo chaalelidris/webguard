@@ -5,7 +5,6 @@ python3 manage.py migrate
 
 # make migrations for specific apps
 apps=(
-    "targetApp"
     "dashboard"
 )
 

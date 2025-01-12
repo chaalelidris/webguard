@@ -50,10 +50,6 @@
             <i class="fe-crosshair me-1"></i>
             <span>Target</span>
           </a>
-          <a href="{% url 'add_organization' current_project.slug %}" class="dropdown-item">
-            <i class="fe-briefcase me-1"></i>
-            <span>Organization</span>
-          </a>
           {% endif %}
           {% if user|can:'modify_scan_configurations' %}
          

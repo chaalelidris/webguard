@@ -31,9 +31,6 @@ urlpatterns = [
         '',
         include('dashboard.urls')),
     path(
-        'target/',
-        include('targetApp.urls')),
-    path(
         'login/',
         include('login.urls')),
     path(
